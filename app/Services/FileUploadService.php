@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
-use Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
+
 
 class FileUploadService
 {

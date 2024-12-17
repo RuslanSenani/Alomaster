@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\admin\app\Traits\MigrationHelper;
-use App\Http\admin\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migration;
-use App\Http\admin\vendor\laravel\framework\src\Illuminate\Database\Schema\Blueprint;
-use App\Http\admin\vendor\laravel\framework\src\Illuminate\Support\Facades\Schema;
+use App\Traits\MigrationHelper;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {

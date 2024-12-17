@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
 use App\Models\Category;
 use App\Models\DbModel;
 use App\Models\Product;
@@ -30,10 +29,10 @@ class StockInController extends Controller
     private Warehouse $warehouseModel;
     private Category $categoryModel;
     private DbModel $dbModel;
-    private  Supplier  $supplierModel;
+    private Supplier $supplierModel;
 
 
-    public function __construct(StockIn $stockIn, Product $product, Warehouse $warehouse, Category $category, DbModel $dbModel,Supplier $supplier)
+    public function __construct(StockIn $stockIn, Product $product, Warehouse $warehouse, Category $category, DbModel $dbModel, Supplier $supplier)
     {
         $this->viewFolder = "Back.StockIn_v";
         $this->stockInModel = $stockIn;
@@ -41,13 +40,13 @@ class StockInController extends Controller
         $this->warehouseModel = $warehouse;
         $this->categoryModel = $category;
         $this->dbModel = $dbModel;
-        $this->supplierModel= $supplier;
+        $this->supplierModel = $supplier;
 
     }
 
     public function index()
     {
-        $stockList = $this->stockInModel->with(['product', 'warehouse', 'category', 'model','supplier'])->get();
+        $stockList = $this->stockInModel->with(['product', 'warehouse', 'category', 'model', 'supplier'])->get();
         $viewData = [
             'viewFolder' => $this->viewFolder,
             'subviewFolder' => 'list',
@@ -132,13 +131,13 @@ class StockInController extends Controller
                     $exising->save();
 
                     Alert::success('Success', 'Record Inserted Successfully!')
-                        ->position('top-right')
+                        ->position('top-left')
                         ->toToast()
                         ->autoclose(3000);
                     return redirect()->route('stock-in.index');
                 } else {
                     Alert::error('Xəta', '111 Bu dəyər artıq mövcuddur! Zəhmət olmasa başqa bir dəyər girin.')
-                        ->position('top-right')
+                        ->position('top-left')
                         ->toToast()
                         ->autoclose(5000);
                 }
@@ -166,7 +165,7 @@ class StockInController extends Controller
             foreach ($ex->errors() as $field => $messages) {
                 foreach ($messages as $message) {
                     Alert::error('Error', 'Record Inserted Failed!' . $ex->getMessage())
-                        ->position('top-right')
+                        ->position('top-left')
                         ->toToast()
                         ->autoclose(3000);
                 }
@@ -175,7 +174,7 @@ class StockInController extends Controller
 
         } catch (Exception $e) {
             Alert::error('Error', 'Record Not Inserted!' . $e->getMessage())
-                ->position('top-right')
+                ->position('top-left')
                 ->toToast()
                 ->autoclose(50000);
             return redirect()->back()->withInput();
@@ -196,7 +195,7 @@ class StockInController extends Controller
      */
     public function edit(string $id)
     {
-        $stockList = $this->stockInModel->with(['product', 'warehouse', 'category', 'model'])->findOrFail($id);
+        $stockList = $this->stockInModel->with(['product', 'warehouse', 'category', 'model', 'supplier'])->findOrFail($id);
         $productList = $this->productModel->with(['unit'])->get();
         $warehouseList = $this->warehouseModel::all();
         $categoryList = $this->categoryModel::all();
@@ -256,16 +255,17 @@ class StockInController extends Controller
             $stock->product_unit = $validatedData['unit'];
             $stock->product_unit_price = $validatedData['unitPrice'];
             $stock->product_enter_count = $validatedData['enterCount'];
-            $stock->product_img = $validatedData['image'];
+            $stock->product_img = $validatedData['image'] ?? $stock->product_img;
             $stock->enter_date = $enterDate;
             $stock->product_desc = $validatedData['description'];
             $stock->supplier_id = $validatedData['supplier'];
             $stock->update();
 
             Alert::success('Success', 'Record Inserted Successfully!')
-                ->position('top-right')
+                ->position('top-left')
                 ->toToast()
-                ->autoclose(3000);
+                ->autoclose(3000)
+                ->width('100px');
 
             return redirect()->route('stock-in.index');
 
@@ -274,18 +274,20 @@ class StockInController extends Controller
             foreach ($ex->errors() as $field => $messages) {
                 foreach ($messages as $message) {
                     Alert::error('Error', 'Record Inserted Failed!' . $ex->getMessage())
-                        ->position('top-right')
+                        ->position('top-left')
                         ->toToast()
-                        ->autoclose(3000);
+                        ->autoclose(3000)
+                        ->width('100px');
                 }
             }
             return redirect()->back()->withInput();
 
         } catch (Exception $e) {
             Alert::error('Error', 'Record Not Inserted!' . $e->getMessage())
-                ->position('top-right')
+                ->position('top-left')
                 ->toToast()
-                ->autoclose(50000);
+                ->autoclose(50000)
+                ->width('100px');
             return redirect()->back()->withInput();
         }
     }
@@ -307,9 +309,9 @@ class StockInController extends Controller
         ];
         if ($deleted) {
 
-            Alert::success('Success', 'Record deleted successfully!')->position('top-right')->toToast()->autoclose(3000);
+            Alert::success('Success', 'Record deleted successfully!')->position('top-left')->toToast()->autoclose(3000);
         } else {
-            Alert::error('Error', 'Something went wrong!')->position('top-right')->toToast()->autoclose(3000);
+            Alert::error('Error', 'Something went wrong!')->position('top-left')->toToast()->autoclose(3000);
         }
         return redirect()->back(302, [], 'stock-in.index')->with($viewData);
 

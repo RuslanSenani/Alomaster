@@ -21,7 +21,7 @@
 
     <!-- Content Wrapper. Contains page content -->
 
-    @include("Back.StockOut_v.add.content")
+    @include("Back.StockOut_v.edit.content")
 
     <!-- /.content-wrapper -->
 
@@ -35,8 +35,6 @@
 @include("Back.includes.static.js")
 @include("Back.includes.static.customJs")
 @include("Back.includes.static.dropdownJs")
-
-
 </body>
 
 @include("Back.includes.static.footer")

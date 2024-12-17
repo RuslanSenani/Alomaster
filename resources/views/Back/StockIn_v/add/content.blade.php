@@ -133,9 +133,10 @@
                                     <div class="form-group col-md-12">
                                         <div class="row">
 
-                                            <div class="row">
+                                            <div class="col">
                                                 <div class="form-group col-md-12">
                                                     <div class="form-group">
+                                                        <label for="enterCount">Tədarükçü:</label>
                                                         <select name="supplier" class="form-control select2bs4">
                                                             <option value="" selected="selected"> --Tədarükçü Seç--</option>
                                                             @foreach($supplierList as $supplier)

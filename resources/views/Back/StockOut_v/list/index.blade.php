@@ -22,6 +22,7 @@
     <!-- Content Wrapper. Contains page content -->
 
     @include("Back.StockOut_v.list.content")
+
     <!-- /.content-wrapper -->
 
 
