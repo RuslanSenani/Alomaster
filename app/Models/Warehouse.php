@@ -18,7 +18,6 @@ class Warehouse extends Model
         'location',
     ];
 
-
     public function StockIn(): HasMany
     {
         return $this->hasMany(StockIn::class);
