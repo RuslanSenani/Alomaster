@@ -32,6 +32,19 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            stock_in_id
+                            warehouse_id
+                            customer_id
+                            model_name
+                            category_name
+                            product_name
+                            product_description
+                            product_code
+                            product_exit_count
+                            product_unit
+                            product_unit_sale_price
+                            exit_date
+
                             <th>Anbar Adı</th>
                             <th>Mehsul Adı</th>
                             <th>Mehsul Kodu</th>

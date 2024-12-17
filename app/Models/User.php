@@ -40,10 +40,7 @@ class User extends Authenticatable
      * @return array<string, string>
      */
 
-    public  function  userRole():BelongsTo
-    {
-        return $this->belongsTo(UserRole::class);
-    }
+
 
     protected function casts(): array
     {

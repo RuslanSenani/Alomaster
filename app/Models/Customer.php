@@ -21,7 +21,7 @@ class Customer extends Model
         'phone'
     ];
 
-    public function stockOuts(): HasMany
+    public function StockOut(): HasMany
     {
         return $this->hasMany(StockOut::class);
     }

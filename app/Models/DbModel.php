@@ -16,7 +16,7 @@ class DbModel extends Model
         'name'
     ];
 
-    public function stockIns(): HasMany
+    public function StockIn(): HasMany
     {
         return $this->hasMany(StockIn::class);
     }

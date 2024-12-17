@@ -25,12 +25,12 @@ class Product extends Model
     {
         return $this->belongsTo(Unit::class);
     }
-    public function stockIns(): HasMany
+    public function StockIn(): HasMany
     {
         return $this->hasMany(StockIn::class);
     }
 
-    public function stockOuts(): HasMany
+    public function StockOut(): HasMany
     {
         return $this->hasMany(StockOut::class);
     }

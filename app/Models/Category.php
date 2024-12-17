@@ -18,7 +18,7 @@ class Category extends Model
     ];
 
 
-    public function stockIns(): HasMany
+    public function StockIn(): HasMany
     {
         return $this->hasMany(StockIn::class);
     }

@@ -55,7 +55,7 @@ class StockIn extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function stockOuts(): HasMany
+    public function StockOut(): HasMany
     {
         return $this->hasMany(StockOut::class);
     }

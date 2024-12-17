@@ -21,7 +21,7 @@ class StockOut extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-    public function stockIn(): BelongsTo
+    public function StockIn(): BelongsTo
     {
         return $this->belongsTo(StockIn::class);
     }
