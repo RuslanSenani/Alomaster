@@ -21,3 +21,10 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+/storage/debugbar
+/public/mix-manifest.json
+*.sqlite
+*.sqlite-journal
+.DS_Store
+.cache
+__pycache__
