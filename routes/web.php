@@ -14,6 +14,7 @@ use App\Http\Controllers\WarehouseController;
 Route::prefix('admin')->group(function () {
 
 
+
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resources([
