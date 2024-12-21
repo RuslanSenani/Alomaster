@@ -36,7 +36,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item ">
                             <a href="{{Route("stock-in.index")}}"
-                               class="nav-link {{ Route::currentRouteName() === 'stock-in.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'stock-in.') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-circle-down"></i> <i class="fas fa-box-open"></i>
                                 <p>
                                     Anbar Giriş
@@ -45,7 +45,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route("stock-out.index")}}"
-                               class="nav-link {{ Route::currentRouteName() === 'stock-out.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'stock-out.') ? 'active' : '' }}">
                                 <i class="fas fa-arrow-circle-up"></i> <i class="fas fa-box-open"></i>
                                 <p>
                                     Anbar Çıxış
@@ -73,7 +73,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route("categories.index")}}"
-                               class="nav-link {{ Route::currentRouteName() === 'categories.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'categories.') ? 'active' : '' }}">
                                 <i class="fas fa-tags"></i>
                                 <p>
                                     Kategoria
@@ -82,7 +82,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route("models.index")}}"
-                               class="nav-link {{ Route::currentRouteName() === 'models.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'model.') ? 'active' : '' }}">
                                 <i class="fas fa-solid fa-robot"></i>
                                 <p>
                                     Modellər
@@ -91,7 +91,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route('products.index')}}"
-                               class="nav-link {{ Route::currentRouteName() === 'products.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'product.') ? 'active' : '' }}">
                                 <i class="fas fa-cubes"></i>
                                 <p>
                                     Mehsullar
@@ -100,7 +100,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route('warehouse.index')}}"
-                               class="nav-link {{ Route::currentRouteName() === 'warehouse.index' ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'warehouse.') ? 'active' : '' }}">
                                 <i class="fas fa-warehouse"></i>
                                 <p>
                                     Anbarlar

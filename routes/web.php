@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\ProductController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarehouseController;
 
 Route::prefix('admin')->group(function () {
-
 
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -30,5 +30,7 @@ Route::prefix('admin')->group(function () {
 
     ]);
 
-    Route::get('/get-product-details', [StockInController::class, 'getProductDetails'])->name('get-product-details');
+    Route::get('/ajax-product', [HelperController::class, 'getProductDetails'])->name('ajax-product');
+
+    Route::get('/ajax-stock', [HelperController::class, 'getStockDetails'])->name('ajax-stock');
 });

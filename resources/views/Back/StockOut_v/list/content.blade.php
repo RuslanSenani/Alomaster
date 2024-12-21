@@ -19,7 +19,7 @@
 
                     </div>
                     <div class="col-md-2 ">
-                        <a href="{{Route("stock-in.create")}}" type="button"
+                        <a href="{{Route("stock-out.create")}}" type="button"
                            class="btn btn-block btn-outline-primary btn-sm">
                             <i class="fa fa-plus"></i> Giriş Et
                         </a>
@@ -32,73 +32,59 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            stock_in_id
-                            warehouse_id
-                            customer_id
-                            model_name
-                            category_name
-                            product_name
-                            product_description
-                            product_code
-                            product_exit_count
-                            product_unit
-                            product_unit_sale_price
-                            exit_date
 
-                            <th>Anbar Adı</th>
                             <th>Mehsul Adı</th>
+                            <th>Anbar Adı</th>
                             <th>Mehsul Kodu</th>
                             <th>Mehsul Modeli</th>
                             <th>Mehsul Kateqoriyası</th>
-                            <th>Mehsul Tədarükçüsü</th>
+                            <th>Müştəri</th>
                             <th>Mehsul Məlumatı</th>
                             <th>Mehsul Şəkili</th>
-                            <th>Mehsul Giriş Sayı</th>
+                            <th>Mehsul Çıxış Sayı</th>
                             <th>Mehsul Vahidi</th>
-                            <th>Mehsul Vahid Qiyməti</th>
-                            <th>Mehsul Giriş Tarixi</th>
+                            <th>Mehsul Satış Qiyməti</th>
+                            <th>Mehsul Çıxış Tarixi</th>
                             <th>Əməliyyatlar</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($stockList as $stock)
-
-
-
+                        @foreach($stockOutList as $stockOut)
 
                             <tr>
-                                <td>{{$stock->warehouse->name}}</td>
-                                <td>{{$stock->product->product_name}}</td>
-                                <td>{{$stock->product->product_code}}</td>
-                                <td>{{$stock->model->name}}</td>
-                                <td>{{$stock->category->name}}</td>
-                                <td>{{$stock->supplier->name}}</td>
-                                <td>{{$stock->product->product_description}}</td>
+                                <td>{{$stockOut->product_name}}</td>
+                                <td>{{$stockOut->warehouse_name}}</td>
+                                <td>{{$stockOut->product_code}}</td>
+                                <td>{{$stockOut->model_name}}</td>
+                                <td>{{$stockOut->category_name}}</td>
+                                <td>{{$stockOut->customer->name}}</td>
+                                <td>{{$stockOut->product_description}}</td>
                                 <td class="text-center col-md-2">
                                     <div class="image">
                                         <img
-                                            src="{{asset($stock->product->product_img)}}"
-                                            alt="Məhsul Şəkli"
-                                            width="100%" height="100%" >
+                                                src="{{asset($stockOut->product_img)}}"
+                                                alt="Məhsul Şəkli"
+                                                width="100%" height="100%">
                                     </div>
                                 </td>
-                                <td>{{$stock->product_enter_count}}</td>
-                                <td>{{$stock->product_unit}}</td>
-                                <td>{{$stock->product_unit_price}}</td>
-                                <td>{{Carbon\Carbon::parse($stock->enter_date)->format('d-m-Y')}}</td>
+                                <td>{{$stockOut->product_exit_count}}</td>
+                                <td>{{$stockOut->product_unit}}</td>
+                                <td>{{$stockOut->product_unit_sale_price}}</td>
+                                <td>{{Carbon\Carbon::parse($stockOut->exit_date)->format('d-m-Y')}}</td>
 
                                 <td>
 
-                                    <form id="delete-form" action="{{ Route('stock-in.destroy', $stock->id) }}"
+                                    <form id="delete-form" action="{{ Route('stock-out.destroy', $stockOut->id) }}"
                                           method="POST">
                                         <div class="d-flex justify-content-between" role="group">
                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit" id="delete-button"
-                                                    class="btn btn-outline-danger btn-md"><i class="fa fa-trash"></i>
-                                            </button>
+{{--                                            @method('DELETE')--}}
+{{--                                            <button type="submit" id="delete-button"--}}
+{{--                                                    class="btn btn-outline-danger btn-md"><i class="fa fa-trash"></i>--}}
+{{--                                            </button>--}}
 
-                                            <a href="{{Route("stock-in.edit",$stock->id)}}" class="btn btn-outline-primary btn-md"><i class="fa fa-edit"></i></a>
+                                            <a href="{{Route("stock-out.edit",$stockOut->id)}}"
+                                               class="btn btn-outline-primary btn-md"><i class="fa fa-edit"></i></a>
                                         </div>
                                     </form>
 

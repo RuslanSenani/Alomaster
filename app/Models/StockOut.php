@@ -12,10 +12,6 @@ class StockOut extends Model
 {
 
     use SoftDeletes;
-    public function warehouse(): BelongsTo
-    {
-        return $this->belongsTo(Warehouse::class);
-    }
 
     public  function  customer(): BelongsTo
     {

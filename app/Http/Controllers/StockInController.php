@@ -46,7 +46,9 @@ class StockInController extends Controller
 
     public function index()
     {
-        $stockList = $this->stockInModel->with(['product', 'warehouse', 'category', 'model', 'supplier'])->get();
+        $stockList = $this->stockInModel->with(['product.unit', 'warehouse', 'category', 'model', 'supplier'])->get();
+
+
         $viewData = [
             'viewFolder' => $this->viewFolder,
             'subviewFolder' => 'list',
@@ -317,23 +319,5 @@ class StockInController extends Controller
 
     }
 
-    public function getProductDetails(Request $request)
-    {
 
-        $productId = $request->input('product_id');
-
-        $product = $this->productModel->with(['unit'])->findOrFail($productId);
-
-        if ($product) {
-            return response()->json([
-                'unit' => $product->unit->name,
-                'description' => $product->product_description,
-                'image' => asset($product->product_img),
-                'imagePath' => $product->product_img,
-                'code' => $product->product_code,
-            ]);
-        }
-        return response()->json(['error' => 'Product not found'], 404);
-
-    }
 }
