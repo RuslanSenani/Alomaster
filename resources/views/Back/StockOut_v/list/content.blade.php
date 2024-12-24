@@ -45,7 +45,7 @@
                             <th>Mehsul Vahidi</th>
                             <th>Mehsul Satış Qiyməti</th>
                             <th>Mehsul Çıxış Tarixi</th>
-                            <th>Əməliyyatlar</th>
+{{--                            <th>Əməliyyatlar</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -67,28 +67,28 @@
                                                 width="100%" height="100%">
                                     </div>
                                 </td>
-                                <td>{{$stockOut->product_exit_count}}</td>
+                                <td>{{$stockOut->qty}}</td>
                                 <td>{{$stockOut->product_unit}}</td>
                                 <td>{{$stockOut->product_unit_sale_price}}</td>
                                 <td>{{Carbon\Carbon::parse($stockOut->exit_date)->format('d-m-Y')}}</td>
 
-                                <td>
+{{--                                <td>--}}
 
-                                    <form id="delete-form" action="{{ Route('stock-out.destroy', $stockOut->id) }}"
-                                          method="POST">
-                                        <div class="d-flex justify-content-between" role="group">
-                                            @csrf
+{{--                                    <form id="delete-form" action="{{ Route('stock-out.destroy', $stockOut->id) }}"--}}
+{{--                                          method="POST">--}}
+{{--                                        <div class="d-flex justify-content-between" role="group">--}}
+{{--                                            @csrf--}}
 {{--                                            @method('DELETE')--}}
 {{--                                            <button type="submit" id="delete-button"--}}
 {{--                                                    class="btn btn-outline-danger btn-md"><i class="fa fa-trash"></i>--}}
 {{--                                            </button>--}}
 
-                                            <a href="{{Route("stock-out.edit",$stockOut->id)}}"
-                                               class="btn btn-outline-primary btn-md"><i class="fa fa-edit"></i></a>
-                                        </div>
-                                    </form>
+{{--                                            <a href="{{Route("stock-out.edit",$stockOut->id)}}"--}}
+{{--                                               class="btn btn-outline-primary btn-md"><i class="fa fa-edit"></i></a>--}}
+{{--                                        </div>--}}
+{{--                                    </form>--}}
 
-                                </td>
+{{--                                </td>--}}
 
                             </tr>
                         @endforeach

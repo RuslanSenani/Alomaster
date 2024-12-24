@@ -125,7 +125,7 @@ class StockInController extends Controller
                     $exising->product_img = $validatedData['image'];
                     $exising->product_desc = $validatedData['description'];
                     $exising->product_code = $validatedData['code'];
-                    $exising->product_enter_count = $validatedData['enterCount'];
+                    $exising->qty = $validatedData['enterCount'];
                     $exising->product_unit = $validatedData['unit'];
                     $exising->product_unit_price = $validatedData['unitPrice'];
                     $exising->enter_date = $enterDate;
@@ -154,7 +154,7 @@ class StockInController extends Controller
             $this->stockInModel->product_img = $validatedData['image'];
             $this->stockInModel->product_desc = $validatedData['description'];
             $this->stockInModel->product_code = $validatedData['code'];
-            $this->stockInModel->product_enter_count = $validatedData['enterCount'];
+            $this->stockInModel->qty = $validatedData['enterCount'];
             $this->stockInModel->product_unit = $validatedData['unit'];
             $this->stockInModel->product_unit_price = $validatedData['unitPrice'];
             $this->stockInModel->enter_date = $enterDate;
@@ -256,7 +256,7 @@ class StockInController extends Controller
             $stock->category_id = $validatedData['category'];
             $stock->product_unit = $validatedData['unit'];
             $stock->product_unit_price = $validatedData['unitPrice'];
-            $stock->product_enter_count = $validatedData['enterCount'];
+            $stock->qty = $validatedData['enterCount'];
             $stock->product_img = $validatedData['image'] ?? $stock->product_img;
             $stock->enter_date = $enterDate;
             $stock->product_desc = $validatedData['description'];

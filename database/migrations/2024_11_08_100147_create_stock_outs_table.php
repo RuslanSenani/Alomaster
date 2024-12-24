@@ -21,13 +21,14 @@ return new class extends Migration {
                 $table->foreignId('stock_in_id')->constrained('stock_ins')->onDelete('cascade');
                 $table->foreignId('customer_id')->constrained()->onDelete('cascade');
                 $table->string("model_name", 100);
+                $table->string('barcode', 50)->nullable();
                 $table->string("warehouse_name", 100);
                 $table->string("category_name", 100);
                 $table->string("product_name", 100);
                 $table->string("product_description", 255)->nullable();
                 $table->string("product_img", 255)->nullable();
                 $table->string("product_code", 100);
-                $table->integer("product_exit_count");
+                $table->integer("qty");
                 $table->string("product_unit", 20);
                 $table->double("product_unit_sale_price");
                 $table->date('exit_date');

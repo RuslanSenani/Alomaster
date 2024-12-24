@@ -69,7 +69,7 @@
                                             width="100%" height="100%" >
                                     </div>
                                 </td>
-                                <td>{{$stock->product_enter_count}}</td>
+                                <td>{{$stock->qty}}</td>
                                 <td>{{$stock->product_unit}}</td>
                                 <td>{{$stock->product_unit_price}}</td>
                                 <td>{{Carbon\Carbon::parse($stock->enter_date)->format('d-m-Y')}}</td>

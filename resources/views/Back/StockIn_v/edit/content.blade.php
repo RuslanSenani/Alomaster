@@ -121,7 +121,7 @@
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="enterCount">Məhsul Giriş Sayı:</label>
-                                                <input type="text" value="{{$stockList->product_enter_count}}"
+                                                <input type="text" value="{{$stockList->qty}}"
                                                        name="enterCount"
                                                        class="form-control" id="enterCount"
                                                        placeholder="Məhsul Giriş Sayı">

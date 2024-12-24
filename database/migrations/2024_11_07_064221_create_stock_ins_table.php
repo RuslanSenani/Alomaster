@@ -23,10 +23,12 @@ return new class extends Migration {
                 $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
                 $table->foreignId('model_id')->constrained('db_models')->onDelete('cascade');
                 $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('cascade');
+                $table->string('barcode',50)->nullable();
                 $table->string("product_img", 255)->nullable();
                 $table->string("product_desc", 255)->nullable();
                 $table->string("product_code", 100);
-                $table->integer("product_enter_count");
+                $table->integer("qty");
+                $table->integer("remain_qty")->default(0);
                 $table->string("product_unit", 20);
                 $table->decimal("product_unit_price", 10, 2);
                 $table->date('enter_date');

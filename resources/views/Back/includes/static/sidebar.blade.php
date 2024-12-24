@@ -82,7 +82,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route("models.index")}}"
-                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'model.') ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'models.') ? 'active' : '' }}">
                                 <i class="fas fa-solid fa-robot"></i>
                                 <p>
                                     Modellər
@@ -91,7 +91,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{Route('products.index')}}"
-                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'product.') ? 'active' : '' }}">
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'products.') ? 'active' : '' }}">
                                 <i class="fas fa-cubes"></i>
                                 <p>
                                     Mehsullar

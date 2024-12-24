@@ -113,7 +113,7 @@
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="exitCount">Mehsul Çıxış Sayı:</label>
-                                                <input type="text" value="{{old('exitCount',$stockOutList->product_exit_count)}}" name="exitCount"
+                                                <input type="text" value="{{old('exitCount',$stockOutList->qty)}}" name="exitCount"
                                                        class="form-control" id="exitCount"
                                                        placeholder="Mehsul Çıxış Sayı">
                                             </div>

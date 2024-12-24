@@ -17,6 +17,7 @@ return new class extends Migration {
             Schema::create('products', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('unit_id')->constrained('units')->onDelete('cascade');
+                $table->string('barcode',50)->nullable();
                 $table->string("product_name");
                 $table->string("product_code");
                 $table->unique(['product_name', 'product_code']);
