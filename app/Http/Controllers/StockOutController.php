@@ -77,6 +77,7 @@ class StockOutController extends Controller
     {
         try {
 
+
             $validatedData = $request->validate([
 
                 'warehouse' => 'required|string|max:255',
