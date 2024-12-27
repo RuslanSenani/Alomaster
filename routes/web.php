@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Front\FrontHomeController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
@@ -11,6 +12,12 @@ use App\Http\Controllers\StockOutController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\WarehouseController;
+use Illuminate\Support\Facades\Route;
+
+//Route::prefix('/')->group(function () {
+    Route::get('/', [FrontHomeController::class, 'index'])->name('home');
+//});
+
 
 Route::prefix('admin')->group(function () {
 
