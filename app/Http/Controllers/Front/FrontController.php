@@ -5,20 +5,20 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class FrontHomeController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    private string $viewFolder = "Front/Home_v";
+
+    private  string $viewFolder ="Front/Home_v";
     public function index()
     {
-        $viewData = [
-            'viewFolder' => $this->viewFolder,
-            'subviewFolder' => 'homepage'
-        ];
-
-        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
+       $viewData = [
+           'viewFolder' => $this->viewFolder,
+           'subviewFolder' => 'homepage'
+       ];
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index");
     }
 
     /**
