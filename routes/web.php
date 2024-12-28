@@ -15,6 +15,7 @@ use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::prefix('/')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('homepage');
 });
