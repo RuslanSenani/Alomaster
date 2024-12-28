@@ -29,9 +29,20 @@ class StockIn extends Model
         'enter_date',
     ];
 
+
+    protected  static  function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('excludeDeletedProducts',function ($query){
+            $query->whereHas('product',function ($query){
+                $query->whereNotNull('deleted_at');
+            });
+        });
+
+    }
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class)->withTrashed();
+        return $this->belongsTo(Product::class);
     }
 
     public function warehouse(): BelongsTo
