@@ -46,7 +46,7 @@ class StockInController extends Controller
 
     public function index()
     {
-        $stockList = $this->stockInModel->withoutGlobalScope('excludeDeletedProducts')->with(['product.unit', 'warehouse', 'category', 'model', 'supplier'])->get();
+        $stockList = $this->stockInModel->with(['product.unit', 'warehouse', 'category', 'model', 'supplier'])->get();
 
 
         $viewData = [

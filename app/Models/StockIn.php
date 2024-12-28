@@ -30,16 +30,6 @@ class StockIn extends Model
     ];
 
 
-    protected  static  function boot()
-    {
-        parent::boot();
-        static::addGlobalScope('excludeDeletedProducts',function ($query){
-            $query->whereHas('product',function ($query){
-                $query->whereNotNull('deleted_at');
-            });
-        });
-
-    }
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
