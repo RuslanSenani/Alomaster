@@ -6,19 +6,3 @@
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
 
-
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#    RewriteRule ^$ public/index.php [L]
-#    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
-#</IfModule>
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#
-#    # Yönlendirme yeteneğini kontrol et
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#
-#    # Laravel'e isteği gönder
-#    RewriteRule ^ index.php [L]
-#</IfModule>
