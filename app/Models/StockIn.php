@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function Termwind\parse;
 
 class StockIn extends Model
 {
@@ -30,42 +31,67 @@ class StockIn extends Model
     ];
 
 
-    public function product(): BelongsTo
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope('excludeDeleted', function ($builder) {
+            $builder->whereHas('product', function ($query) {
+                $query->whereNull('deleted_at');
+            })->whereHas('warehouse', function ($query) {
+                $query->whereNull('deleted_at');
+            })->whereHas('category', function ($query) {
+                $query->whereNull('deleted_at');
+            })->whereHas('model', function ($query) {
+                $query->whereNull('deleted_at');
+            })->whereHas('supplier', function ($query) {
+                $query->whereNull('deleted_at');
+            });
+        });
+
+    }
+
+    public
+    function product(): BelongsTo
     {
         return $this->belongsTo(Product::class)->withDefault([
-            'product_name'=>'Məhsul Silinib'
+            'product_name' => 'Məhsul Silinib'
         ]);
     }
 
-    public function warehouse(): BelongsTo
+    public
+    function warehouse(): BelongsTo
     {
         return $this->belongsTo(Warehouse::class)->withDefault([
             'name' => 'Anbar Silinib',
         ]);
     }
 
-    public function category(): BelongsTo
+    public
+    function category(): BelongsTo
     {
         return $this->belongsTo(Category::class)->withDefault([
             'name' => 'Kateqoriya Silinib',
         ]);
     }
 
-    public function model(): BelongsTo
+    public
+    function model(): BelongsTo
     {
         return $this->belongsTo(DbModel::class)->withDefault([
-            'name'=>'Model Silinib',
+            'name' => 'Model Silinib',
         ]);
     }
 
-    public function supplier(): BelongsTo
+    public
+    function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class)->withDefault([
             'name' => 'Tədarükçü Silinib',
         ]);
     }
 
-    public function StockOut(): HasMany
+    public
+    function StockOut(): HasMany
     {
         return $this->hasMany(StockOut::class);
     }
