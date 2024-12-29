@@ -1,9 +1,7 @@
 $(document).ready(function () {
     $("#product").change(function () {
         const selectedProductId = $(this).val();
-        //const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
-
-        const baseUrl = "http://127.0.0.1:8080/admin"
+        const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 
         alert(baseUrl);
         if (selectedProductId) {
