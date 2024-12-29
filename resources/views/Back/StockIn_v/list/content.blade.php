@@ -54,7 +54,7 @@
 
 
                             <tr>
-                                <td>{{$stock->warehouse->name}}</td>
+                                <td>{{$stock->warehouse->name }}</td>
                                 <td>{{$stock->product->product_name}}</td>
                                 <td>{{$stock->product->product_code}}</td>
                                 <td>{{$stock->model->name}}</td>

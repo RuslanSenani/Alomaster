@@ -32,7 +32,9 @@ class StockIn extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class)->withDefault([
+            'product_name'=>'Məhsul Silinib'
+        ]);
     }
 
     public function warehouse(): BelongsTo
@@ -44,17 +46,23 @@ class StockIn extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withDefault([
+            'name' => 'Kateqoriya Silinib',
+        ]);
     }
 
     public function model(): BelongsTo
     {
-        return $this->belongsTo(DbModel::class);
+        return $this->belongsTo(DbModel::class)->withDefault([
+            'name'=>'Model Silinib',
+        ]);
     }
 
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class)->withDefault([
+            'name' => 'Tədarükçü Silinib',
+        ]);
     }
 
     public function StockOut(): HasMany

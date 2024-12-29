@@ -9,11 +9,11 @@ use App\Models\Product;
 use App\Models\StockIn;
 use App\Models\Supplier;
 use App\Models\Warehouse;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -46,7 +46,8 @@ class StockInController extends Controller
 
     public function index()
     {
-        $stockList = $this->stockInModel->with(['product.unit', 'warehouse', 'category', 'model', 'supplier'])->get();
+        $stockList = $this->stockInModel->with(['product.unit', 'warehouse', 'category', 'model', 'supplier'])
+            ->get();
 
 
         $viewData = [
