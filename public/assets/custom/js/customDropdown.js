@@ -1,8 +1,9 @@
 $(document).ready(function () {
     $("#product").change(function () {
         const selectedProductId = $(this).val();
-        const baseUrl = `${window.location.origin}/${window.location.pathname.split('/')[1]}`;
+        const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 
+        alert(baseUrl);
         if (selectedProductId) {
             $.ajax({
                 url: baseUrl + "/ajax-product",
@@ -31,7 +32,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#stockOut").change(function () {
         const selectedStockId = $(this).val();
-        const baseUrl = `${window.location.origin}/${window.location.pathname.split('/')[1]}`;
+        const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 
         if (selectedStockId) {
             $.ajax({

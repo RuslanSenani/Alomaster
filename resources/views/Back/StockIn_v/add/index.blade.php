@@ -31,7 +31,6 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
 @include("Back.includes.static.js")
 @include("Back.includes.static.customJs")
 @include("Back.includes.static.dropdownJs")
