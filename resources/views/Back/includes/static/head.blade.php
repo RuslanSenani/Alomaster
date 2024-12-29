@@ -1,10 +1,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{asset("assets")}}/dist/img/alomasterLogo.svg?v=1">
+
     <meta name="base-url" content="{{ url('/admin') }}">
 
 
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Alo Master</title>
 
 
     <!-- Google Font: Source Sans Pro -->
