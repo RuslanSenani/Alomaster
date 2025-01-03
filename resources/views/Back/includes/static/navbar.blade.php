@@ -5,26 +5,21 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <b  class="nav-link">{{$pageName}}</b>
+            <b class="nav-link">{{$pageName}}</b>
         </li>
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
+        <form action="{{Route('logout')}}" method="POST">
+            @csrf
+            <li class="nav-item">
+                <button class="nav-link" type="submit">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </li>
+        </form>
 
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
-
-        <li class="nav-item">
-
-            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-               role="button">
-                <i class="fas fa-th-large"></i>
-            </a>
-        </li>
     </ul>
 </nav>
