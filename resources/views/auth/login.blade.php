@@ -67,10 +67,10 @@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
-                <a href="">Şifrəmi unutmuşam</a>
+                <a href="{{Route("password.request")}}">Şifrəmi unutmuşam</a>
             </p>
             <p class="mb-0">
-                <a href="{{route("register")}}" class="text-center">Yeni üzvlük üçün qeydiyyatdan keçin</a>
+                <a href="{{Route("register")}}" class="text-center">Yeni üzvlük üçün qeydiyyatdan keçin</a>
             </p>
         </div>
         <!-- /.login-card-body -->

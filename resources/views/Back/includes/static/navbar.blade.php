@@ -12,14 +12,26 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
-        <form action="{{Route('logout')}}" method="POST">
+        <form action="{{ route('logout') }}" method="POST" class="form-inline">
             @csrf
             <li class="nav-item">
-                <button class="nav-link" type="submit">
-                    <i class="fas fa-sign-out-alt"></i>
+                <button class="btn btn-danger" type="submit">
+                    <i class="fas fa-sign-out-alt"></i> Çıxış Et
                 </button>
             </li>
         </form>
-
     </ul>
+
+    {{--    <ul class="navbar-nav ml-auto">--}}
+{{--        <!-- Navbar Search -->--}}
+{{--        <form action="{{Route('logout')}}" method="POST">--}}
+{{--            @csrf--}}
+{{--            <li class="nav-item">--}}
+{{--                <button class="nav-link" type="submit">--}}
+{{--                    <i class="fas fa-sign-out-alt"></i>--}}
+{{--                </button>--}}
+{{--            </li>--}}
+{{--        </form>--}}
+
+{{--    </ul>--}}
 </nav>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -29,7 +29,7 @@ class LoginController extends Controller
                 Alert::success("Success","Ugurlu Giris Etdiniz")
                     ->position('top-right')
                     ->toToast()
-                    ->autoclose(50000);
+                    ->autoclose(5000);
             }else{
 
                 Alert::error("Xeta","Istifadeci adi ve ya sifre duzhun deyil yeniden ceht edin")
