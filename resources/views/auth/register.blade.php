@@ -25,23 +25,30 @@
     <div class="card">
         <div class="card-body register-card-body">
             <p class="login-box-msg">Yeni üzvlük üçün qeydiyyatdan keçin</p>
-
+            @if(session('status'))
+                <div class="alert alert-success text-center">
+                    {{ session('status') }}
+                </div>
+            @endif
             <form action="{{ route('register') }}" method="POST">
                 @csrf
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" value="{{old("username")}}" name="username"
-                           placeholder="User Name">
 
+                <div class="input-group mb-3">
+                    <input type="text"
+                           name="username"
+                           class="form-control @error('username') is-invalid @enderror"
+                           value="{{ old('username') }}"
+                           placeholder="User Name"
+                           required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
-
+                    @error('username')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('username')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
 
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" value="{{old("name")}}" name="name" placeholder="Full name">
@@ -51,20 +58,20 @@
                         </div>
                     </div>
                 </div>
-                @error('name')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" value="{{old("email")}}" name="email" placeholder="Email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                           value="{{old("email")}}" name="email" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
-                @error('email')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" value="{{old("password")}}" name="password"
                            id="password" placeholder="Password">
@@ -74,9 +81,7 @@
                         </div>
                     </div>
                 </div>
-                @error('password')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+
                 <div class="input-group mb-3">
                     <input type="password" value="{{old("password_confirmation")}}" name="password_confirmation"
                            class="form-control" placeholder="Confirm Password">
@@ -86,9 +91,7 @@
                         </div>
                     </div>
                 </div>
-                @error('password')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+
                 <div class="row">
                     <div class="col-8">
 
@@ -99,20 +102,20 @@
                     </div>
                     <!-- /.col -->
                 </div>
-{{--                <div class="row">--}}
-{{--                    <div class="col-8">--}}
+                {{--                <div class="row">--}}
+                {{--                    <div class="col-8">--}}
 
-{{--                    </div>--}}
-{{--                    <div class="col-4">--}}
-{{--                        <div class="card card-secondary">--}}
-{{--                            <div class="card-body">--}}
-{{--                                <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch--}}
-{{--                                       data-off-color="danger" data-on-color="success">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                {{--                    </div>--}}
+                {{--                    <div class="col-4">--}}
+                {{--                        <div class="card card-secondary">--}}
+                {{--                            <div class="card-body">--}}
+                {{--                                <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch--}}
+                {{--                                       data-off-color="danger" data-on-color="success">--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
 
-{{--                </div>--}}
+                {{--                </div>--}}
             </form>
 
             <a href="{{Route("login")}}" class="text-center">Artıq üzvlüyüm var</a>

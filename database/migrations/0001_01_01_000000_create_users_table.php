@@ -24,6 +24,8 @@ return new class extends Migration {
             $table->rememberToken();
             $table->boolean('isActive')->default(true);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('user_image')->nullable();
+            $table->string('email_token');
             $this->addCommonColumns($table);
 
 

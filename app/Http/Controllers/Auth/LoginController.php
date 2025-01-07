@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
@@ -22,22 +24,24 @@ class LoginController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+
             $credentials = $request->only('email', 'password');
             $remember = $request->has('remember');
+            $user = User::where('email', $request->email)->first();
+
+
+            if (!$user) {
+                return back()->withErrors(['email' => 'Bu e-mail adresi ilə qeydiyyat tapılmadı.'])->withInput();
+            }
+
+            if (!Hash::check($request->password, $user->password)) {
+                return back()->withErrors(['password' => 'Girdiyiniz şifrə səhvdir.'])->withInput();
+
+            }
             if (Auth::attempt($credentials, $remember)) {
                 $request->session()->regenerate();
-                Alert::success("Success","Ugurlu Giris Etdiniz")
-                    ->position('top-right')
-                    ->toToast()
-                    ->autoclose(5000);
-            }else{
-
-                Alert::error("Xeta","Istifadeci adi ve ya sifre duzhun deyil yeniden ceht edin")
-                    ->position('top-right')
-                    ->toToast()
-                    ->autoclose(50000);
-                return redirect()->back();
             }
+
         } catch (\Exception $exception) {
             Alert::error($exception->getMessage())
                 ->position('top-right')
@@ -53,6 +57,16 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Alert::success("Success", "Uğurla Çıxış Etdiniz")
+            ->position('top-right')
+            ->toToast()
+            ->autoclose(3000);
         return redirect('/login');
+    }
+
+
+    protected function throttleKey()
+    {
+        return strtolower(request('email')).'|'.request()->ip();
     }
 }

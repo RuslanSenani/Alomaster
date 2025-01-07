@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+
+use App\Mail\VerifyEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
+use Throwable;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -27,44 +35,46 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
 
-
-        // try {
-        $validatedData = $request->validate([
-            'username' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $this->userModel->user_name = $validatedData['username'];
-        $this->userModel->full_name = $validatedData['name'];
-        $this->userModel->email = $validatedData['email'];
-        $this->userModel->password = Hash::make($validatedData['password']);
-        $this->userModel->save();
-        return redirect()->route('login')->with('success', 'Kayıt başarılı!');
-//        } catch (QueryException $exception) {
+        try {
+            $request->validate([
+                'username' => 'required|string|max:255|unique:users,user_name',
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+            $user = User::create([
+                'user_name' => $request->username,
+                'full_name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'email_token' => Str::random(200),
+            ]);
 
 
-//            if ($exception->getCode() == "23000") {
-//                Alert::error('Xəta', 'Bu dəyər artıq mövcuddur! Zəhmət olmasa başqa bir dəyər girin.')
-//                    ->position('top-right')
-//                    ->toToast()
-//                    ->autoclose(50000);
-//            } else {
-//                Alert::error('Xəta', 'Gözlənilməz baza xətası yarandı: ' . $exception->getMessage())
-//                    ->position('top-right')
-//                    ->toToast()
-//                    ->autoclose(30000);
-//            }
-        //} catch (Exception $exception) {
+            sendEmailVerification($user);
 
-//            Alert::error('Error', 'Record Inserted Failed!' . $exception->getMessage())
-//                ->position('top-left')
-//                ->toToast()
-//                ->autoclose(30000);
-//
-//            return redirect()->route('register')->withInput();
-        //}
-        // return redirect()->route('register')->withInput();
+
+            return redirect()->route('login')->with('status', "Uğurla Qeyd Oldunuz Zəhmət olmasa E-Poçtunuzu Yoxlayın");
+
+        } catch (ValidationException $exception) {
+            return back()->withErrors($exception->validator->errors())->withInput();
+        } catch (Throwable $exception) {
+            return back()->withErrors(['status' => 'Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.'])->withInput();
+
+        }
+
+    }
+
+    public function verifyEmail($token)
+    {
+        $user = User::where('email_token', $token)->firstOrFail();
+        if ($user) {
+            $user->email_token = NULL;
+            $user->email_verified_at = now();
+            $user->save();
+            Auth::logout();
+            return redirect('login')->with('status', "E-Poçtunuz Uğurla Doğrulandı");
+        }
+        return redirect('login')->with('status', 'Xətalı Token');
     }
 }

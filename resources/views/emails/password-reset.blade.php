@@ -70,9 +70,9 @@
 <body>
 <div class="container">
 
-{{--    <div style="text-align: center;">--}}
-{{--        <img src="{{ asset('assets/dist/img/alomasterLogo.svg') }}" alt="Alomaster Logo" style="max-width: 150px;">--}}
-{{--    </div>--}}
+    <div style="text-align: center;">
+        <img src="https://alo-master.com/assets/dist/img/alomasterLogo.svg" alt="Alomaster Logo" style="max-width: 150px;">
+    </div>
 
     <h1>Hesabınıza Giriş Bərpa Edin</h1>
     <p>Salam {{ $username }},</p>
@@ -87,13 +87,13 @@
     <div class="social-icons">
         <p>Bizi sosial mediada izləyin:</p>
         <a href="https://www.instagram.com/alomaster.com_/">
-            <img src="https://yourdomain.com/assets/icons/instagram.png" alt="Instagram">
+            <img src="https://play-lh.googleusercontent.com/VRMWkE5p3CkWhJs6nv-9ZsLAs1QOg5ob1_3qg-rckwYW7yp1fMrYZqnEFpk0IoVP4LM=w480-h960-rw" alt="Instagram">
         </a>
         <a href="https://www.youtube.com/@Alo_Master">
-            <img src="https://yourdomain.com/assets/icons/youtube.png" alt="YouTube">
+            <img src="https://play-lh.googleusercontent.com/Qolm5gr9jnabjk-0z79srjYC1XPVExribNz5kbDmGJeEtmRlo0UQoQEIkKMHRyt5paw=w480-h960-rw" alt="YouTube">
         </a>
         <a href="https://www.tiktok.com/@_alomaster_">
-            <img src="https://yourdomain.com/assets/icons/tiktok.png" alt="TikTok">
+            <img src="https://play-lh.googleusercontent.com/LdBITldj-tJxqLm-CsWSbnt4BMo2gk53cgM7mWIL-zn44m1ywLyQgxRsHKqp8r0qceXs=w480-h960-rw" alt="TikTok">
         </a>
     </div>
     <div class="footer">

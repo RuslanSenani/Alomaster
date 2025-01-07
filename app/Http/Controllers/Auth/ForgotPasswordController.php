@@ -10,7 +10,7 @@ use Illuminate\Mail\Message;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class ForgotPasswordController extends Controller

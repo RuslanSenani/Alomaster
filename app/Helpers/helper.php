@@ -1,17 +1,19 @@
 <?php
 
 
+use App\Mail\VerifyEmail;
 use App\Models\Product;
 use App\Models\StockIn;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 
 // Ajax  deyerlerini kontrol etmek ucun olan bolme sadece ajax deyerleri istifade  olunacaq
 
 
 if (!function_exists('getStock')) {
-    function getStock($id):JsonResponse
+    function getStock($id): JsonResponse
     {
-        $stockList =StockIn::with(['product.unit', 'warehouse', 'category', 'model'])->findOrFail($id);
+        $stockList = StockIn::with(['product.unit', 'warehouse', 'category', 'model'])->findOrFail($id);
 
         if ($stockList) {
             return response()->json([
@@ -30,11 +32,12 @@ if (!function_exists('getStock')) {
 }
 
 
-if(!function_exists('getProduct')){
-    function getProduct($id):JsonResponse{
+if (!function_exists('getProduct')) {
+    function getProduct($id): JsonResponse
+    {
 
 
-        $product =Product::with(['unit'])->findOrFail($id);
+        $product = Product::with(['unit'])->findOrFail($id);
 
         if ($product) {
             return response()->json([
@@ -46,5 +49,13 @@ if(!function_exists('getProduct')){
             ]);
         }
         return response()->json(['error' => 'Product not found'], 404);
+    }
+}
+
+
+if (!function_exists('sendEmailVerification')) {
+    function sendEmailVerification($user): void
+    {
+        Mail::to($user->email)->send(new VerifyEmail($user));
     }
 }
