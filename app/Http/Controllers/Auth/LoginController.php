@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\LogRepo\LogManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
@@ -16,7 +18,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request, LogManager $logManager)
     {
 
         try {
@@ -29,17 +31,33 @@ class LoginController extends Controller
             $remember = $request->has('remember');
             $user = User::where('email', $request->email)->first();
 
+            $throttleKey = 'login:' .$user->id.'|'.$request->input('email') . '|' . $request->ip();
+
+
+            if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
+                $retryAfter = RateLimiter::availableIn($throttleKey);
+                RateLimiter::hit($throttleKey,300);
+                return response()->view('errors.429', ['retryAfter' => $retryAfter], 429);
+            }
 
             if (!$user) {
+                $logManager->log("Error", "Bu e-mail adresi ilə qeydiyyat tapılmadı", ['user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
                 return back()->withErrors(['email' => 'Bu e-mail adresi ilə qeydiyyat tapılmadı.'])->withInput();
             }
 
             if (!Hash::check($request->password, $user->password)) {
+                $logManager->log("Error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
+                RateLimiter::hit($throttleKey,300);
                 return back()->withErrors(['password' => 'Girdiyiniz şifrə səhvdir.'])->withInput();
 
             }
             if (Auth::attempt($credentials, $remember)) {
+                RateLimiter::clear($throttleKey);
                 $request->session()->regenerate();
+            }else{
+                RateLimiter::hit($throttleKey,300);
+                return redirect()->back()->withErrors(['status' => 'Invalid credentials']);
+
             }
 
         } catch (\Exception $exception) {
@@ -64,9 +82,4 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-
-    protected function throttleKey()
-    {
-        return strtolower(request('email')).'|'.request()->ip();
-    }
 }

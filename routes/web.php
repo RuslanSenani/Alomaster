@@ -30,7 +30,7 @@ Route::get('email/verify/{token}', [RegisterController::class, 'verifyEmail'])->
 Route::post('resendVerificationEmail', [VerificationController::class, 'resendVerificationEmail'])->name('resendVerificationEmail');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login'])->middleware('throttle:3,5');
+Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 
@@ -41,16 +41,16 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
-
 Route::prefix('/')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('homepage');
 });
 
-Route::prefix('admin')->middleware(['auth','verified'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
-
+    Route::get('/rate-limited-users', [UserController::class, 'showRateLimitedUsers'])->name('rate.limited.users');
+    Route::post('/rate-clear-users', [UserController::class, 'clearRateLimitedUsers'])->name('rate.clear.users');
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,

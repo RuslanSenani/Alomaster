@@ -134,6 +134,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{Route('rate.limited.users')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'rate-limited-users.') ? 'active' : '' }}">
+                                <i class="fas fa-truck"></i>
+                                <p>
+                                    Bloklanmış İstifadəçilər
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
