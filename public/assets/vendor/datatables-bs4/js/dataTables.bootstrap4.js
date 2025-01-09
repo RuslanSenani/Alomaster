@@ -59,7 +59,7 @@ $.extend( DataTable.ext.classes, {
 	sFilterInput:  "form-control form-control-sm",
 	sLengthSelect: "custom-select custom-select-sm form-control form-control-sm",
 	sProcessing:   "dataTables_processing card",
-	sPageButton:   "paginate_button page-item"
+	sPageButton:   "paginate_button edit-item"
 } );
 
 
@@ -140,7 +140,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 								'aria-label': aria[ button ],
 								'data-dt-idx': counter,
 								'tabindex': settings.iTabIndex,
-								'class': 'page-link'
+								'class': 'edit-link'
 							} )
 							.html( btnDisplay )
 						)
@@ -157,7 +157,7 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	};
 
 	// IE9 throws an 'unknown error' if document.activeElement is used
-	// inside an iframe or frame. 
+	// inside an iframe or frame.
 	var activeEl;
 
 	try {

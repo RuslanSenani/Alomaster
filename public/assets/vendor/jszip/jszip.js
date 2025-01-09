@@ -3569,7 +3569,7 @@ ZipEntries.prototype = {
         this.zipCommentLength = this.reader.readInt(2);
         // warning : the encoding depends of the system locale
         // On a linux machine with LANG=en_US.utf8, this field is utf8 encoded.
-        // On a windows machine, this field is encoded with the localized windows code page.
+        // On a windows machine, this field is encoded with the localized windows code edit.
         var zipComment = this.reader.readData(this.zipCommentLength);
         var decodeParamType = support.uint8array ? "uint8array" : "array";
         // To get consistent behavior with the generation part, we will assume that
@@ -4004,7 +4004,7 @@ ZipEntry.prototype = {
             if (upath !== null) {
                 this.fileNameStr = upath;
             } else {
-                // ASCII text or unsupported code page
+                // ASCII text or unsupported code edit
                 var fileNameByteArray =  utils.transformTo(decodeParamType, this.fileName);
                 this.fileNameStr = this.loadOptions.decodeFileName(fileNameByteArray);
             }
@@ -4013,7 +4013,7 @@ ZipEntry.prototype = {
             if (ucomment !== null) {
                 this.fileCommentStr = ucomment;
             } else {
-                // ASCII text or unsupported code page
+                // ASCII text or unsupported code edit
                 var commentByteArray =  utils.transformTo(decodeParamType, this.fileComment);
                 this.fileCommentStr = this.loadOptions.decodeFileName(commentByteArray);
             }

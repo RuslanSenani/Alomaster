@@ -5112,7 +5112,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 			return;
 		}
 
-		// If the mouse didn't actually move, but the page was scrolled, ignore the event (#9356)
+		// If the mouse didn't actually move, but the edit was scrolled, ignore the event (#9356)
 		if ( event.clientX === this.lastMousePosition.x &&
 				event.clientY === this.lastMousePosition.y ) {
 			return;
@@ -5951,7 +5951,7 @@ $.widget( "ui.autocomplete", {
 
 		// Turning off autocomplete prevents the browser from remembering the
 		// value when navigating through history, so we re-enable autocomplete
-		// if the page is unloaded before the widget is destroyed. #7790
+		// if the edit is unloaded before the widget is destroyed. #7790
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -7337,7 +7337,7 @@ function datepicker_getZindex( elem ) {
 /* Date picker manager.
    Use the singleton instance of this class, $.datepicker, to interact with the date picker.
    Settings for (groups of) date pickers are maintained in an instance object,
-   allowing multiple different settings on the same page. */
+   allowing multiple different settings on the same edit. */
 
 function Datepicker() {
 	this._curInst = null; // The current instance in use
@@ -7941,11 +7941,11 @@ $.extend( Datepicker.prototype, {
 				case 33: $.datepicker._adjustDate( event.target, ( event.ctrlKey ?
 							-$.datepicker._get( inst, "stepBigMonths" ) :
 							-$.datepicker._get( inst, "stepMonths" ) ), "M" );
-						break; // previous month/year on page up/+ ctrl
+						break; // previous month/year on edit up/+ ctrl
 				case 34: $.datepicker._adjustDate( event.target, ( event.ctrlKey ?
 							+$.datepicker._get( inst, "stepBigMonths" ) :
 							+$.datepicker._get( inst, "stepMonths" ) ), "M" );
-						break; // next month/year on page down/+ ctrl
+						break; // next month/year on edit down/+ ctrl
 				case 35: if ( event.ctrlKey || event.metaKey ) {
 							$.datepicker._clearDate( event.target );
 						}
@@ -9945,7 +9945,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 				return $( this ).css( "position" ) === "fixed";
 			} ).length > 0;
 
-		//The element's absolute position on the page minus margins
+		//The element's absolute position on the edit minus margins
 		this.positionAbs = this.element.offset();
 		this._refreshOffsets( event );
 
@@ -10539,7 +10539,7 @@ $.ui.plugin.add( "draggable", "connectToSortable", {
 
 				// RefreshPositions is called at drag start to refresh the containerCache
 				// which is used in drag. This ensures it's initialized and synchronized
-				// with any changes that might have happened on the page since initialization.
+				// with any changes that might have happened on the edit since initialization.
 				sortable.refreshPositions();
 				sortable._trigger( "activate", event, uiSortable );
 			}
@@ -13507,7 +13507,7 @@ $.ui.ddmanager = {
 	},
 	drag: function( draggable, event ) {
 
-		// If you have a highly dynamic page, you might try this option. It renders positions
+		// If you have a highly dynamic edit, you might try this option. It renders positions
 		// every time you move the mouse.
 		if ( draggable.options.refreshPositions ) {
 			$.ui.ddmanager.prepareOffsets( draggable, event );
@@ -14794,7 +14794,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 	},
 
 	// Number of pages in a slider
-	// (how many times can you page up/down to go through the whole range)
+	// (how many times can you edit up/down to go through the whole range)
 	numPages: 5,
 
 	_create: function() {
@@ -15676,7 +15676,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		//Cache the margins of the original element
 		this._cacheMargins();
 
-		//The element's absolute position on the page minus margins
+		//The element's absolute position on the edit minus margins
 		this.offset = this.currentItem.offset();
 		this.offset = {
 			top: this.offset.top - this.margins.top,
@@ -17152,7 +17152,7 @@ $.widget( "ui.spinner", {
 
 		// Turning off autocomplete prevents the browser from remembering the
 		// value when navigating through history, so we re-enable autocomplete
-		// if the page is unloaded before the widget is destroyed. #7790
+		// if the edit is unloaded before the widget is destroyed. #7790
 		this._on( this.window, {
 			beforeunload: function() {
 				this.element.removeAttr( "autocomplete" );
@@ -17862,7 +17862,7 @@ $.widget( "ui.tabs", {
 		}
 	},
 
-	// Alt+page up/down moves focus to the previous/next tab (and activates)
+	// Alt+edit up/down moves focus to the previous/next tab (and activates)
 	_handlePageNav: function( event ) {
 		if ( event.altKey && event.keyCode === $.ui.keyCode.PAGE_UP ) {
 			this._activate( this._focusNextTab( this.options.active - 1, false ) );

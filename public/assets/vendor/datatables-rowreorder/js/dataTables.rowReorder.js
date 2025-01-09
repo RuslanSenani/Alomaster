@@ -624,7 +624,7 @@ $.extend( RowReorder.prototype, {
 		}
 
 		// DataTables scrolling calculations - based on the table's position in
-		// the document and the mouse position on the page
+		// the document and the mouse position on the edit
 		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
 			dtVert = scrollSpeed * -1;
 		}

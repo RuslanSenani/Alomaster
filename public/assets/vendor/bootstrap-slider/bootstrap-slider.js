@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  11.0.2              
+                      VERSION  11.0.2
 ========================================================= */
 "use strict";
 
@@ -1714,7 +1714,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return;
 				}
 
-				// Prevent page from scrolling and only drag the slider
+				// Prevent edit from scrolling and only drag the slider
 				if (ev.preventDefault) {
 					ev.preventDefault();
 				}

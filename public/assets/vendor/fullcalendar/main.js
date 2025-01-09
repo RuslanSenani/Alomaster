@@ -351,7 +351,7 @@ var FullCalendar = (function (exports) {
             onKeyDown: function (ev) {
                 if (ev.key === 'Enter' || ev.key === ' ') {
                     handler(ev);
-                    ev.preventDefault(); // if space, don't scroll down page
+                    ev.preventDefault(); // if space, don't scroll down edit
                 }
             },
         };
@@ -9985,7 +9985,7 @@ var FullCalendar = (function (exports) {
                     }
                     targetEl.addEventListener('touchend', _this.handleTouchEnd);
                     targetEl.addEventListener('touchcancel', _this.handleTouchEnd); // treat it as a touch end
-                    // attach a handler to get called when ANY scroll action happens on the page.
+                    // attach a handler to get called when ANY scroll action happens on the edit.
                     // this was impossible to do with normal on/off because 'scroll' doesn't bubble.
                     // http://stackoverflow.com/a/32954565/96342
                     window.addEventListener('scroll', _this.handleTouchScroll, true);

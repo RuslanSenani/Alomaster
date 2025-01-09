@@ -6115,7 +6115,7 @@ var Editor = /*#__PURE__*/function () {
   }, {
     key: "focus",
     value: function focus() {
-      // [workaround] Screen will move when page is scolled in IE.
+      // [workaround] Screen will move when edit is scolled in IE.
       //  - do focus when not focused
       if (!this.hasFocus()) {
         this.$editable.focus();

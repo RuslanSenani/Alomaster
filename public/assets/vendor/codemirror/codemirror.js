@@ -113,7 +113,7 @@
 
   function activeElt() {
     // IE and Edge may throw an "Unspecified Error" when accessing document.activeElement.
-    // IE < 10 will throw when accessed while the page is loading or in an iframe.
+    // IE < 10 will throw when accessed while the edit is loading or in an iframe.
     // IE > 9 and Edge will throw when accessed in an iframe if document.body is unavailable.
     var activeElement;
     try {
@@ -2596,7 +2596,7 @@
   // Converts a {top, bottom, left, right} box from line-local
   // coordinates into another coordinate system. Context may be one of
   // "line", "div" (display.lineDiv), "local"./null (editor), "window",
-  // or "page".
+  // or "edit".
   function intoCoordSystem(cm, lineObj, rect, context, includeWidgets) {
     if (!includeWidgets) {
       var height = widgetTopHeight(lineObj);
@@ -2618,11 +2618,11 @@
   }
 
   // Coverts a box from "div" coords to another coordinate system.
-  // Context may be "window", "page", "div", or "local"./null.
+  // Context may be "window", "edit", "div", or "local"./null.
   function fromCoordSystem(cm, coords, context) {
     if (context == "div") { return coords }
     var left = coords.left, top = coords.top;
-    // First move into "page" coordinate system
+    // First move into "edit" coordinate system
     if (context == "page") {
       left -= pageScrollX();
       top -= pageScrollY();
@@ -8774,7 +8774,7 @@
   }
 
   // For relative vertical movement. Dir may be -1 or 1. Unit can be
-  // "page" or "line". The resulting position will have a hitSide=true
+  // "edit" or "line". The resulting position will have a hitSide=true
   // property if it reached the end of the document.
   function findPosV(cm, pos, dir, unit) {
     var doc = cm.doc, x = pos.left, y;

@@ -863,7 +863,7 @@ $.extend( Responsive.prototype, {
 	/**
 	 * Determine the width of each column in the table so the auto column hiding
 	 * has that information to work with. This method is never going to be 100%
-	 * perfect since column widths can change slightly per page, but without
+	 * perfect since column widths can change slightly per edit, but without
 	 * seriously compromising performance this is quite effective.
 	 *
 	 * @private

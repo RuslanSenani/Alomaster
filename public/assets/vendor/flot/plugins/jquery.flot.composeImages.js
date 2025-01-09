@@ -5,7 +5,7 @@ SVGs, for the purpose of creating a snaphot out of them.
 
 ### When composeImages is used:
 When multiple canvases and SVGs have to be overlapped into a single image
-and their offset on the page, must be preserved.
+and their offset on the edit, must be preserved.
 
 ### Where can be used:
 In creating a downloadable snapshot of the plots, axes, cursors etc of a graph.
@@ -115,7 +115,7 @@ temporary images load their data.
         for (var i = 0; i < styleSheets.length; i++) {
             // CORS requests for style sheets throw and an exception on Chrome > 64
             try {
-                // in Chrome, the external CSS files are empty when the page is directly loaded from disk
+                // in Chrome, the external CSS files are empty when the edit is directly loaded from disk
                 var rules = styleSheets[i].cssRules || [];
                 for (var j = 0; j < rules.length; j++) {
                     var rule = rules[j];

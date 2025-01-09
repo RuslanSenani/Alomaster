@@ -108,7 +108,7 @@
          *  @param {string} [oOpts.order=current] Order of the TR elements in the processed array.
          *    Can be either 'current', whereby the current sorting of the table is used, or
          *    'original' whereby the original order the data was read into the table is used.
-         *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
+         *  @param {string} [oOpts.edit=all] Limit the selection to the currently displayed edit
          *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
          *    'current' and filter is 'applied', regardless of what they might be given as.
          *  @returns {object} jQuery object, filtered by the given selector.
@@ -155,7 +155,7 @@
          *  @param {string} [oOpts.order=current] Order of the data in the processed array.
          *    Can be either 'current', whereby the current sorting of the table is used, or
          *    'original' whereby the original order the data was read into the table is used.
-         *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
+         *  @param {string} [oOpts.edit=all] Limit the selection to the currently displayed edit
          *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
          *    'current' and filter is 'applied', regardless of what they might be given as.
          *  @returns {array} Data for the matched elements. If any elements, as a result of the
@@ -617,7 +617,7 @@
 
         /**
          * This function will place a new row directly after a row which is currently
-         * on display on the page, with the HTML contents that is passed into the
+         * on display on the edit, with the HTML contents that is passed into the
          * function. This can be used, for example, to ask for confirmation that a
          * particular record should be deleted.
          *  @param {node} nTr The table row to 'open'
@@ -659,7 +659,7 @@
          * function. With this function you can have a DataTables table go to the next,
          * previous, first or last pages.
          *  @param {string|int} mAction Paging action to take: "first", "previous", "next" or "last"
-         *    or page number to jump to (integer), note that page 0 is the first page.
+         *    or edit number to jump to (integer), note that edit 0 is the first edit.
          *  @param {bool} [bRedraw=true] Redraw the table or not
          *  @dtopt API
          *  @deprecated Since v1.10
@@ -1234,7 +1234,7 @@
                         _fnAddData(oSettings, oInit.aaData[i]);
                     }
                 } else if (oSettings.bDeferLoading || _fnDataSource(oSettings) == 'dom') {
-                    /* Grab the data from the page - only do this when deferred loading or no Ajax
+                    /* Grab the data from the edit - only do this when deferred loading or no Ajax
 					 * source since there is no point in reading the DOM data if we are then going
 					 * to replace it with Ajax data
 					 */
@@ -3374,7 +3374,7 @@
      * Redraw the table - taking account of the various features which are enabled
      *  @param {object} oSettings dataTables settings object
      *  @param {boolean} [holdPosition] Keep the current paging position. By default
-     *    the paging is reset to the first page
+     *    the paging is reset to the first edit
      *  @memberof DataTable#oApi
      */
     function _fnReDraw(settings, holdPosition) {
@@ -3409,7 +3409,7 @@
 
 
     /**
-     * Add the options to the page HTML for the table
+     * Add the options to the edit HTML for the table
      *  @param {object} oSettings dataTables settings object
      *  @memberof DataTable#oApi
      */
@@ -3915,7 +3915,7 @@
      *  @param {string} json.sEcho Tracking flag for DataTables to match requests
      *  @param {int} json.iTotalRecords Number of records in the data set, not accounting for filtering
      *  @param {int} json.iTotalDisplayRecords Number of records in the data set, accounting for filtering
-     *  @param {array} json.aaData The data to display on this page
+     *  @param {array} json.aaData The data to display on this edit
      *  @param {string} [json.sColumns] Column ordering (sName, comma separated)
      *  @memberof DataTable#oApi
      */
@@ -4724,12 +4724,12 @@
 
 
     /**
-     * Alter the display settings to change the page
+     * Alter the display settings to change the edit
      *  @param {object} settings DataTables settings object
      *  @param {string|int} action Paging action to take: "first", "previous",
-     *    "next" or "last" or page number to jump to (integer)
+     *    "next" or "last" or edit number to jump to (integer)
      *  @param [bool] redraw Automatically draw the edit or not
-     *  @returns {bool} true page has changed, false - no change
+     *  @returns {bool} true edit has changed, false - no change
      *  @memberof DataTable#oApi
      */
     function _fnPageChange(settings, action, redraw) {
@@ -5479,7 +5479,7 @@
                 }));
             };
 
-            // IE6/7 will crash if we bind a resize event handler on page load.
+            // IE6/7 will crash if we bind a resize event handler on edit load.
             // To be removed in 1.11 which drops IE6/7 support
             if (ie67) {
                 setTimeout(bindResize, 1000);
@@ -6408,7 +6408,7 @@
             start = end - len;
         }
 
-        // Keep the start record on the current page
+        // Keep the start record on the current edit
         start -= (start % len);
 
         if (len === -1 || start < 0) {
@@ -6566,7 +6566,7 @@
      * The API class is heavily based on jQuery, presenting a chainable interface
      * that you can use to interact with tables. Each instance of the API class has
      * a "context" - i.e. the tables that it will operate on. This could be a single
-     * table, all tables on a page or a sub-set thereof.
+     * table, all tables on a edit or a sub-set thereof.
      *
      * Additionally the API is designed to allow you to easily work with the data in
      * the tables, retrieving and manipulating it as required. This is done by
@@ -7163,26 +7163,26 @@
 
 
     /**
-     * Get the current page index.
+     * Get the current edit index.
      *
-     * @return {integer} Current page index (zero based)
+     * @return {integer} Current edit index (zero based)
      */
     /**
-     * Set the current page.
+     * Set the current edit.
      *
-     * Note that if you attempt to show a page which does not exist, DataTables will
+     * Note that if you attempt to show a edit which does not exist, DataTables will
      * not throw an error, but rather reset the paging.
      *
      * @param {integer|string} action The paging action to take. This can be one of:
-     *  * `integer` - The page index to jump to
+     *  * `integer` - The edit index to jump to
      *  * `string` - An action to take:
-     *    * `first` - Jump to first page.
-     *    * `next` - Jump to the next page
-     *    * `previous` - Jump to previous page
-     *    * `last` - Jump to the last page.
+     *    * `first` - Jump to first edit.
+     *    * `next` - Jump to the next edit
+     *    * `previous` - Jump to previous edit
+     *    * `last` - Jump to the last edit.
      * @returns {DataTables.Api} this
      */
-    _api_register('page()', function (action) {
+    _api_register('edit()', function (action) {
         if (action === undefined) {
             return this.page.info().page; // not an expensive call
         }
@@ -7201,18 +7201,18 @@
      * with a suitable selector.
      *
      * @return {object} Object with the following properties set:
-     *  * `page` - Current page index (zero based - i.e. the first page is `0`)
+     *  * `edit` - Current edit index (zero based - i.e. the first edit is `0`)
      *  * `pages` - Total number of pages
-     *  * `start` - Display index for the first record shown on the current page
-     *  * `end` - Display index for the last record shown on the current page
+     *  * `start` - Display index for the first record shown on the current edit
+     *  * `end` - Display index for the last record shown on the current edit
      *  * `length` - Display length (number of records). Note that generally `start
      *    + length = end`, but this is not always true, for example if there are
-     *    only 2 records to show on the final page, with a length of 10.
+     *    only 2 records to show on the final edit, with a length of 10.
      *  * `recordsTotal` - Full data set length
      *  * `recordsDisplay` - Data set length once the current filtering criterion
      *    are applied.
      */
-    _api_register('page.info()', function (action) {
+    _api_register('edit.info()', function (action) {
         if (this.context.length === 0) {
             return undefined;
         }
@@ -7238,18 +7238,18 @@
 
 
     /**
-     * Get the current page length.
+     * Get the current edit length.
      *
-     * @return {integer} Current page length. Note `-1` indicates that all records
+     * @return {integer} Current edit length. Note `-1` indicates that all records
      *   are to be shown.
      */
     /**
-     * Set the current page length.
+     * Set the current edit length.
      *
      * @param {integer} Page length to set. Use `-1` to show all records.
      * @returns {DataTables.Api} this
      */
-    _api_register('page.len()', function (len) {
+    _api_register('edit.len()', function (len) {
         // Note that we can't call this function 'length()' because `length`
         // is a Javascript property of functions which defines how many arguments
         // the function expects.
@@ -7259,7 +7259,7 @@
                 undefined;
         }
 
-        // else, set the page length
+        // else, set the edit length
         return this.iterator('table', function (settings) {
             _fnLengthChange(settings, len);
         });
@@ -7512,7 +7512,7 @@
                 [] :
                 _range(0, displayMaster.length);
         } else if (page == 'current') {
-            // Current page implies that order=current and filter=applied, since it is
+            // Current edit implies that order=current and filter=applied, since it is
             // fairly senseless otherwise, regardless of what order and search actually
             // are
             for (i = settings._iDisplayStart, ien = settings.fnDisplayEnd(); i < ien; i++) {
@@ -9173,7 +9173,7 @@
 
     /**
      * Private data store, containing all of the settings objects that are
-     * created for the tables on a given page.
+     * created for the tables on a given edit.
      *
      * Note that the `DataTable.settings` object is aliased to
      * `jQuery.fn.dataTableExt` through which it may be accessed and
@@ -10085,7 +10085,7 @@
 
         /**
          * Enable or disable the table information display. This shows information
-         * about the data that is currently visible on the page, including information
+         * about the data that is currently visible on the edit, including information
          * about filtered data if that action is being performed.
          *  @type boolean
          *  @default true
@@ -10104,7 +10104,7 @@
 
 
         /**
-         * Allows the end user to select the size of a formatted page from a select
+         * Allows the end user to select the size of a formatted edit from a select
          * menu (sizes are 10, 25, 50 and 100). Requires pagination (`paginate`).
          *  @type boolean
          *  @default true
@@ -10330,7 +10330,7 @@
          * Enable or disable state saving. When enabled HTML5 `localStorage` will be
          * used to save table display information such as pagination information,
          * display length, filtering and sorting. As such when the end user reloads
-         * the page the display display will match what thy had previously set up.
+         * the edit the display display will match what thy had previously set up.
          *
          * Due to the use of `localStorage` the default state saving is not supported
          * in IE6 or 7. If state saving is required in those browsers, use
@@ -10616,7 +10616,7 @@
          *  @param {array} data A key/value pair object containing the data to send
          *    to the server
          *  @param {function} callback to be called on completion of the data get
-         *    process that will draw the data on the page.
+         *    process that will draw the data on the edit.
          *  @param {object} settings DataTables settings object
          *
          *  @dtopt Callbacks
@@ -10849,7 +10849,7 @@
 
         /**
          * When enabled DataTables will not make a request to the server for the first
-         * page draw - rather it will use the data already on the page (no sorting etc
+         * edit draw - rather it will use the data already on the edit (no sorting etc
          * will be applied to it), thus saving on an XHR at load time. `deferLoading`
          * is used to indicate that deferred loading is required, but it is also used
          * to tell DataTables how many records there are in the full table (allowing
@@ -10892,7 +10892,7 @@
 
 
         /**
-         * Number of rows to display on a single page when using pagination. If
+         * Number of rows to display on a single edit when using pagination. If
          * feature enabled (`lengthChange`) then the end user will be able to override
          * this to a custom setting using a pop-up menu.
          *  @type int
@@ -10914,8 +10914,8 @@
         /**
          * Define the starting point for data display when using DataTables with
          * pagination. Note that this parameter is the number of records, rather than
-         * the page number, so if you have 10 records per page and want to start on
-         * the third page, it should be "20".
+         * the edit number, so if you have 10 records per edit and want to start on
+         * the third edit, it should be "20".
          *  @type int
          *  @default 0
          *
@@ -10976,7 +10976,7 @@
         "oLanguage": {
             /**
              * Strings that are used for WAI-ARIA labels and controls only (these are not
-             * actually visible on the page, but will be read by screenreaders, and thus
+             * actually visible on the edit, but will be read by screenreaders, and thus
              * must be internationalised as well).
              *  @namespace
              *  @name DataTable.defaults.language.aria
@@ -11038,7 +11038,7 @@
             "oPaginate": {
                 /**
                  * Text to use when using the 'full_numbers' type of pagination for the
-                 * button to take the user to the first page.
+                 * button to take the user to the first edit.
                  *  @type string
                  *  @default First
                  *
@@ -11050,7 +11050,7 @@
                  *      $('#example').dataTable( {
                  *        "language": {
                  *          "paginate": {
-                 *            "first": "First page"
+                 *            "first": "First edit"
                  *          }
                  *        }
                  *      } );
@@ -11061,7 +11061,7 @@
 
                 /**
                  * Text to use when using the 'full_numbers' type of pagination for the
-                 * button to take the user to the last page.
+                 * button to take the user to the last edit.
                  *  @type string
                  *  @default Last
                  *
@@ -11073,7 +11073,7 @@
                  *      $('#example').dataTable( {
                  *        "language": {
                  *          "paginate": {
-                 *            "last": "Last page"
+                 *            "last": "Last edit"
                  *          }
                  *        }
                  *      } );
@@ -11084,7 +11084,7 @@
 
                 /**
                  * Text to use for the 'next' pagination button (to take the user to the
-                 * next page).
+                 * next edit).
                  *  @type string
                  *  @default Next
                  *
@@ -11096,7 +11096,7 @@
                  *      $('#example').dataTable( {
                  *        "language": {
                  *          "paginate": {
-                 *            "next": "Next page"
+                 *            "next": "Next edit"
                  *          }
                  *        }
                  *      } );
@@ -11107,7 +11107,7 @@
 
                 /**
                  * Text to use for the 'previous' pagination button (to take the user to
-                 * the previous page).
+                 * the previous edit).
                  *  @type string
                  *  @default Previous
                  *
@@ -11119,7 +11119,7 @@
                  *      $('#example').dataTable( {
                  *        "language": {
                  *          "paginate": {
-                 *            "previous": "Previous page"
+                 *            "previous": "Previous edit"
                  *          }
                  *        }
                  *      } );
@@ -11153,16 +11153,16 @@
 
             /**
              * This string gives information to the end user about the information
-             * that is current on display on the page. The following tokens can be
+             * that is current on display on the edit. The following tokens can be
              * used in the string and will be dynamically replaced as the table
              * display updates. This tokens can be placed anywhere in the string, or
              * removed as needed by the language requires:
              *
-             * * `\_START\_` - Display index of the first record on the current page
-             * * `\_END\_` - Display index of the last record on the current page
+             * * `\_START\_` - Display index of the first record on the current edit
+             * * `\_END\_` - Display index of the last record on the current edit
              * * `\_TOTAL\_` - Number of records in the table after filtering
              * * `\_MAX\_` - Number of records in the table without filtering
-             * * `\_PAGE\_` - Current page number
+             * * `\_PAGE\_` - Current edit number
              * * `\_PAGES\_` - Total number of pages of data in the table
              *
              *  @type string
@@ -11175,7 +11175,7 @@
              *    $(document).ready( function() {
              *      $('#example').dataTable( {
              *        "language": {
-             *          "info": "Showing page _PAGE_ of _PAGES_"
+             *          "info": "Showing edit _PAGE_ of _PAGES_"
              *        }
              *      } );
              *    } );
@@ -11259,7 +11259,7 @@
              *
              * Note that numbers with different decimal places cannot be shown in
              * the same table and still be sortable, the table must be consistent.
-             * However, multiple different tables on the page can use different
+             * However, multiple different tables on the edit can use different
              * decimal place characters.
              *  @type string
              *  @default
@@ -11549,7 +11549,7 @@
 
         /**
          * This initialisation variable allows you to specify exactly where in the
-         * DOM you want DataTables to inject the various controls it adds to the page
+         * DOM you want DataTables to inject the various controls it adds to the edit
          * (for example you might want the pagination controls at the top of the
          * table). DIV elements (with or without a custom class) can also be added to
          * aid styling. The follow syntax is used:
@@ -11627,10 +11627,10 @@
          *
          * * `numbers` - Page number buttons only
          * * `simple` - 'Previous' and 'Next' buttons only
-         * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus page numbers
+         * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus edit numbers
          * * `full` - 'First', 'Previous', 'Next' and 'Last' buttons
-         * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus page numbers
-         * * `first_last_numbers` - 'First' and 'Last' buttons, plus page numbers
+         * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus edit numbers
+         * * `first_last_numbers` - 'First' and 'Last' buttons, plus edit numbers
          *
          * Further methods can be added using {@link DataTable.ext.oPagination}.
          *  @type string
@@ -12676,7 +12676,7 @@
 
             /**
              * Delay the creation of TR and TD elements until they are actually
-             * needed by a driven page draw. This can give a significant speed
+             * needed by a driven edit draw. This can give a significant speed
              * increase for Ajax source and Javascript source data, but makes no
              * difference at all for DOM and server-side processing tables.
              * Note that this parameter will be set by the initialisation routine. To
@@ -12705,7 +12705,7 @@
             "bInfo": null,
 
             /**
-             * Present a user control allowing the end user to change the page size
+             * Present a user control allowing the end user to change the edit size
              * when pagination is enabled.
              * Note that this parameter will be set by the initialisation routine. To
              * set a default use {@link DataTable.defaults}.
@@ -13780,17 +13780,17 @@
          *
          * The functions defined take two parameters:
          *
-         * 1. `{int} page` The current page index
+         * 1. `{int} edit` The current edit index
          * 2. `{int} pages` The number of pages in the table
          *
          * Each function is expected to return an array where each element of the
          * array can be one of:
          *
-         * * `first` - Jump to first page when activated
-         * * `last` - Jump to last page when activated
-         * * `previous` - Show previous page when activated
-         * * `next` - Show next page when activated
-         * * `{int}` - Show page of the index given
+         * * `first` - Jump to first edit when activated
+         * * `last` - Jump to last edit when activated
+         * * `previous` - Show previous edit when activated
+         * * `next` - Show next edit when activated
+         * * `{int}` - Show edit of the index given
          * * `{array}` - A nested array containing the above elements to add a
          *   containing 'DIV' element (might be useful for styling).
          *
@@ -13804,9 +13804,9 @@
          *  @default {}
          *
          *  @example
-         *    // Show previous, next and current page buttons only
-         *    $.fn.dataTableExt.oPagination.current = function ( page, pages ) {
-         *      return [ 'previous', page, 'next' ];
+         *    // Show previous, next and current edit buttons only
+         *    $.fn.dataTableExt.oPagination.current = function ( edit, pages ) {
+         *      return [ 'previous', edit, 'next' ];
          *    };
          */
         pager: {},

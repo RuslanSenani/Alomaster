@@ -3,8 +3,8 @@
 // © Denis Ineshin, 2019
 // https://github.com/IonDen
 //
-// Project page:    http://ionden.com/a/plugins/ion.rangeSlider/en.html
-// GitHub page:     https://github.com/IonDen/ion.rangeSlider
+// Project edit:    http://ionden.com/a/plugins/ion.rangeSlider/en.html
+// GitHub edit:     https://github.com/IonDen/ion.rangeSlider
 //
 // Released under MIT licence:
 // http://ionden.com/a/plugins/licence-en.html

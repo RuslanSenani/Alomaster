@@ -11,11 +11,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="#" class="img-circle elevation-2"
+                <img src="{{asset("assets")}}/dist/img/alomasterLogo.svg" class="img-circle elevation-2"
                      alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">User Name</a>
+                <a href="#" class="d-block">{{Str::upper(Auth::user()->full_name)}}</a>
             </div>
         </div>
 
@@ -131,6 +131,15 @@
                                 <i class="fas fa-truck"></i>
                                 <p>
                                     Tədarükçülər
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{Route('permissions.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'permissions.') ? 'active' : '' }}">
+                                <i class="fas fa-lock text-danger"></i>
+                                <p>
+                                    Səlahiyyətlər
                                 </p>
                             </a>
                         </li>

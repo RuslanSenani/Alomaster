@@ -11,6 +11,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\HelperController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StockInController;
 use App\Http\Controllers\StockOutController;
@@ -61,6 +62,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'units' => UnitController::class,
         'customers' => CustomerController::class,
         'suppliers' => SupplierController::class,
+        'permissions' => PermissionController::class,
+        'users' => UserController::class,
 
     ]);
 

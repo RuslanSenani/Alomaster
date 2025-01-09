@@ -58,7 +58,7 @@ var DataTable = $.fn.dataTable;
  * the scrolling smooth) is drawn, while the scrolling container gives the
  * visual impression that the whole table is visible. This is done by making use
  * of the pagination abilities of DataTables and moving the table around in the
- * scrolling container DataTables adds to the page. The scrolling container is
+ * scrolling container DataTables adds to the edit. The scrolling container is
  * forced to the height it would be for the full table display using an extra
  * element.
  *
@@ -496,7 +496,7 @@ $.extend( Scroller.prototype, {
 			this.s.autoHeight = false;
 		}
 
-		// Scrolling callback to see if a page change is needed
+		// Scrolling callback to see if a edit change is needed
 		this.s.ingnoreScroll = true;
 		$(this.dom.scroller).on( 'scroll.dt-scroller', function (e) {
 			that._scroll.call( that );
@@ -1296,7 +1296,7 @@ Api.register( 'scroller.measure()', function ( redraw ) {
 	return this;
 } );
 
-Api.register( 'scroller.page()', function() {
+Api.register( 'scroller.edit()', function() {
 	var ctx = this.context;
 
 	if ( ctx.length && ctx[0].oScroller ) {

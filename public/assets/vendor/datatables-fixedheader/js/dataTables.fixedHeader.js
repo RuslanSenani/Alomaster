@@ -475,7 +475,7 @@ $.extend( FixedHeader.prototype, {
 	},
 
 	/**
-	 * Reposition the floating elements to take account of horizontal page
+	 * Reposition the floating elements to take account of horizontal edit
 	 * scroll
 	 *
 	 * @param  {string} item       The `header` or `footer`
@@ -839,7 +839,7 @@ $.extend( FixedHeader.prototype, {
 				var newHeight = windowBottom +
 					// If the gap between the top of the scrollbody and the window is more than
 					//  the height of the header then the top of the table is still visible so add that gap
-					// Doing this has effectively calculated the height from the top of the table to the bottom of the current page
+					// Doing this has effectively calculated the height from the top of the table to the bottom of the current edit
 					(overlap > -header.height ? overlap : 0) -
 					// Take from that
 					(
@@ -856,7 +856,7 @@ $.extend( FixedHeader.prototype, {
 					newHeight = 0;
 				}
 
-				// At the end of the above calculation the space between the header (top of the page if floating)
+				// At the end of the above calculation the space between the header (top of the edit if floating)
 				// and the point just above the footer should be the new value for the height of the table.
 				scrollBody.outerHeight(newHeight);
 

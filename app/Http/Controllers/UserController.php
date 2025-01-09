@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class UserController extends Controller
@@ -18,13 +21,13 @@ class UserController extends Controller
 
     public function __construct(User $user)
     {
-        $this->viewFolder = "Back/LogUsers_v";
+        $this->viewFolder = "Back/Users_v";
         $this->userModel = $user;
     }
 
     public function index()
     {
-        //
+
     }
 
     /**
@@ -56,7 +59,16 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = $this->userModel->find($id);
+
+        $viewData = [
+            "viewFolder" => $this->viewFolder,
+            "subViewFolder" => "edit",
+            "pageName" => "İstifadəçi" . $user->full_name,
+            "user" => $user,
+        ];
+
+        return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
     }
 
     /**
@@ -64,7 +76,10 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+
+
+
     }
 
     /**
@@ -101,6 +116,7 @@ class UserController extends Controller
      */
     public function showLimitClear(Request $request): array
     {
+        $this->viewFolder = "Back/LogUsers_v";
         $users = $this->userModel::all();
         $rateLimitedUsers = [];
         foreach ($users as $user) {

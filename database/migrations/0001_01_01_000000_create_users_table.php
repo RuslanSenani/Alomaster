@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->boolean('isActive')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('user_image')->nullable();
+            $table->string('pending_email')->nullable();
             $table->string('email_token');
             $this->addCommonColumns($table);
 

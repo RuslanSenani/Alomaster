@@ -1983,7 +1983,7 @@
         return res;
       },
       moveByPage: function(cm, head, motionArgs) {
-        // CodeMirror only exposes functions that move the cursor page down, so
+        // CodeMirror only exposes functions that move the cursor edit down, so
         // doing this bad hack to move the cursor and move it back. evalInput
         // will move the cursor to where it should be in the end.
         var curStart = head;

@@ -20,7 +20,7 @@
 
     @include("Back.includes.static.sidebar")
 
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains edit content -->
 
     @include("Back.Home_v.list.content")
     <!-- /.content-wrapper -->

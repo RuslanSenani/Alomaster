@@ -2,7 +2,7 @@
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 /**
- * Link to the project's GitHub page:
+ * Link to the project's GitHub edit:
  * https://github.com/duralog/CodeMirror
  */
 

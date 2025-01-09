@@ -19,7 +19,7 @@
 
     @include("Back.includes.static.sidebar")
 
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains edit content -->
 
     @include("Back.Unit_v.edit.content")
     <!-- /.content-wrapper -->

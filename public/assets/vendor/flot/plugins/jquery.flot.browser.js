@@ -13,7 +13,7 @@ This plugin is used to make available some browser-related utility functions.
         - getPageXY(e)
 
          Calculates the pageX and pageY using the screenX, screenY properties of the event
-         and the scrolling of the page. This is needed because the pageX and pageY
+         and the scrolling of the edit. This is needed because the pageX and pageY
          properties of the event are not correct while running tests in Edge. */
         getPageXY: function (e) {
             // This code is inspired from https://stackoverflow.com/a/3464890
@@ -27,7 +27,7 @@ This plugin is used to make available some browser-related utility functions.
         - getPixelRatio(context)
 
          This function returns the current pixel ratio defined by the product of desktop
-         zoom and page zoom.
+         zoom and edit zoom.
          Additional info: https://www.html5rocks.com/en/tutorials/canvas/hidpi/
         */
         getPixelRatio: function(context) {

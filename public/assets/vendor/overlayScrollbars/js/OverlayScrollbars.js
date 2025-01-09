@@ -4316,7 +4316,7 @@
                 function setupStructureEvents() {
                     var textareaKeyDownRestrictedKeyCodes = [
                         112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 123,    //F1 to F12
-                        33, 34,                                                   //page up, page down
+                        33, 34,                                                   //edit up, edit down
                         37, 38, 39, 40,                                           //left, up, right, down arrows
                         16, 17, 18, 19, 20, 144                                   //Shift, Ctrl, Alt, Pause, CapsLock, NumLock
                     ];
@@ -4534,7 +4534,7 @@
                     var mouseDownInvertedScale;
 
                     function getPointerPosition(event) {
-                        return _msieVersion && insideIFrame ? event['screen' + XY] : COMPATIBILITY.page(event)[xy]; //use screen coordinates in EDGE & IE because the page values are incorrect in frames.
+                        return _msieVersion && insideIFrame ? event['screen' + XY] : COMPATIBILITY.page(event)[xy]; //use screen coordinates in EDGE & IE because the edit values are incorrect in frames.
                     }
                     function getPreparedScrollbarsOption(name) {
                         return _currentPreparedOptions.scrollbars[name];
@@ -6461,7 +6461,7 @@
                         //apply the body scroll to handle it right in the edit method
                         _viewportElement[_strScrollLeft](initBodyScroll.l)[_strScrollTop](initBodyScroll.t);
 
-                        //set the focus on the viewport element so you dont have to click on the page to use keyboard keys (up / down / space) for scrolling
+                        //set the focus on the viewport element so you dont have to click on the edit to use keyboard keys (up / down / space) for scrolling
                         if (document.activeElement == targetElement && _viewportElementNative.focus) {
                             //set a tabindex to make the viewportElement focusable
                             _viewportElement.attr(LEXICON.ti, '-1');

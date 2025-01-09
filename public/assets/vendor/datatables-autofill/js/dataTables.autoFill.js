@@ -248,7 +248,7 @@ $.extend( AutoFill.prototype, {
 
 		if ( ! handleDim.height || ! handleDim.width ) {
 			// Append to document so we can get its size. Not expecting it to
-			// change during the life time of the page
+			// change during the life time of the edit
 			handle.appendTo( 'body' );
 			handleDim.height = handle.outerHeight();
 			handleDim.width = handle.outerWidth();
@@ -864,7 +864,7 @@ $.extend( AutoFill.prototype, {
 		}
 
 		// DataTables scrolling calculations - based on the table's position in
-		// the document and the mouse position on the page
+		// the document and the mouse position on the edit
 		if ( scroll.dtTop !== null && e.pageY < scroll.dtTop + buffer ) {
 			dtVert = scrollSpeed * -1;
 		}

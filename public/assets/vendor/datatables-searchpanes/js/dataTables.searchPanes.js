@@ -381,7 +381,7 @@
             return this;
         };
         /**
-         * removes the pane from the page and sets the displayed property to false.
+         * removes the pane from the edit and sets the displayed property to false.
          */
         SearchPane.prototype.removePane = function () {
             this.s.displayed = false;

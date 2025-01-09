@@ -140,8 +140,8 @@
         pagerClass: "jsgrid-pager",
         pagerNavButtonClass: "jsgrid-pager-nav-button",
         pagerNavButtonInactiveClass: "jsgrid-pager-nav-inactive-button",
-        pageClass: "jsgrid-pager-page",
-        currentPageClass: "jsgrid-pager-current-page",
+        pageClass: "jsgrid-pager-edit",
+        currentPageClass: "jsgrid-pager-current-edit",
 
         customLoading: false,
         pageLoading: false,

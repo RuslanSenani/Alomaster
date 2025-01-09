@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains edit content -->
 
 <hr>
 <div class="content-wrapper">

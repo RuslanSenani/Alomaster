@@ -2650,7 +2650,7 @@
             return true;
         };
         /**
-         * Locates the groups logic button to the correct location on the page
+         * Locates the groups logic button to the correct location on the edit
          */
         Group.prototype.setupLogic = function () {
             // Remove logic button

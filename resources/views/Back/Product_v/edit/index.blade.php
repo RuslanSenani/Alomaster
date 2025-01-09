@@ -19,7 +19,7 @@
 
     @include("Back.includes.static.sidebar")
 
-    <!-- Content Wrapper. Contains page content -->
+    <!-- Content Wrapper. Contains edit content -->
 
     @include("Back.Product_v.edit.content")
     <!-- /.content-wrapper -->
