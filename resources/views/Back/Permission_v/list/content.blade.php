@@ -47,13 +47,15 @@
                                 <td class="col-md-5">{{$permission->name}}</td>
                                 <td class="col-md-3">
 
+
                                     <form id="delete-form" action="{{Route("permissions.destroy",$permission->id)}}"
                                           method="POST">
                                         <div class="d-flex justify-content-between" role="group">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" id="delete-button"
-                                                    class="btn btn-outline-danger btn-md"> <i class="fas fa-trash"></i> Sil
+                                                    class="btn btn-outline-danger btn-md"><i
+                                                    class="fas fa-trash"></i> Sil
                                             </button>
 
                                         </div>
