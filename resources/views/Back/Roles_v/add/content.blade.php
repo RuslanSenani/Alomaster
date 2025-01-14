@@ -16,9 +16,8 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{Route("permissions.update",$permission->id)}}">
+                        <form method="POST" action="{{Route("roles.store")}}">
                             @csrf
-                            @method('PUT')
                             <div class="card-body">
 
                                 <div class="from-group col-md-12">
@@ -28,9 +27,9 @@
 
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
-                                                <label for="modelName">Model Adı:</label>
-                                                <input type="text" value="{{$permission->name}}" name="modelName" class="form-control" id="modelName"
-                                                       placeholder="Model Adı">
+                                                <label for="roleName">Rol Adı:</label>
+                                                <input type="text" value="{{old('roleName')}}" name="roleName" class="form-control" id="roleName"
+                                                       placeholder="Role Adı">
                                             </div>
                                         </div>
                                     </div>
@@ -42,10 +41,10 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <button type="submit" class="btn  btn-outline-primary btn-md">Yenilə</button>
+                                            <button type="submit" class="btn  btn-outline-primary btn-md">Saxla</button>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="{{Route("permissions.index")}}" type="submit" class="btn  btn-outline-danger btn-md">Ləğv Et</a>
+                                            <a href="{{Route("roles.index")}}" type="submit" class="btn  btn-outline-danger btn-md">Ləğv Et</a>
                                         </div>
                                     </div>
                                 </div>

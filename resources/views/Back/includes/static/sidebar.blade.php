@@ -125,12 +125,23 @@
                                 </p>
                             </a>
                         </li>
+                        @role('Admin')
                         <li class="nav-item">
                             <a href="{{Route('suppliers.index')}}"
                                class="nav-link {{ Str::startsWith(Route::currentRouteName(),'suppliers.') ? 'active' : '' }}">
                                 <i class="fas fa-truck"></i>
                                 <p>
                                     Tədarükçülər
+                                </p>
+                            </a>
+                        </li>
+                        @endrole
+                        <li class="nav-item">
+                            <a href="{{Route('roles.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'roles.') ? 'active' : '' }}">
+                                <i class="fas fa-user-tag text-primary"></i>
+                                <p>
+                                    Role
                                 </p>
                             </a>
                         </li>
@@ -144,11 +155,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{Route('rate.limited.users')}}"
-                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'rate-limited-users.') ? 'active' : '' }}">
-                                <i class="fas fa-truck"></i>
+                            <a href="{{Route('users.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'users.') ? 'active' : '' }}">
+                                <i class="fas fa-user"></i>
                                 <p>
-                                    Bloklanmış İstifadəçilər
+                                     İstifadəçilər
                                 </p>
                             </a>
                         </li>

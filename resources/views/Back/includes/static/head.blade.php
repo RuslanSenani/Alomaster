@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/bs-stepper/css/bs-stepper.min.css">
+    <link rel="stylesheet" href="{{asset("assets")}}/custom/css/toggle.css">
 
 </head>
 

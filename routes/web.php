@@ -13,6 +13,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StockInController;
 use App\Http\Controllers\StockOutController;
 use App\Http\Controllers\SupplierController;
@@ -27,7 +28,6 @@ Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('r
 Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('email/verify/{token}', [RegisterController::class, 'verifyEmail'])->name('verifyEmail');
-
 Route::post('resendVerificationEmail', [VerificationController::class, 'resendVerificationEmail'])->name('resendVerificationEmail');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -52,6 +52,14 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/rate-limited-users', [UserController::class, 'showRateLimitedUsers'])->name('rate.limited.users');
     Route::post('/rate-clear-users', [UserController::class, 'clearRateLimitedUsers'])->name('rate.clear.users');
+
+    Route::get('/roles/{role}/users', [UserController::class, 'manageRoles'])->name('user.roles');
+    Route::post('/roles/{role}/users', [UserController::class, 'updateRoles'])->name('user.update.roles');
+
+
+    Route::get('/roles/{role}/permissions', [RoleController::class, 'managePermissions'])->name('roles.permissions');
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('roles.permissions.update');
+
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -64,6 +72,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'suppliers' => SupplierController::class,
         'permissions' => PermissionController::class,
         'users' => UserController::class,
+        'roles' => RoleController::class,
 
     ]);
 

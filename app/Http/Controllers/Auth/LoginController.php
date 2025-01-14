@@ -9,10 +9,24 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
+
+
+    private User $userModel;
+    private Role $roleModel;
+
+    public function __construct(User $userModel, Role $roleModel)
+    {
+        $this->roleModel = $roleModel;
+        $this->userModel = $userModel;
+    }
+
     public function showLoginForm()
     {
         return view('auth.login');
@@ -31,12 +45,12 @@ class LoginController extends Controller
             $remember = $request->has('remember');
             $user = User::where('email', $request->email)->first();
 
-            $throttleKey = 'login:' .$user->id.'|'.$request->input('email') . '|' . $request->ip();
+            $throttleKey = 'login:' . $user->id . '|' . $request->input('email') . '|' . $request->ip();
 
 
             if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
                 $retryAfter = RateLimiter::availableIn($throttleKey);
-                RateLimiter::hit($throttleKey,300);
+                RateLimiter::hit($throttleKey, 300);
                 return response()->view('errors.429', ['retryAfter' => $retryAfter], 429);
             }
 
@@ -47,15 +61,21 @@ class LoginController extends Controller
 
             if (!Hash::check($request->password, $user->password)) {
                 $logManager->log("Error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
-                RateLimiter::hit($throttleKey,300);
+                RateLimiter::hit($throttleKey, 300);
                 return back()->withErrors(['password' => 'Girdiyiniz şifrə səhvdir.'])->withInput();
 
             }
             if (Auth::attempt($credentials, $remember)) {
+
+                if (!$user->isActive) {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', $user->email . ' Sizin Hesab Aktiv Deyil');
+                }
+
                 RateLimiter::clear($throttleKey);
                 $request->session()->regenerate();
-            }else{
-                RateLimiter::hit($throttleKey,300);
+            } else {
+                RateLimiter::hit($throttleKey, 300);
                 return redirect()->back()->withErrors(['status' => 'Invalid credentials']);
 
             }
@@ -81,5 +101,8 @@ class LoginController extends Controller
             ->autoclose(3000);
         return redirect('/login');
     }
+
+
+
 
 }

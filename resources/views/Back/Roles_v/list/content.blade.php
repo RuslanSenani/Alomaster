@@ -20,9 +20,9 @@
                     </div>
 
                     <div class="col-md-2 ">
-                        <a href="{{Route("permissions.create")}}" type="button"
+                        <a href="{{Route("roles.create")}}" type="button"
                            class="btn btn-block btn-outline-primary btn-sm">
-                            <i class="fa fa-plus"></i> Səlahiyyət Yarat
+                            <i class="fa fa-plus"></i> Rol Yarat
                         </a>
                     </div>
                 </div>
@@ -34,28 +34,34 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Adı</th>
+                            <th>Rol Adı</th>
                             <th>Əməliyyatlar</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($permissionList as $permission)
+                        @foreach($roleList as $role)
 
                             <tr>
 
-                                <td class="col-md-5">{{$permission->id}}</td>
-                                <td class="col-md-5">{{$permission->name}}</td>
-                                <td class="col-md-3">
+                                <td class="col-md-1">{{$role->id}}</td>
+                                <td class="col-md-4">{{$role->name}}</td>
+                                <td class="col-md-2">
 
-                                    <form id="delete-form" action="{{Route("permissions.destroy",$permission->id)}}"
+                                    <form id="delete-form" action="{{Route("roles.destroy",$role->id)}}"
                                           method="POST">
                                         <div class="d-flex justify-content-between" role="group">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" id="delete-button"
-                                                    class="btn btn-outline-danger btn-md"> <i class="fas fa-trash"></i> Sil
+                                                    class="btn btn-outline-danger btn-md"><i class="fas fa-trash"></i>Sil
                                             </button>
-
+                                            <a href="{{Route("roles.edit",$role->id)}}"
+                                               class="btn btn-outline-primary btn-md"> <i class="fas fa-edit"></i>
+                                                Redaktə Et
+                                            </a>
+                                            <a href="{{Route("roles.permissions",$role->id)}}"
+                                               class="btn btn-outline-dark btn-md"> <i class="fas fa-eye"></i> İcazə Ver
+                                            </a>
                                         </div>
                                     </form>
 

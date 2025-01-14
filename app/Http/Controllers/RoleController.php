@@ -8,32 +8,36 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class PermissionController
+
+class RoleController
 {
     /**
      * Display a listing of the resource.
      */
     private string $viewFolder = "";
+    private Role $roleModel;
     private Permission $permissionModel;
 
-    public function __construct(Permission $permission)
+    public function __construct(Role $role, Permission $permission)
     {
+        $this->roleModel = $role;
         $this->permissionModel = $permission;
-        $this->viewFolder = "Back/Permission_v";
+        $this->viewFolder = "Back/Roles_v";
 
 
     }
 
     public function index()
     {
-        $permissionList = $this->permissionModel::all();
+        $roleList = $this->roleModel::all();
 
         $viewData = [
             'viewFolder' => $this->viewFolder,
             'subviewFolder' => 'list',
-            'pageName' => 'Səlahiyyətlər',
-            'permissionList' => $permissionList,
+            'pageName' => 'Rol',
+            'roleList' => $roleList,
 
         ];
 
@@ -48,7 +52,7 @@ class PermissionController
         $viewData = [
             'viewFolder' => $this->viewFolder,
             'subviewFolder' => 'add',
-            'pageName' => 'Səlahiyyət',
+            'pageName' => 'Rol',
         ];
 
         return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
@@ -62,13 +66,13 @@ class PermissionController
         try {
             $validatedData = $request->validate(
                 [
-                    'permissionName' => 'required|string|unique:permissions,name',
+                    'roleName' => 'required|string|unique:roles,name',
                 ]
             );
 
-            $this->permissionModel->name = $validatedData['permissionName'];
-            $this->permissionModel->save();
-            return redirect()->route('permissions.index');
+            $this->roleModel->name = $validatedData['roleName'];
+            $this->roleModel->save();
+            return redirect()->route('roles.index');
 
         } catch (QueryException $exception) {
 
@@ -85,12 +89,12 @@ class PermissionController
             }
 
 
-            return redirect()->route('permissions.create');
+            return redirect()->route('roles.create');
         } catch (ValidationException $exception) {
-            Alert::error('Error', 'Record Inserted Failed!' . $exception)
+            Alert::error('Error', 'Record Inserted Failed!' . $exception->getMessage())
                 ->position('top-right')
                 ->toToast()
-                ->autoclose(3000);
+                ->autoclose(300000);
 
             return redirect()->back()->withInput();
         }
@@ -110,12 +114,12 @@ class PermissionController
     public function edit(string $id)
     {
         try {
-            $permission = $this->permissionModel->findOrFail($id);
+            $role = $this->roleModel->findOrFail($id);
             $viewData = [
                 'viewFolder' => $this->viewFolder,
                 'subviewFolder' => "edit",
                 'pageName' => "Redaktə Et",
-                'role' => $permission,
+                'role' => $role,
 
             ];
 
@@ -123,7 +127,7 @@ class PermissionController
 
         } catch (\Exception $exception) {
             Alert::error('Xəta', $exception->getMessage())->toToast()->autoclose(3000);
-            return redirect()->route('permissions.index');
+            return redirect()->route('roles.index');
         }
     }
 
@@ -134,14 +138,14 @@ class PermissionController
     {
         try {
 
-            $permission = $this->permissionModel->findOrFail($id);
-            if (!$permission) {
+            $role = $this->roleModel->findOrFail($id);
+            if (!$role) {
                 throw new ModelNotFoundException("Hər hansı məlumat tapılmadı");
             }
 
             $validatedData = $request->validate(
                 [
-                    'permissionName' => 'required|string|unique:permissions,name',
+                    'roleName' => 'required|string|unique:roles,name',
                 ]
             );
             Alert::success('Success', 'Record Updated Successfully!')
@@ -149,22 +153,22 @@ class PermissionController
                 ->toToast()
                 ->autoclose(3000);
 
-            $permission->name = $validatedData['permissionName'];
+            $role->name = $validatedData['roleName'];
 
-            $permission->update($validatedData);
+            $role->update($validatedData);
 
-            return redirect()->route('permissions.index');
+            return redirect()->route('roles.index');
 
         } catch (ValidationException $exception) {
 
             Alert::error('Xəta', $exception->getMessage())->toToast()->autoclose(3000);
 
-            return redirect()->route('permissions.edit', $id);
+            return redirect()->route('roles.edit', $id);
 
         } catch (ModelNotFoundException $ex) {
 
             Alert::error('Xəta', $ex->getMessage())->toToast()->autoclose(3000);
-            return redirect()->route('permissions.edit', $id);
+            return redirect()->route('roles.edit', $id);
         }
     }
 
@@ -173,11 +177,11 @@ class PermissionController
      */
     public function destroy(string $id)
     {
-        $deleted = $this->permissionModel->destroy($id);
+        $deleted = $this->roleModel->destroy($id);
         $viewData = [
             'viewFolder' => $this->viewFolder,
             'subviewFolder' => 'list',
-            'roleList' => $this->permissionModel::all(),
+            'roleList' => $this->roleModel::all(),
         ];
         if ($deleted) {
 
@@ -185,6 +189,43 @@ class PermissionController
         } else {
             Alert::error('Error', 'Something went wrong!')->position('top-right')->toToast()->autoclose(3000);
         }
-        return redirect()->back(302, [], 'permissions.index')->with($viewData);
+        return redirect()->back(302, [], 'roles.index')->with($viewData);
+    }
+
+
+    public function managePermissions(string $roleId)
+    {
+        $role = $this->roleModel::findOrFail($roleId);
+        $permissions = $this->permissionModel::all();
+        $viewData = [
+            'viewFolder' => $this->viewFolder,
+            'subviewFolder' => 'permission',
+            'pageName' => 'İcazələr',
+            'role' => $role,
+            'permissions' => $permissions,
+
+        ];
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
+
+    }
+
+    public function updatePermissions(Request $request, string $roleId)
+    {
+        try {
+            $role = $this->roleModel::findOrFail($roleId);
+            $validateData = $request->validate([
+                'permissions' => 'required|array',
+            ]);
+            $permissions = $validateData['permissions'] ?? [];
+            $role->syncPermissions($permissions);
+            Alert::success('Uğurlu', 'İcazələr uğurla elavə edildi')->toToast()->autoclose(3000);
+        } catch (ValidationException $ex) {
+            Alert::error('Xəta', $ex->getMessage())->toToast()->autoclose(3000);
+        }
+
+
+
+
+        return redirect()->route('roles.index')->with('success', 'Yetkiler başarıyla güncellendi.');
     }
 }

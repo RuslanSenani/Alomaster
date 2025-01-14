@@ -1,6 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @include('sweetalert::alert')
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
@@ -86,6 +87,8 @@
 <script src="{{asset("assets")}}/custom/js/custom.js"></script>
 
 <script src="{{asset("assets")}}/dist/js/adminlte.min.js"></script>
+
+<script src="{{asset("assets")}}/vendor/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 
 
 

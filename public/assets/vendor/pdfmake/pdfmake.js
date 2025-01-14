@@ -29,7 +29,7 @@ return /******/ (function() { // webpackBootstrap
 // sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in
+// The above copyright notice and this role notice shall be included in
 // all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -13418,7 +13418,7 @@ __webpack_require__(6699);
  * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
  * to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all copies or
+ * The above copyright notice and this role notice shall be included in all copies or
  * substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
@@ -44960,7 +44960,7 @@ module.exports = {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -52409,7 +52409,7 @@ module.exports = function shimFlags() {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -52682,7 +52682,7 @@ module.exports.q = codes;
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -52828,7 +52828,7 @@ Object.defineProperty(Duplex.prototype, 'destroyed', {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -52875,7 +52875,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -54006,7 +54006,7 @@ function indexOf(xs, x) {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -54215,7 +54215,7 @@ function done(stream, er, data) {
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -55238,7 +55238,7 @@ module.exports = {
 
 "use strict";
 // Ported from https://github.com/mafintosh/end-of-stream with
-// permission from the author, Mathias Buus (@mafintosh).
+// role from the author, Mathias Buus (@mafintosh).
 
 
 var ERR_STREAM_PREMATURE_CLOSE = (__webpack_require__(8106)/* .codes.ERR_STREAM_PREMATURE_CLOSE */ .q.ERR_STREAM_PREMATURE_CLOSE);
@@ -55359,7 +55359,7 @@ module.exports = function () {
 
 "use strict";
 // Ported from https://github.com/mafintosh/pump with
-// permission from the author, Mathias Buus (@mafintosh).
+// role from the author, Mathias Buus (@mafintosh).
 
 
 var eos;
@@ -55526,7 +55526,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
@@ -71411,7 +71411,7 @@ exports.isAnyArrayBuffer = isAnyArrayBuffer;
 // persons to whom the Software is furnished to do so, subject to the
 // following conditions:
 //
-// The above copyright notice and this permission notice shall be included
+// The above copyright notice and this role notice shall be included
 // in all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS

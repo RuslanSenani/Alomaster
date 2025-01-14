@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 
 class UserController extends Controller
@@ -18,16 +19,27 @@ class UserController extends Controller
      */
     private string $viewFolder = "";
     private User $userModel;
+    private Role $roleModel;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Role $role)
     {
         $this->viewFolder = "Back/Users_v";
         $this->userModel = $user;
+        $this->roleModel = $role;
     }
 
     public function index()
     {
+        $users = $this->userModel::where('email_verified_at', '!=', null)->get()->all();
 
+        $viewData = [
+            'viewFolder' => $this->viewFolder,
+            'subviewFolder' => 'list',
+            'pageName' => 'İstifadəçilər',
+            'users' => $users,
+        ];
+
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
     }
 
     /**
@@ -76,8 +88,6 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
-
 
 
     }
@@ -139,6 +149,44 @@ class UserController extends Controller
             'rateLimitedUsers' => $rateLimitedUsers,
         ];
         return $viewData;
+    }
+
+
+    public function manageRoles(string $userId)
+    {
+        $user = $this->userModel->findOrFail($userId);
+        $roles = $this->roleModel->orderBy('id', 'desc')->get();
+        $viewData = [
+            'viewFolder' => $this->viewFolder,
+            'subviewFolder' => 'role',
+            'pageName' => 'İstifadəçi İcazələr',
+            'user' => $user,
+            'roles' => $roles,
+
+        ];
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
+
+    }
+
+    public function updateRoles(Request $request, string $userId)
+    {
+        try {
+            $user = $this->userModel->findOrFail($userId);
+            $validatedData = $request->validate([
+                'roles' => 'required|array',
+            ]);
+            $roles = $validatedData['roles'] ?? [];
+            $user->syncRoles($roles);
+            Alert::success('Uğurlu', 'Rollar uğurla yeniləndi!')->toToast()->autoclose(3000);
+
+        } catch (ValidationException $ex) {
+            Alert::error('Xəta', $ex->getMessage())->toToast()->autoclose(3000);
+        }
+
+
+
+
+        return redirect()->route('users.index')->with('success', 'Yetkiler başarıyla güncellendi.');
     }
 
 }
