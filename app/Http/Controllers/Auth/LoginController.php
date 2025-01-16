@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Contracts\ILoggerRepository;
-use App\Repositories\LogManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 
@@ -21,7 +18,7 @@ class LoginController extends Controller
 
     private User $userModel;
     private Role $roleModel;
-    private  ILoggerRepository $logManager;
+    private ILoggerRepository $logManager;
 
     public function __construct(User $userModel, Role $roleModel, ILoggerRepository $logManager)
     {
@@ -46,9 +43,14 @@ class LoginController extends Controller
 
             $credentials = $request->only('email', 'password');
             $remember = $request->has('remember');
-            $user = User::where('email', $request->email)->first();
+            $user = $this->userModel->where('email', $request->email)->first();
 
-            $throttleKey = 'login:' . $user->id . '|' . $request->input('email') . '|' . $request->ip();
+            try {
+                $throttleKey = 'login:' . $user->id . '|' . $request->input('email') . '|' . $request->ip();
+            }catch (\Exception $exception){
+                $this->logManager->log("error", "Bu e-mail adresi ilə qeydiyyat tapılmadı", ['user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
+                return back()->withErrors(['email'=> 'Bu e-mail adresi ilə qeydiyyat tapılmadı.'])->withInput();
+            }
 
 
             if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
@@ -57,17 +59,14 @@ class LoginController extends Controller
                 return response()->view('errors.429', ['retryAfter' => $retryAfter], 429);
             }
 
-            if (!$user) {
-                $this->logManager->log("error","Bu e-mail adresi ilə qeydiyyat tapılmadı",['user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
-                return back()->withErrors(['email' => 'Bu e-mail adresi ilə qeydiyyat tapılmadı.'])->withInput();
-            }
-
             if (!Hash::check($request->password, $user->password)) {
-                $this->logManager->log("Error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
+                $this->logManager->log("error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
                 RateLimiter::hit($throttleKey, 300);
-                return back()->withErrors(['password' => 'Girdiyiniz şifrə səhvdir.'])->withInput();
+                return back()->withErrors(['password'=>'Girdiyiniz şifrə səhvdir.'])->withInput();
 
             }
+
+
             if (Auth::attempt($credentials, $remember)) {
 
                 if (!$user->isActive) {
@@ -104,8 +103,6 @@ class LoginController extends Controller
             ->autoclose(3000);
         return redirect('/login');
     }
-
-
 
 
 }
