@@ -57,9 +57,9 @@ class RegisterController extends Controller
             return redirect()->route('login')->with('status', "Uğurla Qeyd Oldunuz Zəhmət olmasa E-Poçtunuzu Yoxlayın");
 
         } catch (ValidationException $exception) {
-            return back()->withErrors($exception->validator->errors())->withInput();
+            return back()->with('status',$exception->getMessage());
         } catch (Throwable $exception) {
-            return back()->withErrors(['status' => 'Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.'])->withInput();
+            return back()->with('status','Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.');
 
         }
 
