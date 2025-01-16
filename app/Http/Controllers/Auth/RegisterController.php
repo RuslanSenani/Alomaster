@@ -59,8 +59,7 @@ class RegisterController extends Controller
         } catch (ValidationException $exception) {
             return back()->with('status',$exception->getMessage());
         } catch (\Exception $exception) {
-//            'Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.'
-            return back()->with('status',$exception->getMessage());
+            return back()->with('status','Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.');
 
         }
 
@@ -74,8 +73,8 @@ class RegisterController extends Controller
             $user->email_verified_at = now();
             $user->save();
             Auth::logout();
-            return redirect('login')->with('status', "E-Poçtunuz Uğurla Doğrulandı");
+            return redirect()->route('login')->with('status', "E-Poçtunuz Uğurla Doğrulandı");
         }
-        return redirect('login')->with('status', 'Xətalı Token');
+        return redirect()->route('login')->with('status', 'Xətalı Token');
     }
 }
