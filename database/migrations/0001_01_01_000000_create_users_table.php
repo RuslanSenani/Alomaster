@@ -21,12 +21,12 @@ return new class extends Migration {
             $table->string('full_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->rememberToken();
             $table->boolean('isActive')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('user_image')->nullable();
             $table->string('pending_email')->nullable();
             $table->string('email_token');
+            $table->rememberToken();
             $this->addCommonColumns($table);
 
 
