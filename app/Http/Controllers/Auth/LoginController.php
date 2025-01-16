@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\LogRepo\LogManager;
+use App\Contracts\ILoggerRepository;
+use App\Repositories\LogManager;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -20,11 +21,13 @@ class LoginController extends Controller
 
     private User $userModel;
     private Role $roleModel;
+    private  ILoggerRepository $logManager;
 
-    public function __construct(User $userModel, Role $roleModel)
+    public function __construct(User $userModel, Role $roleModel, ILoggerRepository $logManager)
     {
         $this->roleModel = $roleModel;
         $this->userModel = $userModel;
+        $this->logManager = $logManager;
     }
 
     public function showLoginForm()
@@ -32,7 +35,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request, LogManager $logManager)
+    public function login(Request $request)
     {
 
         try {
@@ -55,12 +58,12 @@ class LoginController extends Controller
             }
 
             if (!$user) {
-                $logManager->log("Error", "Bu e-mail adresi ilə qeydiyyat tapılmadı", ['user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
+                $this->logManager->log("error","Bu e-mail adresi ilə qeydiyyat tapılmadı",['user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
                 return back()->withErrors(['email' => 'Bu e-mail adresi ilə qeydiyyat tapılmadı.'])->withInput();
             }
 
             if (!Hash::check($request->password, $user->password)) {
-                $logManager->log("Error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
+                $this->logManager->log("Error", "Girdiyiniz şifrə səhvdir", ['user_id' => $user->id, 'user_name' => $user->full_name, 'user_ip' => request()->ip(), 'user_agent' => request()->userAgent()]);
                 RateLimiter::hit($throttleKey, 300);
                 return back()->withErrors(['password' => 'Girdiyiniz şifrə səhvdir.'])->withInput();
 

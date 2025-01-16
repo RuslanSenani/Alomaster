@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Loggers\DatabaseLogger;
-use App\LogRepo\LogManager;
+use App\Contracts\ILoggerRepository;
+use App\Repositories\DatabaseLoggerRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,14 +13,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(LogManager::class, function ($app) {
-            $logManager = new LogManager();
 
-            $logManager->addLogger(new DatabaseLogger());
+        $this->app->singleton(ILoggerRepository::class, DatabaseLoggerRepository::class);
 
+//        foreach (glob(app_path('Contracts') . '/*.php') as $file) {
+//            $interface = 'App\\Contracts\\' . basename($file, '.php');
+//            $implementation = 'App\\Repositories\\' . basename($file, 'Interface.php');
+//
+//            if (class_exists($implementation)) {
+//                $this->app->bind($interface, $implementation);
+//            }
+//
+//        }
 
-            return $logManager;
-        });
     }
 
     /**

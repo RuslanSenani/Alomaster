@@ -5,21 +5,21 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\Front\FrontController;
-use App\Http\Controllers\HelperController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ModelController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\StockInController;
-use App\Http\Controllers\StockOutController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\Back\CategoryController;
+use App\Http\Controllers\Back\CustomerController;
+use App\Http\Controllers\Back\HelperController;
+use App\Http\Controllers\Back\HomeController;
+use App\Http\Controllers\Back\ModelController;
+use App\Http\Controllers\Back\PermissionController;
+use App\Http\Controllers\Back\ProductController;
+use App\Http\Controllers\Back\RoleController;
+use App\Http\Controllers\Back\StockInController;
+use App\Http\Controllers\Back\StockOutController;
+use App\Http\Controllers\Back\SupplierController;
+use App\Http\Controllers\Back\UnitController;
+use App\Http\Controllers\Back\UserController;
+use App\Http\Controllers\Back\WarehouseController;
+use App\Http\Controllers\Front\FrontHomeController;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
@@ -43,7 +43,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [FrontController::class, 'index'])->name('homepage');
+    Route::get('/', [FrontHomeController::class, 'index'])->name('homepage');
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {

@@ -125,7 +125,7 @@
                                 </p>
                             </a>
                         </li>
-                        @role('Admin')
+
                         <li class="nav-item">
                             <a href="{{Route('suppliers.index')}}"
                                class="nav-link {{ Str::startsWith(Route::currentRouteName(),'suppliers.') ? 'active' : '' }}">
@@ -135,7 +135,7 @@
                                 </p>
                             </a>
                         </li>
-                        @endrole
+
                         <li class="nav-item">
                             <a href="{{Route('roles.index')}}"
                                class="nav-link {{ Str::startsWith(Route::currentRouteName(),'roles.') ? 'active' : '' }}">
