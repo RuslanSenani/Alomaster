@@ -58,8 +58,9 @@ class RegisterController extends Controller
 
         } catch (ValidationException $exception) {
             return back()->with('status',$exception->getMessage());
-        } catch (Throwable $exception) {
-            return back()->with('status','Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.');
+        } catch (\Exception $exception) {
+//            'Qeydiyyat zamanı xəta baş verdi. Xahiş edirik, yenidən cəhd edin.'
+            return back()->with('status',$exception->getMessage());
 
         }
 
