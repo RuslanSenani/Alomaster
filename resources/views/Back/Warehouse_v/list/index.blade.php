@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-@include("Back.includes.static.head")
+@include("includes.static.head")
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -11,13 +11,13 @@
 
     <!-- Navbar -->
 
-    @include("Back.includes.static.navbar")
+    @include("includes.static.navbar")
 
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
 
-    @include("Back.includes.static.sidebar")
+    @include("includes.static.sidebar")
 
     <!-- Content Wrapper. Contains edit content -->
 
@@ -26,15 +26,15 @@
 
 
     <!-- Control Sidebar -->
-    @include("Back.includes.static.controller")
+    @include("includes.static.controller")
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 
-@include("Back.includes.static.js")
+@include("includes.static.js")
 
 </body>
 
-@include("Back.includes.static.footer")
+@include("includes.static.footer")
 
 </html>
