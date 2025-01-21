@@ -17,7 +17,7 @@
                                 <div class="form-group col-md-4">
 {{--                                    <label for="previewImage">Seçilmiş Şəkli:</label>--}}
                                     <img id="previewImage" alt="Seçilmiş Şəkli"
-                                         src="http://127.0.0.1:8080/assets/dist/img/chosePhoto.png"
+                                         src="{{asset("assets/dist/img/chosePhoto.png")}}"
                                          class="img-thumbnail rounded mx-auto d-block"
                                          style="width: 80%;height: 150px; display: none;">
                                 </div>
