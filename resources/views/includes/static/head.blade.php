@@ -8,7 +8,6 @@
 
     <title>Alo Master</title>
 
-    <canvas id="myChart" width="400" height="200"></canvas>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
