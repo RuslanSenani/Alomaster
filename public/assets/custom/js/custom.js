@@ -36,14 +36,6 @@ $(function () {
     });
 });
 
-$(function () {
-    bsCustomFileInput.init();
-});
-
-
-const fileInput = document.getElementById('fileInput');
-const previewImage = document.getElementById('previewImage');
-
 
 
 

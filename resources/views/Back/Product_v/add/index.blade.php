@@ -33,6 +33,8 @@
 
 @include("includes.static.js")
 @include("includes.static.customJs")
+@include("Back.Product_v.custom.js.changeFile")
+
 </body>
 
 @include("includes.static.footer")
