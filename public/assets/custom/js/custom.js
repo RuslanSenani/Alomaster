@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $(function () {
         //Initialize Select2 Elements
         $('.select2').select2()
@@ -7,7 +8,7 @@ $(document).ready(function () {
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })
-    })
+    });
 
     $(function () {
         const fields = ['#about_us', '#address', '#mission', '#vision'];
@@ -18,6 +19,7 @@ $(document).ready(function () {
             });
         });
     });
+
 })
 
 
