@@ -8,6 +8,7 @@
 
     <title>Alo Master</title>
 
+    <canvas id="myChart" width="400" height="200"></canvas>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -22,11 +23,12 @@
     <!-- JQVMap -->
 
 
+
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset("assets")}}/dist/css/adminlte.min.css">
     <!-- SimpleMDE -->
-    <link rel="stylesheet" href="{{asset("assets")}}/vendor/simplemde/simplemde.min.css">
+{{--    <link rel="stylesheet" href="{{asset("assets")}}/vendor/simplemde/simplemde.min.css">--}}
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->

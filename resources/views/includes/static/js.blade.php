@@ -10,9 +10,9 @@
 
 <script src="{{asset("assets")}}/vendor/jquery-ui/jquery-ui.min.js"></script>
 
-<script src="{{asset("assets")}}/dist/js/pages/dashboard3.js"></script>
 
-<script src="{{asset("assets")}}/vendor/js/adminlte.js"></script>
+
+<script src="{{asset("assets")}}/dist/js/adminlte.js"></script>
 
 <script>
     $.widget.bridge('uibutton', $.ui.button)
@@ -41,6 +41,8 @@
 <script src="{{asset("assets")}}/dist/js/demo.js"></script>
 
 <script src="{{asset("assets")}}/dist/js/pages/dashboard.js"></script>
+
+<script src="{{asset("assets")}}/dist/js/pages/dashboard3.js"></script>
 
 <script src="{{asset("assets")}}/vendor/datatables/jquery.dataTables.min.js"></script>
 
