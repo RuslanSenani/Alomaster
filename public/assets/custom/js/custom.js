@@ -15,6 +15,15 @@
 //     })
 // })
 
+$(function () {
+    const fields = ['#about_us', '#address', '#mission', '#vision'];
+    fields.forEach(function (selector) {
+        $(selector).summernote({
+            height: '300px',
+            width: '100%',
+        });
+    });
+});
 
 $(function () {
     bsCustomFileInput.init();

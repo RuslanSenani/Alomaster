@@ -159,7 +159,7 @@
                                class="nav-link {{ Str::startsWith(Route::currentRouteName(),'users.') ? 'active' : '' }}">
                                 <i class="fas fa-user"></i>
                                 <p>
-                                     İstifadəçilər
+                                    İstifadəçilər
                                 </p>
                             </a>
                         </li>
@@ -177,65 +177,17 @@
                     </span>
 
                     <ul class="nav nav-treeview">
-                        {{--                        <li class="nav-item ">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
-                        {{--                                <i class="fas fa-arrow-circle-down"></i> <i class="fas fa-box-open"></i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Anbar Giriş--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
-                        {{--                                <i class="fas fa-arrow-circle-up"></i> <i class="fas fa-box-open"></i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Anbar Çıxış--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
 
-                        {{--                                <i class="fas fa-calculator"> </i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Anbar Hesabatı--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
+                        <li class="nav-item">
+                            <a href="{{Route('settings.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'settings.') ? 'active' : '' }}">
+                                <i class="fas fa-user"></i>
+                                <p>
+                                    Settings
+                                </p>
+                            </a>
+                        </li>
 
-
-                        {{--                                <i class="fas fa-balance-scale"> </i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Mənfəət/Zərər--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
-                        {{--                                <i class="fas fa-tags"></i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Kategoria--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
-                        {{--                                <i class="fas fa-cubes"></i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Mehsullar--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
-                        {{--                        <li class="nav-item">--}}
-                        {{--                            <a href="#" class="nav-link">--}}
-                        {{--                                <i class="fas fa-barcode"></i>--}}
-                        {{--                                <p>--}}
-                        {{--                                    Mehsul Kodları--}}
-                        {{--                                </p>--}}
-                        {{--                            </a>--}}
-                        {{--                        </li>--}}
                     </ul>
                 </li>
 

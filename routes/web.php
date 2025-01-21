@@ -20,6 +20,7 @@ use App\Http\Controllers\Back\UnitController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\WarehouseController;
 use App\Http\Controllers\Front\FrontHomeController;
+use App\Http\Controllers\Front\FrontSettingController;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
@@ -44,6 +45,11 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 Route::prefix('/')->group(function () {
     Route::get('/', [FrontHomeController::class, 'index'])->name('homepage');
+
+    Route::resources([
+        'settings' => FrontSettingController::class,
+    ]);
+
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {

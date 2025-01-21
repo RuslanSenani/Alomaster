@@ -21,9 +21,12 @@
           href="{{asset("assets")}}/vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- JQVMap -->
 
+
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset("assets")}}/dist/css/adminlte.min.css">
+    <!-- SimpleMDE -->
+    <link rel="stylesheet" href="{{asset("assets")}}/vendor/simplemde/simplemde.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->

@@ -9,14 +9,22 @@ class FrontSettingController
     /**
      * Display a listing of the resource.
      */
-    private  string $viewFolder="";
+    private string $viewFolder = "";
 
-    public function __construct(){
-        $this->viewFolder="Front/";
+    public function __construct()
+    {
+        $this->viewFolder = "Front/Settings_v";
     }
+
     public function index()
     {
+        $viewData = [
+            'viewFolder' => $this->viewFolder,
+            'subviewFolder' => 'add',
+            'pageName' => 'Setting',
+        ];
 
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
     }
 
     /**
@@ -48,7 +56,13 @@ class FrontSettingController
      */
     public function edit(string $id)
     {
-        //
+        $viewData = [
+            'viewFolder' => $this->viewFolder,
+            'subviewFolder' => 'edit',
+            'pageName' => 'Setting',
+        ];
+
+        return view("{$viewData['viewFolder']}.{$viewData['subviewFolder']}.index")->with($viewData);
     }
 
     /**
