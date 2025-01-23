@@ -17,11 +17,13 @@ return new class extends Migration {
 
         $this->createCoursesTable();
 
-        $this->createFilesTable();
-
         $this->createGalleriesTable();
 
+        $this->createFilesTable();
+
         $this->createImagesTable();
+
+        $this->createVideosTable();
 
         $this->createMembersTable();
 
@@ -29,9 +31,9 @@ return new class extends Migration {
 
         $this->createPopupsTable();
 
-        $this->createPortfoliosTable();
-
         $this->createPortfolioCategoriesTable();
+
+        $this->createPortfoliosTable();
 
         $this->createPortfolioImagesTable();
 
@@ -49,7 +51,7 @@ return new class extends Migration {
 
         $this->createTestimonialsTable();
 
-        $this->createVideosTable();
+
     }
 
     /**
@@ -58,7 +60,7 @@ return new class extends Migration {
     public function down(): void
     {
 
-        $tables = ['brands', 'courses', 'files', 'galleries', 'images', 'members', 'news', 'popups', 'portfolios', 'portfolio_categories', 'portfolio_images', 'f_products', 'product_images', 'references', 'services', 'settings', 'slides', 'testimonials', 'videos',];
+        $tables = ['brands', 'courses', 'files', 'images', 'videos', 'galleries', 'members', 'news', 'popups', 'portfolios', 'portfolio_categories', 'portfolio_images', 'product_images', 'f_products', 'references', 'services', 'settings', 'slides', 'testimonials',];
 
         foreach ($tables as $table) {
             Schema::dropIfExists($table);
@@ -98,6 +100,21 @@ return new class extends Migration {
             $this->addCommonColumns($table);
         });
     }
+    /**
+     * @return void
+     */
+    public function createGalleriesTable(): void
+    {
+        Schema::create('galleries', function (Blueprint $table) {
+            $table->id();
+            $table->string('url');
+            $table->string('title');
+            $table->enum('gallery_type', ['file', 'image', 'video']);
+            $table->string('folder_name');
+            $table->integer('rank');
+            $table->boolean('isActive')->default(false);
+        });
+    }
 
     /**
      * @return void
@@ -118,25 +135,24 @@ return new class extends Migration {
     /**
      * @return void
      */
-    public function createGalleriesTable(): void
+    public function createImagesTable(): void
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('gallery_id')->constrained('galleries')->onDelete('cascade');
             $table->string('url');
-            $table->string('title');
-            $table->enum('gallery_type', ['file', 'image', 'video']);
-            $table->string('folder_name');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);
+            $this->addCommonColumns($table);
         });
     }
 
     /**
      * @return void
      */
-    public function createImagesTable(): void
+    public function createVideosTable(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('gallery_id')->constrained('galleries')->onDelete('cascade');
             $table->string('url');
@@ -246,23 +262,6 @@ return new class extends Migration {
     /**
      * @return void
      */
-    public function createProductsTable(): void
-    {
-        Schema::create('f_products', function (Blueprint $table) {
-            $table->id();
-            $table->string('url')->nullable();
-            $table->string('title')->nullable();
-            $table->string('description')->nullable();
-            $table->integer('rank');
-            $table->boolean('isActive')->default(false);
-            $this->addCommonColumns($table);
-
-        });
-    }
-
-    /**
-     * @return void
-     */
     public function createProductImagesTable(): void
     {
         Schema::create('product_images', function (Blueprint $table) {
@@ -277,6 +276,24 @@ return new class extends Migration {
 
         });
     }
+
+    /**
+     * @return void
+     */
+    public function createProductsTable(): void
+    {
+        Schema::create('f_products', function (Blueprint $table) {
+            $table->id();
+            $table->string('url')->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->integer('rank');
+            $table->boolean('isActive')->default(false);
+            $this->addCommonColumns($table);
+
+        });
+    }
+
 
     /**
      * @return void
@@ -381,18 +398,5 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * @return void
-     */
-    public function createVideosTable(): void
-    {
-        Schema::create('videos', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('gallery_id')->constrained('galleries')->onDelete('cascade');
-            $table->string('url');
-            $table->integer('rank');
-            $table->boolean('isActive')->default(false);
-            $this->addCommonColumns($table);
-        });
-    }
+
 };

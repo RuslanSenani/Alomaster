@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Front;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class Portfolio extends Model
 {
     //
 }
