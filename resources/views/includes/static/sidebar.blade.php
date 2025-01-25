@@ -187,6 +187,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{Route('product.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'product.') ? 'active' : '' }}">
+                                <i class="fas fa-user"></i>
+                                <p>
+                                    Məhsullar
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

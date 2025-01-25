@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Models\Front\FProduct;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 
 class HelperController extends Controller
 {
+
+    private FProduct $productModel;
+
+    public function __construct(FProduct $productModel)
+    {
+        $this->productModel = $productModel;
+    }
+
     public function getStockDetails(Request $request)
     {
         $validate = $request->validate([
@@ -33,6 +42,16 @@ class HelperController extends Controller
             return getProduct($validate['product_id']);
         } else {
             return response()->json(['error' => 'Invalid request'], 400);
+        }
+    }
+
+    public function rankSetter(Request $request)
+    {
+        $data = $request->post('data');
+        parse_str($data, $order);
+        $items = $order['ord'];
+        foreach ($items as $rank => $id) {
+            $this->productModel::where('id', $id)->where('rank', '!=', $rank)->update(['rank' => $rank]);
         }
     }
 }

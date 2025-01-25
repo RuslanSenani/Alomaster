@@ -20,6 +20,7 @@ use App\Http\Controllers\Back\UnitController;
 use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\WarehouseController;
 use App\Http\Controllers\Front\FrontHomeController;
+use App\Http\Controllers\Front\FrontProductController;
 use App\Http\Controllers\Front\FrontSettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,10 +80,13 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'permissions' => PermissionController::class,
         'users' => UserController::class,
         'roles' => RoleController::class,
+        'product' => FrontProductController::class,
 
     ]);
 
     Route::get('/ajax-product', [HelperController::class, 'getProductDetails'])->name('ajax-product');
 
     Route::get('/ajax-stock', [HelperController::class, 'getStockDetails'])->name('ajax-stock');
+
+    Route::post('/ajax-rankSetter', [HelperController::class, 'rankSetter'])->name('ajax-rankSetter');
 });
