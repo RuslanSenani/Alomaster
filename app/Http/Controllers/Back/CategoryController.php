@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categoryList = $this->category::all();
+        $categoryList = $this->category::orderBy("id", "desc")->get()->all();
 
         $viewData = [
             'viewFolder' => $this->viewFolder,
