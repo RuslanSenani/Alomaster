@@ -66,7 +66,7 @@ class CategoryController extends Controller
         try {
             $validatedData = $request->validate(
                 [
-                    'categoryName' => 'required|string|regex:/^[a-zA-Z]+$/|max:255',
+                    'categoryName' => 'required|string|regex:/^[\p{L}\s]+$/u|max:100',
                 ]
             );
             $exising = $this->category::withTrashed()->where('name', $validatedData['categoryName'])->first();
