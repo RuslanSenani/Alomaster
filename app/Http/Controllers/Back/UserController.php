@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Back;
 
 use App\Models\User;
+use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
+use function Pest\Laravel\json;
 
 
 class UserController extends Controller
@@ -19,12 +21,14 @@ class UserController extends Controller
     private string $viewFolder = "";
     private User $userModel;
     private Role $roleModel;
+    private StatusServices $statusServices;
 
-    public function __construct(User $user, Role $role)
+    public function __construct(User $user, Role $role, StatusServices $statusServices)
     {
         $this->viewFolder = "Back/Users_v";
         $this->userModel = $user;
         $this->roleModel = $role;
+        $this->statusServices = $statusServices;
     }
 
     public function index()
@@ -183,9 +187,12 @@ class UserController extends Controller
         }
 
 
-
-
         return redirect()->route('users.index')->with('success', 'Yetkiler başarıyla güncellendi.');
+    }
+
+    public function isActiveSetter(Request $request, string $id)
+    {
+        $this->statusServices->setStatus($request, $this->userModel, $id);
     }
 
 }

@@ -30,6 +30,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
                         <thead>
                         <tr>
                             <th>İstifadəçi Adı</th>
@@ -40,6 +41,7 @@
                         </tr>
                         </thead>
                         <tbody>
+
                         @foreach($users as $user)
 
                             <tr>
@@ -49,7 +51,8 @@
                                 <td class="col-md-3">{{$user->email}}</td>
                                 <td class="col-md-1 text-center">
                                     <label class="toggle">
-                                        <input type="checkbox" id="btnToggle"
+                                        <input type="checkbox" class="isActive"
+                                               data-url="{{route('user.is-active-setter',$user->id)}}"
                                                name="isActive" {{ $user->isActive ? 'checked' : '' }} />
                                         <span class="slider"></span>
                                     </label>

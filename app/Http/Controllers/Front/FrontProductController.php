@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Front\FProduct;
+use App\Http\Requests\FProductRequest;
+use App\Services\Back\AlertServices;
+use App\Services\Back\FProductServices;
+use App\Services\Back\RankServices;
+use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class FrontProductController
 {
@@ -13,17 +19,23 @@ class FrontProductController
 
     private string $viewFolder;
 
-    private FProduct $productModel;
+    private FProductServices $productServices;
+    private RankServices $rankServices;
+    private StatusServices $statusServices;
+    private AlertServices $alertServices;
 
-    public function __construct(FProduct $product)
+    public function __construct(FProductServices $productServices, RankServices $rankServices, StatusServices $statusServices, AlertServices $alertServices)
     {
         $this->viewFolder = 'Front/Product_v';
-        $this->productModel = $product;
+        $this->productServices = $productServices;
+        $this->rankServices = $rankServices;
+        $this->statusServices = $statusServices;
+        $this->alertServices = $alertServices;
     }
 
     public function index()
     {
-        $products = $this->productModel->orderBy('rank', 'asc')->get();
+        $products = $this->productServices->getAllProducts();
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "list",
@@ -45,9 +57,9 @@ class FrontProductController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FProductRequest $request)
     {
-        //
+        $validationData = $request->validated();
     }
 
     /**
@@ -69,7 +81,7 @@ class FrontProductController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FProductRequest $request, string $id)
     {
         //
     }
@@ -79,7 +91,27 @@ class FrontProductController
      */
     public function destroy(string $id)
     {
-        //
+        $this->productServices->deleteProduct($id);
+
+        $viewData = [
+            "viewFolder" => $this->viewFolder,
+            "subViewFolder" => "list",
+            "pageName" => "Məhsullar",
+            'products' => $this->productServices->getAllProducts(),
+        ];
+        return redirect()->route("product.index")->with($viewData, 200);
+    }
+
+    public function isActiveSetter(FProductRequest $request, string $id)
+    {
+        $product = $this->productServices->getProductById($id);
+        $this->statusServices->setStatus($request, $product, $id);
+
+    }
+
+    public function rankSetter(FProductRequest $request)
+    {
+        $this->rankServices->setRankStatus($request, $this->productServices->getModelInstance());
     }
 
 }

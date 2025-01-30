@@ -2,8 +2,17 @@
 
 namespace App\Providers;
 
+use App\Contracts\IAlert;
+use App\Contracts\IBaseRepository;
 use App\Contracts\ILoggerRepository;
+use App\Contracts\IRankableRepository;
+use App\Contracts\IStatusRepository;
+use App\Repositories\BaseRepository;
 use App\Repositories\DatabaseLoggerRepository;
+use App\Repositories\RankableRepository;
+use App\Repositories\StatusRepository;
+use App\Services\Back\AlertServices;
+use App\Services\Back\RankServices;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,16 +24,10 @@ class AppServiceProvider extends ServiceProvider
     {
 
         $this->app->singleton(ILoggerRepository::class, DatabaseLoggerRepository::class);
+        $this->app->bind(IAlert::class, AlertServices::class);
 
-//        foreach (glob(app_path('Contracts') . '/*.php') as $file) {
-//            $interface = 'App\\Contracts\\' . basename($file, '.php');
-//            $implementation = 'App\\Repositories\\' . basename($file, 'Interface.php');
-//
-//            if (class_exists($implementation)) {
-//                $this->app->bind($interface, $implementation);
-//            }
-//
-//        }
+        $this->app->bind(IRankableRepository::class, RankableRepository::class);
+        $this->app->bind(IStatusRepository::class, StatusRepository::class);
 
     }
 

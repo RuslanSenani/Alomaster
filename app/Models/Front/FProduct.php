@@ -4,9 +4,11 @@ namespace App\Models\Front;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FProduct extends Model
 {
+    use SoftDeletes;
     protected $table = 'f_products';
     protected $fillable = ['url', 'title', 'description', 'rank', 'isActive'];
 

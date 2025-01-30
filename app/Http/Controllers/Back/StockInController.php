@@ -90,8 +90,6 @@ class StockInController extends Controller
      */
     public function store(Request $request)
     {
-
-
         try {
             $validatedData = $request->validate([
 

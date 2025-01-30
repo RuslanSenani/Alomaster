@@ -47,7 +47,7 @@
                         @foreach($products as $product)
                             <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                            <tr id="ord-{{$product->id}}" data-url="{{url('product')}}">
+                            <tr id="ord-{{$product->id}}" data-url="{{route('ajax-rankSetter')}}">
                                 <th><i class="fa-solid fa-list-ol"></i></th>
                                 <td class="col-md-1">#{{$product->id}}</td>
                                 <td class="col-md-3">{{$product->title}}</td>
@@ -55,7 +55,8 @@
                                 <td class="col-md-3">{{$product->description}}</td>
                                 <td class="col-md-2">
                                     <label class="toggle">
-                                        <input type="checkbox" id="btnToggle"
+                                        <input type="checkbox" class="isActive"
+                                               data-url="{{route('product.is-active-setter',$product->id)}}"
                                                name="isActive" {{ $product->isActive ? 'checked' : '' }} />
                                         <span class="slider"></span>
                                     </label>

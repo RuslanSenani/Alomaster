@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Models\Front\FProduct;
+
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -10,12 +10,6 @@ use Illuminate\Routing\Controller;
 class HelperController extends Controller
 {
 
-    private FProduct $productModel;
-
-    public function __construct(FProduct $productModel)
-    {
-        $this->productModel = $productModel;
-    }
 
     public function getStockDetails(Request $request)
     {
@@ -45,13 +39,5 @@ class HelperController extends Controller
         }
     }
 
-    public function rankSetter(Request $request)
-    {
-        $data = $request->post('data');
-        parse_str($data, $order);
-        $items = $order['ord'];
-        foreach ($items as $rank => $id) {
-            $this->productModel::where('id', $id)->where('rank', '!=', $rank)->update(['rank' => $rank]);
-        }
-    }
+
 }

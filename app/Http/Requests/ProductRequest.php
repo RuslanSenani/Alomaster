@@ -42,16 +42,5 @@ class ProductRequest extends FormRequest
     }
 
 
-//    public function validated()
-//    {
-//        $data = parent::validated();
-//        return [
-//            'p_name' => $data['p_name'],
-//            'p_code' => $data['p_code'],
-//            'p_info' => $data['p_info'],
-//            'p_img' => $data['p_img'],
-//
-//        ];
-//    }
 
 }

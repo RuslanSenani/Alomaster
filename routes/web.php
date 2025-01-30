@@ -67,6 +67,12 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/roles/{role}/permissions', [RoleController::class, 'managePermissions'])->name('roles.permissions');
     Route::post('/roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('roles.permissions.update');
 
+
+    Route::post('/isActive/{id}/users', [UserController::class, 'isActiveSetter'])->name('user.is-active-setter');
+    Route::post('/isActive/{id}/product', [FrontProductController::class, 'isActiveSetter'])->name('product.is-active-setter');
+    Route::post('/ajax-rankSetter', [FrontProductController::class, 'rankSetter'])->name('ajax-rankSetter');
+
+
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -88,5 +94,5 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/ajax-stock', [HelperController::class, 'getStockDetails'])->name('ajax-stock');
 
-    Route::post('/ajax-rankSetter', [HelperController::class, 'rankSetter'])->name('ajax-rankSetter');
+
 });
