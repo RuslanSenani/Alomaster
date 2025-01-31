@@ -52,9 +52,9 @@
                                 <td class="text-center col-md-2">
                                     <div class="image">
                                         <img
-                                                src="{{asset($product->product_img)}}"
-                                                alt="Məhsul Şəkli"
-                                                width="40%" height="40%">
+                                            src="{{asset($product->product_img)}}"
+                                            alt="Məhsul Şəkli"
+                                            width="100%" height="100%">
                                     </div>
                                     <div class="mt-3">
                                         <img id="imagePreview" src="" alt="Şəkil önizləmə"

@@ -66,7 +66,7 @@
                                         <img
                                             src="{{asset($stock->product->product_img)}}"
                                             alt="Məhsul Şəkli"
-                                            width="100%" height="100%" >
+                                            width="40%" height="40%" >
                                     </div>
                                 </td>
                                 <td>{{$stock->qty}}</td>
