@@ -5,10 +5,8 @@ use App\Mail\VerifyEmail;
 use App\Models\Product;
 use App\Models\StockIn;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 // Ajax  deyerlerini kontrol etmek ucun olan bolme sadece ajax deyerleri istifade  olunacaq
 

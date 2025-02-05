@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FProduct extends Model
 {
-    use SoftDeletes;
     protected $table = 'f_products';
     protected $fillable = ['url', 'title', 'description', 'rank', 'isActive'];
 

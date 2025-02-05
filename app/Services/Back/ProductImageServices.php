@@ -3,57 +3,54 @@
 namespace App\Services\Back;
 
 use App\Contracts\IAlert;
-use App\Contracts\IFProductRepository;
+use App\Contracts\IProductImageRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class FProductServices
+class ProductImageServices
 {
-    protected IFproductRepository $productRepository;
-    protected IAlert $alert;
 
-    public function __construct(IFproductRepository $productRepository, IAlert $alert)
+    private IProductImageRepository $productImageRepository;
+    private IAlert $alert;
+
+    public function __construct(IProductImageRepository $productImageRepository, IAlert $alert)
     {
-        $this->productRepository = $productRepository;
+        $this->productImageRepository = $productImageRepository;
         $this->alert = $alert;
-
     }
 
 
-    public function getAllProducts(): Collection
+    public function getAllProducts(array $where): Collection
     {
-        return $this->productRepository->all();
+        return $this->productImageRepository->all($where);
 
     }
 
     public function getProductById(int $id): Model
     {
-        return $this->productRepository->find($id);
+        return $this->productImageRepository->find($id);
     }
 
     public function getModelInstance(): Model
     {
-        return $this->productRepository->getModel();
+        return $this->productImageRepository->getModel();
     }
 
     public function saveProduct(array $data): Model
     {
-        return $this->productRepository->create($data);
+        return $this->productImageRepository->create($data);
     }
 
     public function updateProduct(int $id, array $data): bool
     {
-
-        return $this->productRepository->update($id, $data);
+        return $this->productImageRepository->update($id, $data);
     }
 
     public function deleteProduct(int $id): bool
     {
         try {
-
-            $delete = $this->productRepository->delete($id);
+            $delete = $this->productImageRepository->delete($id);
             if ($delete) {
-
                 $this->alert->success("Uğurlu", "Silinmə Uğurlu Oldu");
                 return true;
             } else {
@@ -67,6 +64,5 @@ class FProductServices
 
 
     }
-
 
 }

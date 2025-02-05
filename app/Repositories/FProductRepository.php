@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\IFProductRepository;
 use App\Models\Front\FProduct;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 
@@ -41,7 +40,8 @@ class FProductRepository implements IFProductRepository
 
     public function update($id, array $attributes): bool
     {
-        return $this->productModel->update($id, $attributes);
+        $product = $this->productModel->findOrFail($id);
+        return $product->update($attributes);
     }
 
     public function delete($id): bool

@@ -16,7 +16,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc; /* Kapalı durum için gri arka plan */
+    background-color: rgb(250, 0, 0);
     border-radius: 34px;
     transition: 0.4s;
 }
@@ -28,15 +28,18 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: #fff; /* Kapalı durum için beyaz top */
+    background-color: #fff;
     border-radius: 50%;
     transition: 0.4s;
 }
 
 input:checked + .slider {
-    background-color: #10c469; /* Açık durum için yeşil arka plan */
+    background-color: #10c469;
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px); /* Topu sağa kaydır */
+    transform: translateX(26px);
 }
+
+
+

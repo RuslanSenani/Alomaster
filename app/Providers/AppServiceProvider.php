@@ -3,12 +3,14 @@
 namespace App\Providers;
 
 use App\Contracts\IAlert;
-use App\Contracts\IBaseRepository;
+use App\Contracts\ICoverRepository;
 use App\Contracts\ILoggerRepository;
+use App\Contracts\IProductImageRepository;
 use App\Contracts\IRankableRepository;
 use App\Contracts\IStatusRepository;
-use App\Repositories\BaseRepository;
+use App\Repositories\CoverRepository;
 use App\Repositories\DatabaseLoggerRepository;
+use App\Repositories\ProductImageRepository;
 use App\Repositories\RankableRepository;
 use App\Repositories\StatusRepository;
 use App\Services\Back\AlertServices;
@@ -28,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(IRankableRepository::class, RankableRepository::class);
         $this->app->bind(IStatusRepository::class, StatusRepository::class);
+
+        $this->app->bind(IProductImageRepository::class, ProductImageRepository::class);
+
+        $this->app->bind(ICoverRepository::class, CoverRepository::class);
 
     }
 

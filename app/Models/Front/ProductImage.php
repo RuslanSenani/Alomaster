@@ -12,7 +12,7 @@ class ProductImage extends Model
 
     public function product(): BelongsTo
     {
-        return $this->belongsTo(FProduct::class,'product_idl');
+        return $this->belongsTo(FProduct::class,'product_id');
     }
 
 }

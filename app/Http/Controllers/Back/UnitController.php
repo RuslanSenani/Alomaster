@@ -182,7 +182,7 @@ class UnitController extends Controller
 
             Alert::error('Xəta', $exception->getMessage())->toToast()->autoclose(3000);
 
-            return redirect()->route('units.index');
+            return redirect()->route('units.edit',$id);
         } catch (ModelNotFoundException $ex) {
 
             Alert::error('Xəta', $ex->getMessage())->toToast()->autoclose(3000);

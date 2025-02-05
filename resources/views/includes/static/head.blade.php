@@ -22,12 +22,16 @@
     <!-- JQVMap -->
 
 
-
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/jqvmap/jqvmap.min.css">
+    <!-- Dropzone CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+
+
     <!-- Theme style -->
+
     <link rel="stylesheet" href="{{asset("assets")}}/dist/css/adminlte.min.css">
     <!-- SimpleMDE -->
-{{--    <link rel="stylesheet" href="{{asset("assets")}}/vendor/simplemde/simplemde.min.css">--}}
+    {{--    <link rel="stylesheet" href="{{asset("assets")}}/vendor/simplemde/simplemde.min.css">--}}
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->

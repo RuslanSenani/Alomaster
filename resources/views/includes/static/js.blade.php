@@ -10,15 +10,21 @@
 
 <script src="{{asset("assets")}}/vendor/jquery-ui/jquery-ui.min.js"></script>
 
-
-
 <script src="{{asset("assets")}}/dist/js/adminlte.js"></script>
 
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 
+
+<!-- Dropzone JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+
+<script src="{{asset("assets")}}/custom/js/dropzone.js"></script>
+
 <script src="{{asset("assets")}}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="{{asset("assets")}}/vendor/dropzone/min/dropzone.min.js"></script>
 
 <script src="{{asset("assets")}}/vendor/chart.js/Chart.min.js"></script>
 

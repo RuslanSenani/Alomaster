@@ -21,6 +21,7 @@ use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\Back\WarehouseController;
 use App\Http\Controllers\Front\FrontHomeController;
 use App\Http\Controllers\Front\FrontProductController;
+use App\Http\Controllers\Front\FrontProductImageController;
 use App\Http\Controllers\Front\FrontSettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,8 +70,21 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
 
     Route::post('/isActive/{id}/users', [UserController::class, 'isActiveSetter'])->name('user.is-active-setter');
-    Route::post('/isActive/{id}/product', [FrontProductController::class, 'isActiveSetter'])->name('product.is-active-setter');
+    Route::post('/isActive/{id}/product', [FrontProductController::class, 'isActiveSetter'])->name('ajax.is-active-setter');
     Route::post('/ajax-rankSetter', [FrontProductController::class, 'rankSetter'])->name('ajax-rankSetter');
+
+    Route::get('/image-form/{id}/product', [FrontProductController::class, 'product_image'])->name('product.image-form');
+
+    Route::post('/image-upload/{id}/product', [FrontProductController::class, 'product_image_upload'])->name('product.image-upload');
+
+    Route::post('/image-refresh/{id}/product', [FrontProductController::class, 'product_refresh_image'])->name('product.refresh-image-list');
+
+
+    Route::post('/isActive/{id}/product-image', [FrontProductImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-product-image');
+
+    Route::post('/ajax-rankSetter-product-image', [FrontProductImageController::class, 'rankSetter'])->name('ajax-rankSetter-product-image');
+
+    Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 
 
     Route::resources([
@@ -87,6 +101,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'users' => UserController::class,
         'roles' => RoleController::class,
         'product' => FrontProductController::class,
+        'product-image' => FrontProductImageController::class,
 
     ]);
 

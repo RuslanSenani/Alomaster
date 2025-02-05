@@ -268,7 +268,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('product_id')->constrained('f_products')->onDelete('cascade');
             $table->string('img_url')->nullable();
-            $table->integer('rank');
+            $table->integer('rank')->default(0);
             $table->boolean('isActive')->default(false);
             $table->boolean('isCover')->default(false);
             $this->addCommonColumns($table);
