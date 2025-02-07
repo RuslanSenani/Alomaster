@@ -21,8 +21,7 @@
 
     <!-- Content Wrapper. Contains edit content -->
 
-    @include("Back.StockOut_v.edit.content")
-
+    @include("Front.News_v.add.content")
     <!-- /.content-wrapper -->
 
 
@@ -33,6 +32,7 @@
 <!-- ./wrapper -->
 
 @include("includes.static.js")
+
 </body>
 
 @include("includes.static.footer")

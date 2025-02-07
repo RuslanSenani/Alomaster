@@ -18,10 +18,10 @@ class ProductImageRepository implements IProductImageRepository
         $this->productImage = $productImage;
     }
 
-    public function all(array $where): Collection
+    public function all(): Collection
     {
 
-        return $this->productImage->where($where)->orderBy('rank', 'asc')->get();
+        return $this->productImage->orderBy('rank', 'asc')->get();
     }
 
     public function find($id): ?Model
@@ -41,7 +41,8 @@ class ProductImageRepository implements IProductImageRepository
 
     public function update($id, array $attributes): bool
     {
-        return $this->productImage->update($id, $attributes);
+        $product = $this->productImage->findOrFail($id);
+        return $product->update($id, $attributes);
     }
 
     public function delete($id): bool

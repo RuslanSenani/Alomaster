@@ -1,36 +1,48 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\Back\CategoryController;
-use App\Http\Controllers\Back\CustomerController;
-use App\Http\Controllers\Back\HelperController;
-use App\Http\Controllers\Back\HomeController;
-use App\Http\Controllers\Back\ModelController;
-use App\Http\Controllers\Back\PermissionController;
-use App\Http\Controllers\Back\ProductController;
-use App\Http\Controllers\Back\RoleController;
-use App\Http\Controllers\Back\StockInController;
-use App\Http\Controllers\Back\StockOutController;
-use App\Http\Controllers\Back\SupplierController;
-use App\Http\Controllers\Back\UnitController;
-use App\Http\Controllers\Back\UserController;
-use App\Http\Controllers\Back\WarehouseController;
-use App\Http\Controllers\Front\FrontHomeController;
-use App\Http\Controllers\Front\FrontProductController;
-use App\Http\Controllers\Front\FrontProductImageController;
-use App\Http\Controllers\Front\FrontSettingController;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes(['verify' => true]);
+
+use App\Http\Controllers\Auth\{
+    ForgotPasswordController,
+    LoginController,
+    RegisterController,
+    ResetPasswordController,
+    VerificationController,
+};
+
+use App\Http\Controllers\Back\{
+    CategoryController,
+    CustomerController,
+    HelperController,
+    HomeController,
+    ModelController,
+    PermissionController,
+    ProductController,
+    RoleController,
+    StockInController,
+    StockOutController,
+    SupplierController,
+    UnitController,
+    UserController,
+    WarehouseController,
+};
+
+use App\Http\Controllers\Front\{
+    FrontHomeController,
+    FrontNewsController,
+    FrontProductController,
+    FrontProductImageController,
+    FrontSettingController,
+};
+
+
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
-
 Route::get('email/verify/{token}', [RegisterController::class, 'verifyEmail'])->name('verifyEmail');
+
+
 Route::post('resendVerificationEmail', [VerificationController::class, 'resendVerificationEmail'])->name('resendVerificationEmail');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -41,17 +53,13 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
+
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 
 Route::prefix('/')->group(function () {
     Route::get('/', [FrontHomeController::class, 'index'])->name('homepage');
-
-    Route::resources([
-        'settings' => FrontSettingController::class,
-    ]);
-
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
@@ -100,8 +108,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'permissions' => PermissionController::class,
         'users' => UserController::class,
         'roles' => RoleController::class,
+        'settings' => FrontSettingController::class,
         'product' => FrontProductController::class,
         'product-image' => FrontProductImageController::class,
+        'news' => FrontNewsController::class,
+
 
     ]);
 

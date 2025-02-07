@@ -32,8 +32,6 @@
 </div>
 <!-- ./wrapper -->
 @include("includes.static.js")
-@include("includes.static.customJs")
-@include("includes.static.dropdownJs")
 
 
 </body>

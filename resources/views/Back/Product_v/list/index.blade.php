@@ -33,7 +33,6 @@
 <!-- ./wrapper -->
 
 @include("includes.static.js")
-@include("includes.static.customJs")
 </body>
 
 @include("includes.static.footer")

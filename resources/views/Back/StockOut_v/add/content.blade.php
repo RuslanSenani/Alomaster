@@ -24,7 +24,6 @@
                                 <div class="from-group col-md-12">
                                     <div class="row">
 
-
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="product">Məhsul Adı:</label>
@@ -33,7 +32,8 @@
                                                     </option>
                                                     @foreach($stockInList as $stock)
                                                         <option
-                                                            value="{{$stock->id}}" {{ old('product', $stockOutList->stock_in_id ?? '') == $stock->id ? 'selected' : '' }}>{{$stock->product->product_name}} - {{$stock->product->product_code}}</option>
+                                                            value="{{$stock->id}}" {{ old('product', $stockOutList->stock_in_id ?? '') == $stock->id ? 'selected' : '' }}>{{$stock->product->product_name}}
+                                                            - {{$stock->product->product_code}}</option>
                                                     @endforeach
 
                                                 </select>
@@ -48,7 +48,6 @@
                                                        placeholder="Anbar Adı" readonly>
                                             </div>
                                         </div>
-
 
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
@@ -68,12 +67,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group col-md-12">
-                                    <div class="row">
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="category">Məhsul Kateqoriyası:</label>
@@ -82,7 +75,6 @@
                                                        placeholder="Məhsul Kateqoriası" readonly>
                                             </div>
                                         </div>
-
 
                                         <div class="form-group col-md-3">
 
@@ -95,6 +87,7 @@
                                             </div>
 
                                         </div>
+
                                         <div class="form-group col-md-3">
 
                                             <div class="form-group">
@@ -115,66 +108,56 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <div class="form-group">
+                                                <label for="enterCount">Müştəri:</label>
+                                                <select name="customer" class="form-control select2bs4">
+                                                    <option value="" selected="selected"> --Müştəri Seç--
+                                                    </option>
+                                                    @foreach($customerList as $customer)
+                                                        <option
+                                                            value="{{$customer->id}}" {{ old('customer', $stockOutList->customer->id ?? '') == $customer->id ? 'selected' : '' }}>{{$customer->name}}</option>
+                                                    @endforeach
 
-                                            <div class="col">
-                                                <div class="form-group col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="enterCount">Müştəri:</label>
-                                                        <select name="customer" class="form-control select2bs4">
-                                                            <option value="" selected="selected"> --Müştəri Seç--
-                                                            </option>
-                                                            @foreach($customerList as $customer)
-                                                                <option
-                                                                    value="{{$customer->id}}" {{ old('customer', $stockOutList->customer->id ?? '') == $customer->id ? 'selected' : '' }}>{{$customer->name}}</option>
-                                                            @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Mehsul Çıxış Tarixi:</label>
-                                                    <div class="input-group date" id="reservationdate"
-                                                         data-target-input="nearest">
-                                                        <input name="date" type="text"
-                                                               class="form-control datetimepicker-input"
-                                                               data-target="#reservationdate"/>
-                                                        <div class="input-group-append" data-target="#reservationdate"
-                                                             data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Mehsul Çıxış Tarixi:</label>
+                                            <div class="input-group date" id="reservationdate"
+                                                 data-target-input="nearest">
+                                                <input name="date" type="text"
+                                                       class="form-control datetimepicker-input"
+                                                       data-target="#reservationdate"/>
+                                                <div class="input-group-append" data-target="#reservationdate"
+                                                     data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="form-group col-md-3">
-                                                <label for="description">Məhsul Məlumati</label>
-                                                <textarea id="description" class="form-control" name="description"
-                                                          rows="8"
-                                                          placeholder="Məhsul Məlumatlarını daxil edin"
-                                                          readonly>{{old('description')}}</textarea>
-                                            </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="description">Məhsul Məlumati</label>
+                                            <textarea id="descr" class="form-control" name="description"
+                                                      rows="8"
+                                                      placeholder="Məhsul Məlumatlarını daxil edin"
+                                                      readonly>{{old('description')}}</textarea>
+                                        </div>
 
-                                            <div class="form-group col-md-3">
-                                                <label for="image">Məhsul Şəkli:</label>
-                                                <img id="image"
-                                                     alt="Seçilmiş Şəkli"
-                                                     src="{{old('image',asset("assets/dist/img/chosePhoto.png"))}}"
-                                                     class="img-thumbnail rounded mx-auto d-block"
-                                                     style="width: 100%;height: 209px; display: none;">
-                                                <input type="hidden" name="image" id="imagePath"
-                                                       value="">
-                                            </div>
-
-
+                                        <div class="form-group col-md-3">
+                                            <label for="image">Məhsul Şəkli:</label>
+                                            <img id="image"
+                                                 alt="Seçilmiş Şəkli"
+                                                 src="{{old('image',asset("assets/dist/img/chosePhoto.png"))}}"
+                                                 class="img-thumbnail rounded mx-auto d-block"
+                                                 style="width: 100%;height: 209px; display: none;">
+                                            <input type="hidden" name="image" id="imagePath"
+                                                   value="">
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Contracts\IFrontNewsRepository;
+use App\Services\Back\FrontNewsServices;
 use Illuminate\Http\Request;
 
 class FrontNewsController
@@ -9,9 +11,29 @@ class FrontNewsController
     /**
      * Display a listing of the resource.
      */
+    private $viewFolder;
+    private FrontNewsServices $newsServices;
+
+
+    public function __construct(FrontNewsServices $newsServices)
+    {
+        $this->viewFolder = "Front/News_v";
+        $this->newsServices = $newsServices;
+    }
+
     public function index()
     {
-        //
+
+        $news = $this->newsServices->getAllData();
+
+        $viewData = [
+            "viewFolder" => $this->viewFolder,
+            "subViewFolder" => "list",
+            "pageName" => "Xəbərlər",
+            'news' => $news,
+        ];
+
+        return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
     }
 
     /**
@@ -19,7 +41,12 @@ class FrontNewsController
      */
     public function create()
     {
-        //
+        $viewData = [
+            "viewFolder" => $this->viewFolder,
+            "subViewFolder" => "add",
+            "pageName" => "Xəbərlər Əlavə Et",
+        ];
+        return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
     }
 
     /**

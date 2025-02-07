@@ -190,7 +190,7 @@ return new class extends Migration {
             $table->string('news_type', 10);
             $table->string('img_url');
             $table->string('video_url');
-            $table->integer('rank');
+            $table->integer('rank')->default(0);
             $table->boolean('isActive')->default(false);
         });
     }

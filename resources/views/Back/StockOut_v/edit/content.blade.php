@@ -47,17 +47,19 @@
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="warehouse">Anbar Adı:</label>
-                                                <input type="text" value="{{old('warehouse',$stockOutList->warehouse_name)}}" name="warehouse"
+                                                <input type="text"
+                                                       value="{{old('warehouse',$stockOutList->warehouse_name)}}"
+                                                       name="warehouse"
                                                        class="form-control " id="warehouse"
                                                        placeholder="Anbar Adı" readonly>
                                             </div>
                                         </div>
 
-
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="code">Məhsul Kodu:</label>
-                                                <input type="text" value="{{old('code',$stockOutList->product_code)}}" name="code"
+                                                <input type="text" value="{{old('code',$stockOutList->product_code)}}"
+                                                       name="code"
                                                        class="form-control " id="code"
                                                        placeholder="Məhsul Kodu" readonly>
                                             </div>
@@ -66,44 +68,44 @@
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="model">Məhsul Modeli:</label>
-                                                <input type="text" value="{{old('model',$stockOutList->model_name)}}" name="model"
+                                                <input type="text" value="{{old('model',$stockOutList->model_name)}}"
+                                                       name="model"
                                                        class="form-control " id="model"
                                                        placeholder="Məhsul Modeli" readonly>
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group col-md-12">
-                                    <div class="row">
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="category">Məhsul Kateqoriyası:</label>
-                                                <input type="text" value="{{old('category',$stockOutList->category_name)}}" name="category"
+                                                <input type="text"
+                                                       value="{{old('category',$stockOutList->category_name)}}"
+                                                       name="category"
                                                        class="form-control " id="category"
                                                        placeholder="Məhsul Kateqoriası" readonly>
                                             </div>
                                         </div>
 
-
                                         <div class="form-group col-md-3">
 
                                             <div class="form-group">
                                                 <label for="unit">Məhsul Vahidi:</label>
-                                                <input type="text" value="{{old('unit',$stockOutList->product_unit)}}" name="unit"
+                                                <input type="text" value="{{old('unit',$stockOutList->product_unit)}}"
+                                                       name="unit"
                                                        class="form-control " id="unit"
                                                        placeholder="Məhsul Vahidi" readonly>
 
                                             </div>
 
                                         </div>
+
                                         <div class="form-group col-md-3">
 
                                             <div class="form-group">
                                                 <label for="salesPrice">Mehsul Satış Qiyməti:</label>
-                                                <input type="text" value="{{old('salesPrice',$stockOutList->product_unit_sale_price)}}" name="salesPrice"
+                                                <input type="text"
+                                                       value="{{old('salesPrice',$stockOutList->product_unit_sale_price)}}"
+                                                       name="salesPrice"
                                                        class="form-control" id="salesPrice"
                                                        placeholder="Mehsul Satış Qiyməti">
                                             </div>
@@ -113,70 +115,66 @@
                                         <div class="form-group col-md-3">
                                             <div class="form-group">
                                                 <label for="exitCount">Mehsul Çıxış Sayı:</label>
-                                                <input type="text" value="{{old('exitCount',$stockOutList->qty)}}" name="exitCount"
+                                                <input type="text" value="{{old('exitCount',$stockOutList->qty)}}"
+                                                       name="exitCount"
                                                        class="form-control" id="exitCount"
                                                        placeholder="Mehsul Çıxış Sayı">
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <div class="form-group">
+                                                <label for="enterCount">Müştəri:</label>
+                                                <select name="customer" class="form-control select2bs4">
+                                                    <option value="" selected="selected"> --Müştəri Seç--
+                                                    </option>
+                                                    @foreach($customerList as $customer)
+                                                        <option
+                                                            value="{{$customer->id}}" {{ old('customer', $stockOutList->customer->id ?? '') == $customer->id ? 'selected' : '' }}>
+                                                            {{$customer->name}}
+                                                        </option>
+                                                    @endforeach
 
-                                            <div class="col">
-                                                <div class="form-group col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="enterCount">Müştəri:</label>
-                                                        <select name="customer" class="form-control select2bs4">
-                                                            <option value="" selected="selected"> --Müştəri Seç--
-                                                            </option>
-                                                            @foreach($customerList as $customer)
-                                                                <option
-                                                                    value="{{$customer->id}}" {{ old('customer', $stockOutList->customer->id ?? '') == $customer->id ? 'selected' : '' }}>
-                                                                    {{$customer->name}}
-                                                                </option>
-                                                            @endforeach
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Mehsul Çıxış Tarixi:</label>
-                                                    <div class="input-group date" id="reservationdate"
-                                                         data-target-input="nearest">
-                                                        <input name="date" value="{{\Carbon\Carbon::parse($stockOutList->exit_date)->format('m-d-Y')}}" type="text"
-                                                               class="form-control datetimepicker-input"
-                                                               data-target="#reservationdate"/>
-                                                        <div class="input-group-append" data-target="#reservationdate"
-                                                             data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </select>
                                             </div>
-
-                                            <div class="form-group col-md-3">
-                                                <label for="description">Məhsul Məlumati</label>
-                                                <textarea id="description" class="form-control" name="description"
-                                                          rows="8"
-                                                          placeholder="Məhsul Məlumatlarını daxil edin"
-                                                          readonly>{{old('description',$stockOutList->product_description)}}</textarea>
-                                            </div>
-
-                                            <div class="form-group col-md-3">
-                                                <label for="image">Məhsul Şəkli:</label>
-                                                <img id="image"
-                                                     alt="Seçilmiş Şəkli"
-                                                     src="{{old('image',asset($stockOutList->product_img))}}"
-                                                     class="img-thumbnail rounded mx-auto d-block"
-                                                     style="width: 100%;height: 209px; display: none;">
-                                                <input type="hidden" name="image" id="imagePath"
-                                                       value="">
-                                            </div>
-
-
                                         </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label>Mehsul Çıxış Tarixi:</label>
+                                            <div class="input-group date" id="reservationdate"
+                                                 data-target-input="nearest">
+                                                <input name="date"
+                                                       value="{{\Carbon\Carbon::parse($stockOutList->exit_date)->format('m-d-Y')}}"
+                                                       type="text"
+                                                       class="form-control datetimepicker-input"
+                                                       data-target="#reservationdate"/>
+                                                <div class="input-group-append" data-target="#reservationdate"
+                                                     data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="description">Məhsul Məlumati</label>
+                                            <textarea id="description" class="form-control" name="description"
+                                                      rows="8"
+                                                      placeholder="Məhsul Məlumatlarını daxil edin"
+                                                      readonly>{{old('description',$stockOutList->product_description)}}</textarea>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="image">Məhsul Şəkli:</label>
+                                            <img id="image"
+                                                 alt="Seçilmiş Şəkli"
+                                                 src="{{old('image',asset($stockOutList->product_img))}}"
+                                                 class="img-thumbnail rounded mx-auto d-block"
+                                                 style="width: 100%;height: 209px; display: none;">
+                                            <input type="hidden" name="image" id="imagePath"
+                                                   value="">
+                                        </div>
+
                                     </div>
                                 </div>
 

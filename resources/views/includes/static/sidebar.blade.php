@@ -196,6 +196,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{Route('news.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'news.') ? 'active' : '' }}">
+                                <i class="fas fa-user"></i>
+                                <p>
+                                    Xəbərlər
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

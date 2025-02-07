@@ -19,7 +19,7 @@
 
                     </div>
                     <div class="col-md-2 ">
-                        <a href="{{Route("product.create")}}" type="button"
+                        <a href="{{Route("news.create")}}" type="button"
                            class="btn btn-block btn-outline-primary btn-sm">
                             <i class="fa fa-plus"></i> Giriş Et
                         </a>
@@ -38,6 +38,8 @@
                             <th>Başlıq</th>
                             <th>Url</th>
                             <th>Açıqlama</th>
+                            <th>Xəbər Növü</th>
+                            <th>Vizual</th>
                             <th>Status</th>
                             <th>Əməliyyatlar</th>
                         </tr>
@@ -45,18 +47,20 @@
                         <tbody class="sortable">
 
 
-                        @foreach($products as $product)
-                            <tr id="ord-{{$product->id}}" data-url="{{route('ajax-rankSetter')}}">
+                        @foreach($news as $new)
+                            <tr id="ord-{{$new->id}}" data-url="{{route('ajax-rankSetter')}}">
                                 <th><i class="fa-solid fa-list-ol"></i></th>
-                                <td class="col-md-1">#{{$product->id}}</td>
-                                <td class="col-md-2">{{$product->title}}</td>
-                                <td class="col-md-2">{{$product->url}}</td>
-                                <td class="col-md-3">{{$product->description}}</td>
+                                <td class="col-md-1">#{{$new->id}}</td>
+                                <td class="col-md-2">{{$new->title}}</td>
+                                <td class="col-md-2">{{$new->url}}</td>
+                                <td class="col-md-3">{{$new->description}}</td>
+                                <td class="col-md-3">{{$new->news_type}}</td>
+                                <td class="col-md-3">Goruntu olacaq</td>
                                 <td class="col-md-1">
                                     <label class="toggle">
                                         <input type="checkbox" class="isActive"
-                                               data-url="{{route('ajax.is-active-setter',$product->id)}}"
-                                               name="isActive" {{ $product->isActive ? 'checked' : '' }} />
+                                               data-url="{{route('ajax.is-active-setter',$new->id)}}"
+                                               name="isActive" {{ $new->isActive ? 'checked' : '' }} />
                                         <span class="slider"></span>
                                     </label>
                                 </td>
@@ -64,15 +68,12 @@
 
                                     <div class="d-flex justify-content-between" role="group">
                                         <button type="submit" id="delete-button"
-                                                data-url="{{route('product.destroy',$product->id)}}"
+                                                data-url="{{route('product.destroy',$new->id)}}"
                                                 class="btn btn-outline-danger btn-md remove-btn"><i
                                                 class="fa fa-trash"></i>
                                         </button>
-                                        <a href="{{Route('product.edit',$product->id)}}"
+                                        <a href="{{Route('product.edit',$new->id)}}"
                                            class="btn btn-outline-primary btn-md"> <i class="fa fa-edit"></i> </a>
-                                        <a
-                                            href="{{Route('product.image-form',$product->id)}}"
-                                            class="btn btn-outline-dark btn-md"> <i class="fa fa-image"></i> </a>
                                     </div>
 
 
