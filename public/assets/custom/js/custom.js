@@ -4,7 +4,7 @@ $(document).ready(function () {
         const selectedProductId = $(this).val();
         const baseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content');
 
-        alert(baseUrl);
+
         if (selectedProductId) {
             $.ajax({
                 url: baseUrl + "/ajax-product",
