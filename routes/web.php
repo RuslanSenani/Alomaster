@@ -33,9 +33,8 @@ use App\Http\Controllers\Front\{
     FrontNewsController,
     FrontProductController,
     FrontProductImageController,
-    FrontSettingController,
+    FrontSettingController
 };
-
 
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -91,6 +90,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/isActive/{id}/product-image', [FrontProductImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-product-image');
 
     Route::post('/ajax-rankSetter-product-image', [FrontProductImageController::class, 'rankSetter'])->name('ajax-rankSetter-product-image');
+
+    Route::post('/ajax-news-rankSetter', [FrontNewsController::class, 'rankSetter'])->name('ajax-news-rankSetter');
+
+    Route::post('/isActive/{id}/news', [FrontNewsController::class, 'isActiveSetter'])->name('ajax.news-is-active-setter');
 
     Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 

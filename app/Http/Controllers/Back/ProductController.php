@@ -22,7 +22,7 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     private string $viewFolder = "";
-    private string $directoryPath = "";
+    private string $directoryPath ;
     private Product $productModel;
     private Unit $unitModel;
 

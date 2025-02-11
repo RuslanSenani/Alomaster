@@ -13,11 +13,14 @@ class FrontNewsServices
 
     private IFrontNewsRepository $newsRepository;
     private IAlert $alert;
+    private  FileUploadService  $uploadService;
 
-    public function __construct(IFrontNewsRepository $newsRepository, IAlert $alert)
+    public function __construct(IFrontNewsRepository $newsRepository, IAlert $alert, FileUploadService $uploadService)
     {
         $this->newsRepository = $newsRepository;
         $this->alert = $alert;
+        $this->uploadService = $uploadService;
+
     }
 
 
@@ -50,8 +53,11 @@ class FrontNewsServices
     public function deleteData(int $id): bool
     {
         try {
+            $getFilePath = $this->newsRepository->find($id);
             $delete = $this->newsRepository->delete($id);
+
             if ($delete) {
+                $this->uploadService->fileDelete($getFilePath->img_url);
                 $this->alert->success("Uğurlu", "Silinmə Uğurlu Oldu");
                 return true;
             } else {

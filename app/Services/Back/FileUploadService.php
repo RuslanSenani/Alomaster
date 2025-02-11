@@ -16,13 +16,15 @@ class FileUploadService
         try {
 
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+
                 $targetPath = $uploadPath . "/" . $width . "x" . $height;
                 File::ensureDirectoryExists($targetPath);
                 $image = $request->file('image');
 
 
                 if (!in_array($image->getClientOriginalExtension(), ['jpeg', 'jpg', 'png', 'gif'])) {
-                    return response()->json(['Error' => 'Format Uygun Değil'], 400);
+                    return response()->json(['Error' => 'Şəkil Formatı Uyğun Deyil'], 400);
                 }
 
 
@@ -33,10 +35,10 @@ class FileUploadService
                     ->resize($width, $height)
                     ->save($fullPath, 75);
 
-                return response()->json(['Success' => 'Dosya eklendi', 'fileName' => $fullPath], 200);
+                return response()->json(['Success' => 'Fayl Yükləndi', 'fileName' => $fullPath], 200);
             }
 
-            return response()->json(['Error' => 'Geçerli bir resim bulunamadı'], 400);
+            return response()->json(['Error' => 'Uyğu bir şəkil tapılmadı'], 400);
         } catch (\Exception $exception) {
             return response()->json(['Error' => $exception->getMessage()], 400);
         }

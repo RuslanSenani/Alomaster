@@ -113,6 +113,7 @@ return new class extends Migration {
             $table->string('folder_name');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);
+            $this->addCommonColumns($table);
         });
     }
 
@@ -188,10 +189,11 @@ return new class extends Migration {
             $table->string('title');
             $table->text('description');
             $table->string('news_type', 10);
-            $table->string('img_url');
-            $table->string('video_url');
+            $table->string('img_url')->nullable();
+            $table->string('video_url')->nullable();
             $table->integer('rank')->default(0);
             $table->boolean('isActive')->default(false);
+            $this->addCommonColumns($table);
         });
     }
 
@@ -206,6 +208,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('page', 50);
             $table->boolean('isActive')->default(false);
+            $this->addCommonColumns($table);
         });
     }
 

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 @include("includes.static.head")
-@include($viewFolder.".".$style."."."style")
+
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
@@ -21,7 +22,7 @@
 
     <!-- Content Wrapper. Contains edit content -->
 
-    @include("Front.News_v.add.content")
+    @include("Front.News_v.edit.content")
     <!-- /.content-wrapper -->
 
 

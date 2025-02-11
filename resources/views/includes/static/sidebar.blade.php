@@ -199,7 +199,7 @@
                         <li class="nav-item">
                             <a href="{{Route('news.index')}}"
                                class="nav-link {{ Str::startsWith(Route::currentRouteName(),'news.') ? 'active' : '' }}">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-info"></i>
                                 <p>
                                     Xəbərlər
                                 </p>

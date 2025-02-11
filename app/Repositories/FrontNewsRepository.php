@@ -39,7 +39,7 @@ class FrontNewsRepository implements IFrontNewsRepository
     public function update($id, array $attributes): bool
     {
         $news =  $this->newsModel->findOrFail($id);
-        return  $this->newsModel->update($news);
+        return  $news->update($attributes);
     }
 
     public function delete($id): bool
