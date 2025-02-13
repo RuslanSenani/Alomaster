@@ -29,13 +29,13 @@ use App\Http\Controllers\Back\{
 };
 
 use App\Http\Controllers\Front\{
+    BrandController,
     FrontHomeController,
     FrontNewsController,
     FrontProductController,
     FrontProductImageController,
     FrontSettingController,
-    ReferencesController
-};
+    ReferencesController};
 
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -101,6 +101,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/isActive/{id}/references', [ReferencesController::class, 'isActiveSetter'])->name('ajax.references-is-active-setter');
 
 
+
+    Route::post('/ajax-brands-rankSetter', [BrandController::class, 'rankSetter'])->name('ajax-brands-rankSetter');
+
+    Route::post('/isActive/{id}/brands', [BrandController::class, 'isActiveSetter'])->name('ajax.brands-is-active-setter');
+
     Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 
 
@@ -121,7 +126,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'product' => FrontProductController::class,
         'product-image' => FrontProductImageController::class,
         'news' => FrontNewsController::class,
-        'references' => ReferencesController::class
+        'references' => ReferencesController::class,
+        'brands' => BrandController::class,
 
 
     ]);

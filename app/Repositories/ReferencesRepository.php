@@ -40,8 +40,6 @@ class ReferencesRepository implements IReferencesRepository
 
     public function update($id, array $attributes): bool
     {
-
-
         $reference = $this->reference->findOrFail($id);
         return $reference->update($attributes);
     }

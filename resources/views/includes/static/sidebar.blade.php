@@ -216,6 +216,16 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{Route('brands.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'brands.') ? 'active' : '' }}">
+                                <i class="fas fa-puzzle-piece"></i>
+                                <p>
+                                    Brendlər
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

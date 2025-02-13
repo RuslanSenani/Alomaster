@@ -59,7 +59,7 @@
 
                                 <td class="col-md-3">{{$reference->description}}</td>
 
-                                <td class="col-md-3">
+                                <td class="col-md-1">
                                     <div class="image">
                                         <img
                                             src="{{asset($reference->img_url)}}"
