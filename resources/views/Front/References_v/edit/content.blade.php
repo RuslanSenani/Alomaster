@@ -16,10 +16,10 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-
-                        <form method="POST" action="{{Route("news.store")}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{Route("references.update",$references->id)}}"
+                              enctype="multipart/form-data">
                             @csrf
-
+                            @method('PUT')
                             <div class="card-body">
 
                                 <div class="from-group col-md-12">
@@ -28,7 +28,7 @@
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
                                                 <label for="url">Url:</label>
-                                                <input type="text" value="{{old('url')}}"
+                                                <input type="text" value="{{$references->url}}"
                                                        name="url"
                                                        class="form-control" id="url"
                                                        placeholder="Url">
@@ -38,54 +38,34 @@
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
                                                 <label for="title">Başlıq:</label>
-                                                <input type="text" value="{{old('title')}}"
+                                                <input type="text" value="{{$references->title}}"
                                                        name="title"
                                                        class="form-control" id="title"
                                                        placeholder="Başlıq">
                                             </div>
                                         </div>
+
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
                                                 <label for="description">Açıqlama:</label>
-                                                <textarea id="description" name="description" placeholder="Açıqlama">               {{old('description')}}
+                                                <textarea id="description" name="description" placeholder="Açıqlama">               {{$references->description}}
                                                 </textarea>
 
                                             </div>
                                         </div>
 
 
-                                        <div class="form-group col-md-12">
-                                            <div class="form-group">
-                                                <label>Xəbər Növü:</label>
-                                                <select name="news_type"
-                                                        class="form-control select2bs4 news_type_select">
-                                                    <option value="image" selected="selected">Şəkil</option>
-                                                    <option value="video">Video</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                        <div class="row">
 
-                                        <div class="form-group col-md-12 video_url_container">
-                                            <div class="form-group">
-                                                <label for="video_url">Video Url:</label>
-                                                <input type="text" value=""
-                                                       name="video_url"
-                                                       class="form-control" id="video_url"
-                                                       placeholder="Video Linkini Bura Daxil Edin">
-                                            </div>
-                                        </div>
-
-                                        <div class="row image_upload_container">
-
-
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 <label for="previewImage">Seçilmiş Şəkli:</label>
                                                 <img id="previewImage"
                                                      alt="Seçilmiş Şəkli"
-                                                     src="{{asset("assets/dist/img/chosePhoto.png")}}"
+                                                     src="{{asset($references->img_url)}}"
                                                      class="img-thumbnail rounded mx-auto d-block"
                                                      style="width: 150px;height: 150px; display: none;">
                                             </div>
+
 
                                             <div class="form-group col-md-9">
                                                 <div class="form-group">
@@ -95,22 +75,20 @@
                                                         <div class="custom-file">
                                                             <input type="file" name="image"
                                                                    class="custom-file-input"
-                                                                   id="fileInput" accept="image/*">
+                                                                   id="fileInput">
                                                             <label class="custom-file-label" for="fileInput">Şəkil
                                                                 Seç</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-
                                         </div>
 
 
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-md-1">
@@ -119,7 +97,7 @@
                                         </button>
                                     </div>
                                     <div class="col-md-1">
-                                        <a href="{{Route("news.index")}}" type="submit"
+                                        <a href="{{Route("references.index")}}" type="submit"
                                            class="btn  btn-outline-danger btn-md"><i class="fa fa-window-close"
                                                                                      aria-hidden="true"></i>
 

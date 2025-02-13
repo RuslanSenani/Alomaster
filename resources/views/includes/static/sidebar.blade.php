@@ -206,6 +206,16 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{Route('references.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'references.') ? 'active' : '' }}">
+                                <i class="fas fa-link"></i>
+                                <p>
+                                    Referanslar
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

@@ -33,7 +33,8 @@ use App\Http\Controllers\Front\{
     FrontNewsController,
     FrontProductController,
     FrontProductImageController,
-    FrontSettingController
+    FrontSettingController,
+    ReferencesController
 };
 
 
@@ -95,6 +96,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/isActive/{id}/news', [FrontNewsController::class, 'isActiveSetter'])->name('ajax.news-is-active-setter');
 
+    Route::post('/ajax-references-rankSetter', [ReferencesController::class, 'rankSetter'])->name('ajax-references-rankSetter');
+
+    Route::post('/isActive/{id}/references', [ReferencesController::class, 'isActiveSetter'])->name('ajax.references-is-active-setter');
+
+
     Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 
 
@@ -115,6 +121,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'product' => FrontProductController::class,
         'product-image' => FrontProductImageController::class,
         'news' => FrontNewsController::class,
+        'references' => ReferencesController::class
 
 
     ]);

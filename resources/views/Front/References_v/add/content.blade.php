@@ -16,8 +16,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-
-                        <form method="POST" action="{{Route("news.store")}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{Route("references.store")}}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="card-body">
@@ -54,28 +53,7 @@
                                         </div>
 
 
-                                        <div class="form-group col-md-12">
-                                            <div class="form-group">
-                                                <label>Xəbər Növü:</label>
-                                                <select name="news_type"
-                                                        class="form-control select2bs4 news_type_select">
-                                                    <option value="image" selected="selected">Şəkil</option>
-                                                    <option value="video">Video</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-12 video_url_container">
-                                            <div class="form-group">
-                                                <label for="video_url">Video Url:</label>
-                                                <input type="text" value=""
-                                                       name="video_url"
-                                                       class="form-control" id="video_url"
-                                                       placeholder="Video Linkini Bura Daxil Edin">
-                                            </div>
-                                        </div>
-
-                                        <div class="row image_upload_container">
+                                        <div class="row ">
 
 
                                             <div class="form-group col-md-3">
@@ -119,7 +97,7 @@
                                         </button>
                                     </div>
                                     <div class="col-md-1">
-                                        <a href="{{Route("news.index")}}" type="submit"
+                                        <a href="{{Route("references.index")}}" type="submit"
                                            class="btn  btn-outline-danger btn-md"><i class="fa fa-window-close"
                                                                                      aria-hidden="true"></i>
 
