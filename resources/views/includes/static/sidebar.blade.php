@@ -226,6 +226,16 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{Route('courses.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'courses.') ? 'active' : '' }}">
+                                <i class="fas fa-graduation-cap"></i>
+                                <p>
+                                    Kurslar
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

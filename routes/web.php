@@ -30,6 +30,7 @@ use App\Http\Controllers\Back\{
 
 use App\Http\Controllers\Front\{
     BrandController,
+    CourseController,
     FrontHomeController,
     FrontNewsController,
     FrontProductController,
@@ -106,6 +107,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/isActive/{id}/brands', [BrandController::class, 'isActiveSetter'])->name('ajax.brands-is-active-setter');
 
+    Route::post('/ajax-courses-rankSetter', [CourseController::class, 'rankSetter'])->name('ajax-courses-rankSetter');
+
+    Route::post('/isActive/{id}/courses', [CourseController::class, 'isActiveSetter'])->name('ajax.courses-is-active-setter');
+
     Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 
 
@@ -128,6 +133,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'news' => FrontNewsController::class,
         'references' => ReferencesController::class,
         'brands' => BrandController::class,
+        'courses'=>CourseController::class,
 
 
     ]);

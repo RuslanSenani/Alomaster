@@ -92,9 +92,9 @@ return new class extends Migration {
             $table->id();
             $table->string('url');
             $table->string('title');
-            $table->text('description');
+            $table->longText('description');
             $table->string('img_url');
-            $table->dateTime('event_date');
+            $table->date('event_date');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);
             $this->addCommonColumns($table);

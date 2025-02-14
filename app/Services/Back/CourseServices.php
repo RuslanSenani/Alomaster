@@ -3,59 +3,59 @@
 namespace App\Services\Back;
 
 use App\Contracts\IAlert;
-use App\Contracts\IBrandsRepository;
+use App\Contracts\ICoursesRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class BrandServices
+class CourseServices
 {
 
-    private IBrandsRepository $brandRepository;
-    private FileUploadService $uploadService;
+    private ICoursesRepository $courseRepository;
+    private FileUploadService $fileUploadService;
     private IAlert $alert;
 
-    public function __construct(IBrandsRepository $brandRepository, FileUploadService $fileUploadService, IAlert $alert)
+    public function __construct(ICoursesRepository $courseRepository, FileUploadService $fileUploadService, IAlert $alert)
     {
-        $this->brandRepository = $brandRepository;
+        $this->courseRepository = $courseRepository;
+        $this->fileUploadService = $fileUploadService;
         $this->alert = $alert;
-        $this->uploadService = $fileUploadService;
     }
 
 
     public function getAllData(): Collection
     {
-        return $this->brandRepository->all();
+        return $this->courseRepository->all();
     }
 
     public function getDataById(int $id): Model
     {
-        return $this->brandRepository->find($id);
+        return $this->courseRepository->find($id);
     }
 
     public function getModelInstance(): Model
     {
-        return $this->brandRepository->getModel();
+        return $this->courseRepository->getModel();
 
     }
 
     public function saveData(array $data): Model
     {
-        return $this->brandRepository->create($data);
+        return $this->courseRepository->create($data);
     }
 
     public function updateData(int $id, array $data): bool
     {
-        return $this->brandRepository->update($id, $data);
+        return $this->courseRepository->update($id, $data);
     }
 
     public function deleteData(int $id): bool
     {
         try {
-            $getFilePath = $this->brandRepository->find($id);
-            $delete = $this->brandRepository->delete($id);
+            $getFilePath = $this->courseRepository->find($id);
+            $delete = $this->courseRepository->delete($id);
 
             if ($delete) {
-                $this->uploadService->fileDelete($getFilePath->img_url);
+                $this->fileUploadService->fileDelete($getFilePath->img_url);
                 $this->alert->success("Uğurlu", "Silinmə Uğurlu Oldu");
                 return true;
             } else {
