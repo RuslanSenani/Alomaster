@@ -5,6 +5,9 @@ return [
     App\Providers\BrandsProviders::class,
     App\Providers\CoursesProviders::class,
     App\Providers\FProductServiceProvider::class,
+    App\Providers\FileProviders::class,
     App\Providers\FrontNewsProviders::class,
+    App\Providers\ImagesProviders::class,
     App\Providers\ReferencesProviders::class,
+    App\Providers\VideoProviders::class,
 ];
