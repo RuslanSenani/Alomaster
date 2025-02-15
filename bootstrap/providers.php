@@ -7,6 +7,7 @@ return [
     App\Providers\FProductServiceProvider::class,
     App\Providers\FileProviders::class,
     App\Providers\FrontNewsProviders::class,
+    App\Providers\GalleryProviders::class,
     App\Providers\ImagesProviders::class,
     App\Providers\ReferencesProviders::class,
     App\Providers\VideoProviders::class,
