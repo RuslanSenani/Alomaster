@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 
-class VideoController
+class FrontFileController
 {
     /**
      * Display a listing of the resource.

@@ -10,7 +10,7 @@ use App\Services\Back\RankServices;
 use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
 
-class ProductImageController
+class FrontProductImageController
 {
     /**
      * Display a listing of the resource.

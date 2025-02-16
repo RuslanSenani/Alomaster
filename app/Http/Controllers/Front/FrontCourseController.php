@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Repositories\BrandsRepository;
 use App\Services\Back\AlertServices;
-use App\Services\Back\BrandServices;
+use App\Services\Back\CourseServices;
 use App\Services\Back\FileUploadService;
 use App\Services\Back\RankServices;
 use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
-class BrandController
+
+class FrontCourseController
 {
     /**
      * Display a listing of the resource.
@@ -18,17 +20,17 @@ class BrandController
 
     private $viewFolder;
     private $directoryPath;
-    private BrandServices $brandServices;
+    private CourseServices $courseServices;
     private RankServices $rankServices;
     private StatusServices $statusServices;
     private FileUploadService $fileUploadService;
     private AlertServices $alertServices;
 
-    public function __construct(BrandServices $brandServices, RankServices $rankServices, StatusServices $statusServices, FileUploadService $fileUploadService, AlertServices $alertServices)
+    public function __construct(CourseServices $courseServices, RankServices $rankServices, StatusServices $statusServices, FileUploadService $fileUploadService, AlertServices $alertServices)
     {
-        $this->viewFolder = "Front/Brands_v";
+        $this->viewFolder = "Front/Courses_v";
         $this->directoryPath = "uploads/" . $this->viewFolder;
-        $this->brandServices = $brandServices;
+        $this->courseServices = $courseServices;
         $this->rankServices = $rankServices;
         $this->statusServices = $statusServices;
         $this->fileUploadService = $fileUploadService;
@@ -38,13 +40,13 @@ class BrandController
 
     public function index()
     {
-        $brands = $this->brandServices->getAllData();
+        $courses = $this->courseServices->getAllData();
 
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "list",
-            "pageName" => "Brendlər",
-            'brands' => $brands,
+            "pageName" => "Kurslar",
+            'courses' => $courses,
         ];
 
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
@@ -58,7 +60,7 @@ class BrandController
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "add",
-            "pageName" => "Brend Əlavə Et",
+            "pageName" => "Kurs Əlavə Et",
         ];
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
     }
@@ -70,22 +72,27 @@ class BrandController
     {
         try {
             $validatedData = $request->validate([
+                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
+                'description' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'event_date' => 'required|date',
             ]);
+            $validatedData['event_date'] = Carbon::createFromFormat('m/d/Y', $validatedData['event_date'])->format('Y-m-d');
+            $validatedData['url'] = Str::slug($validatedData['url']);
             $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;
             }
 
-            $this->brandServices->saveData($validatedData);
+            $this->courseServices->saveData($validatedData);
         } catch (\Exception $exception) {
 
             $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
             return redirect()->back();
         }
 
-        return redirect()->route('brands.index');
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -101,12 +108,12 @@ class BrandController
      */
     public function edit(string $id)
     {
-        $brand = $this->brandServices->getDataById($id);
+        $course = $this->courseServices->getDataById($id);
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "edit",
             "pageName" => "Redaktə Et",
-            "brand" => $brand,
+            "course" => $course,
         ];
 
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
@@ -118,19 +125,26 @@ class BrandController
     public function update(Request $request, string $id)
     {
         try {
+
+
             $validatedData = $request->validate([
+                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
+                'description' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'event_date' => 'required|date',
             ]);
 
-            $brands = $this->brandServices->getDataById($id);
+            $course = $this->courseServices->getDataById($id);
+            $validatedData['event_date'] = Carbon::createFromFormat('m/d/Y', $validatedData['event_date'])->format('Y-m-d');
+            $validatedData['url'] = Str::slug($validatedData['url']);
             $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
-                $this->fileUploadService->fileDelete($brands->img_url);
+                $this->fileUploadService->fileDelete($course->img_url);
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;
             }
 
-            $this->brandServices->updateData($id, $validatedData);
+            $this->courseServices->updateData($id, $validatedData);
 
         } catch (\Exception $exception) {
 
@@ -138,7 +152,7 @@ class BrandController
             return redirect()->back();
         }
 
-        return redirect()->route('brands.index');
+        return redirect()->route('courses.index');
     }
 
     /**
@@ -146,26 +160,26 @@ class BrandController
      */
     public function destroy(string $id)
     {
-        $delete = $this->brandServices->deleteData($id);
+        $delete = $this->courseServices->deleteData($id);
         if (!$delete) {
             return response()->json([
-                'redirect_url' => route('brands.index'),
+                'redirect_url' => route('courses.index'),
             ], 404);
         }
         return response()->json([
-            'redirect_url' => route('brands.index'),
+            'redirect_url' => route('courses.index'),
         ]);
     }
 
 
     public function rankSetter(Request $request)
     {
-        $this->rankServices->setRankStatus($request, $this->brandServices->getModelInstance());
+        $this->rankServices->setRankStatus($request, $this->courseServices->getModelInstance());
     }
 
     public function isActiveSetter(Request $request, string $id)
     {
-        $brands = $this->brandServices->getDataById($id);
-        $this->statusServices->setStatus($request, $brands, $id);
+        $course = $this->courseServices->getDataById($id);
+        $this->statusServices->setStatus($request, $course, $id);
     }
 }

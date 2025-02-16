@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 
-class SettingController
+class FrontSettingController
 {
     /**
      * Display a listing of the resource.

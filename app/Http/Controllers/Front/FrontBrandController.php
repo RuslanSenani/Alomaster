@@ -2,49 +2,49 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Requests\FrontNewsRequest;
+use App\Repositories\BrandsRepository;
 use App\Services\Back\AlertServices;
+use App\Services\Back\BrandServices;
 use App\Services\Back\FileUploadService;
-use App\Services\Back\FrontNewsServices;
 use App\Services\Back\RankServices;
 use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
 
-class NewsController
+class FrontBrandController
 {
     /**
      * Display a listing of the resource.
      */
+
     private $viewFolder;
     private $directoryPath;
-    private FrontNewsServices $newsServices;
+    private BrandServices $brandServices;
     private RankServices $rankServices;
     private StatusServices $statusServices;
     private FileUploadService $fileUploadService;
     private AlertServices $alertServices;
 
-
-    public function __construct(FrontNewsServices $newsServices, RankServices $rankServices, StatusServices $statusServices, FileUploadService $fileUploadService, AlertServices $alertServices)
+    public function __construct(BrandServices $brandServices, RankServices $rankServices, StatusServices $statusServices, FileUploadService $fileUploadService, AlertServices $alertServices)
     {
-        $this->viewFolder = "Front/News_v";
+        $this->viewFolder = "Front/Brands_v";
         $this->directoryPath = "uploads/" . $this->viewFolder;
-        $this->newsServices = $newsServices;
+        $this->brandServices = $brandServices;
         $this->rankServices = $rankServices;
         $this->statusServices = $statusServices;
         $this->fileUploadService = $fileUploadService;
         $this->alertServices = $alertServices;
+
     }
 
     public function index()
     {
-
-        $news = $this->newsServices->getAllData();
+        $brands = $this->brandServices->getAllData();
 
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "list",
-            "pageName" => "Xəbərlər",
-            'news' => $news,
+            "pageName" => "Brendlər",
+            'brands' => $brands,
         ];
 
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
@@ -58,9 +58,7 @@ class NewsController
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "add",
-            "script" => "scripts",
-            "style" => "style",
-            "pageName" => "Xəbərlər Əlavə Et",
+            "pageName" => "Brend Əlavə Et",
         ];
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
     }
@@ -70,33 +68,24 @@ class NewsController
      */
     public function store(Request $request)
     {
-
         try {
             $validatedData = $request->validate([
-                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
-                'description' => 'required|string|max:255',
-                'news_type' => 'required|string|max:5',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'video_url' => 'nullable|string|max:100'
             ]);
-
-            if ($request->news_type == "image") {
-                $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
-                if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
-                    $validatedData['img_url'] = $uploadFile->getData()->fileName;
-                }
-            } else if ($request->news_type == "video") {
-                $validatedData['video_url'] = $request->video_url;
+            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
+            if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
+                $validatedData['img_url'] = $uploadFile->getData()->fileName;
             }
-            $this->newsServices->saveData($validatedData);
+
+            $this->brandServices->saveData($validatedData);
         } catch (\Exception $exception) {
 
             $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
             return redirect()->back();
         }
 
-        return redirect()->route('news.index');
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -112,14 +101,12 @@ class NewsController
      */
     public function edit(string $id)
     {
-        $news = $this->newsServices->getDataById($id);
+        $brand = $this->brandServices->getDataById($id);
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "edit",
-            "script" => "scripts",
-            "style" => "style",
             "pageName" => "Redaktə Et",
-            "news" => $news,
+            "brand" => $brand,
         ];
 
         return view("{$viewData['viewFolder']}.{$viewData['subViewFolder']}.index")->with($viewData);
@@ -131,32 +118,27 @@ class NewsController
     public function update(Request $request, string $id)
     {
         try {
-
             $validatedData = $request->validate([
-                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
-                'description' => 'required|string|max:255',
-                'news_type' => 'required|string|max:5',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'video_url' => 'nullable|string|max:100'
             ]);
 
-            $news = $this->newsServices->getDataById($id);
-            if ($request->news_type == "image") {
-                $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
-                if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
-                    $this->fileUploadService->fileDelete($news->img_url);
-                    $validatedData['img_url'] = $uploadFile->getData()->fileName;
-                }
-            } else if ($request->news_type == "video") {
-                $validatedData['video_url'] = $request->video_url;
+            $brands = $this->brandServices->getDataById($id);
+            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
+            if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
+                $this->fileUploadService->fileDelete($brands->img_url);
+                $validatedData['img_url'] = $uploadFile->getData()->fileName;
             }
-            $this->newsServices->updateData($id, $validatedData);
-            return redirect()->route('news.index');
+
+            $this->brandServices->updateData($id, $validatedData);
+
         } catch (\Exception $exception) {
-            $this->alertServices->error("Xəta ", $exception->getMessage());
-            return redirect()->route('news.index');
+
+            $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
+            return redirect()->back();
         }
+
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -164,25 +146,26 @@ class NewsController
      */
     public function destroy(string $id)
     {
-        $delete = $this->newsServices->deleteData($id);
+        $delete = $this->brandServices->deleteData($id);
         if (!$delete) {
             return response()->json([
-                'redirect_url' => route('news.index'),
+                'redirect_url' => route('brands.index'),
             ], 404);
         }
         return response()->json([
-            'redirect_url' => route('news.index'),
+            'redirect_url' => route('brands.index'),
         ]);
     }
 
+
     public function rankSetter(Request $request)
     {
-        $this->rankServices->setRankStatus($request, $this->newsServices->getModelInstance());
+        $this->rankServices->setRankStatus($request, $this->brandServices->getModelInstance());
     }
 
     public function isActiveSetter(Request $request, string $id)
     {
-        $news = $this->newsServices->getDataById($id);
-        $this->statusServices->setStatus($request, $news, $id);
+        $brands = $this->brandServices->getDataById($id);
+        $this->statusServices->setStatus($request, $brands, $id);
     }
 }

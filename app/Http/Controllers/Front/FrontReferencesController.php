@@ -9,7 +9,7 @@ use App\Services\Back\ReferencesServices;
 use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
 
-class ReferencesController
+class FrontReferencesController
 {
     /**
      * Display a listing of the resource.

@@ -29,17 +29,15 @@ use App\Http\Controllers\Back\{
 };
 
 use App\Http\Controllers\Front\{
-
-    BrandController,
-    CourseController,
-    HomeController,
-    NewsController,
-    ProductController,
-    ProductImageController,
-    SettingController,
-    GalleryController,
-    ReferencesController
-};
+    FrontBrandController,
+    FrontCourseController,
+    FrontHomeController,
+    FrontNewsController,
+    FrontProductController,
+    FrontProductImageController,
+    FrontSettingController,
+    FrontGalleryController,
+    FrontReferencesController};
 
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -63,7 +61,7 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('homepage');
+    Route::get('/', [FrontHomeController::class, 'index'])->name('homepage');
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
@@ -82,39 +80,39 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
 
     Route::post('/isActive/{id}/users', [UserController::class, 'isActiveSetter'])->name('user.is-active-setter');
-    Route::post('/isActive/{id}/product', [ProductController::class, 'isActiveSetter'])->name('ajax.is-active-setter');
-    Route::post('/ajax-rankSetter', [ProductController::class, 'rankSetter'])->name('ajax-rankSetter');
+    Route::post('/isActive/{id}/product', [FrontProductController::class, 'isActiveSetter'])->name('ajax.is-active-setter');
+    Route::post('/ajax-rankSetter', [FrontProductController::class, 'rankSetter'])->name('ajax-rankSetter');
 
-    Route::get('/image-form/{id}/product', [ProductController::class, 'product_image'])->name('product.image-form');
+    Route::get('/image-form/{id}/product', [FrontProductController::class, 'product_image'])->name('product.image-form');
 
-    Route::post('/image-upload/{id}/product', [ProductController::class, 'product_image_upload'])->name('product.image-upload');
+    Route::post('/image-upload/{id}/product', [FrontProductController::class, 'product_image_upload'])->name('product.image-upload');
 
-    Route::post('/image-refresh/{id}/product', [ProductController::class, 'product_refresh_image'])->name('product.refresh-image-list');
-
-
-    Route::post('/isActive/{id}/product-image', [ProductImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-product-image');
-
-    Route::post('/ajax-rankSetter-product-image', [ProductImageController::class, 'rankSetter'])->name('ajax-rankSetter-product-image');
-
-    Route::post('/ajax-news-rankSetter', [NewsController::class, 'rankSetter'])->name('ajax-news-rankSetter');
-
-    Route::post('/isActive/{id}/news', [NewsController::class, 'isActiveSetter'])->name('ajax.news-is-active-setter');
-
-    Route::post('/ajax-references-rankSetter', [ReferencesController::class, 'rankSetter'])->name('ajax-references-rankSetter');
-
-    Route::post('/isActive/{id}/references', [ReferencesController::class, 'isActiveSetter'])->name('ajax.references-is-active-setter');
+    Route::post('/image-refresh/{id}/product', [FrontProductController::class, 'product_refresh_image'])->name('product.refresh-image-list');
 
 
+    Route::post('/isActive/{id}/product-image', [FrontProductImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-product-image');
 
-    Route::post('/ajax-brands-rankSetter', [BrandController::class, 'rankSetter'])->name('ajax-brands-rankSetter');
+    Route::post('/ajax-rankSetter-product-image', [FrontProductImageController::class, 'rankSetter'])->name('ajax-rankSetter-product-image');
 
-    Route::post('/isActive/{id}/brands', [BrandController::class, 'isActiveSetter'])->name('ajax.brands-is-active-setter');
+    Route::post('/ajax-news-rankSetter', [FrontNewsController::class, 'rankSetter'])->name('ajax-news-rankSetter');
 
-    Route::post('/ajax-courses-rankSetter', [CourseController::class, 'rankSetter'])->name('ajax-courses-rankSetter');
+    Route::post('/isActive/{id}/news', [FrontNewsController::class, 'isActiveSetter'])->name('ajax.news-is-active-setter');
 
-    Route::post('/isActive/{id}/courses', [CourseController::class, 'isActiveSetter'])->name('ajax.courses-is-active-setter');
+    Route::post('/ajax-references-rankSetter', [FrontReferencesController::class, 'rankSetter'])->name('ajax-references-rankSetter');
 
-    Route::post('/isCoverSetter/{id}/{parent}/product-image', [ProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
+    Route::post('/isActive/{id}/references', [FrontReferencesController::class, 'isActiveSetter'])->name('ajax.references-is-active-setter');
+
+
+
+    Route::post('/ajax-brands-rankSetter', [FrontBrandController::class, 'rankSetter'])->name('ajax-brands-rankSetter');
+
+    Route::post('/isActive/{id}/brands', [FrontBrandController::class, 'isActiveSetter'])->name('ajax.brands-is-active-setter');
+
+    Route::post('/ajax-courses-rankSetter', [FrontCourseController::class, 'rankSetter'])->name('ajax-courses-rankSetter');
+
+    Route::post('/isActive/{id}/courses', [FrontCourseController::class, 'isActiveSetter'])->name('ajax.courses-is-active-setter');
+
+    Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
 
 
     Route::resources([
@@ -130,14 +128,14 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'permissions' => PermissionController::class,
         'users' => UserController::class,
         'roles' => RoleController::class,
-        'settings' => SettingController::class,
-        'product' => ProductController::class,
-        'product-image' => ProductImageController::class,
-        'news' => NewsController::class,
-        'references' => ReferencesController::class,
-        'brands' => BrandController::class,
-        'courses'=>CourseController::class,
-        'galleries' => GalleryController::class,
+        'settings' => FrontSettingController::class,
+        'product' => FrontProductController::class,
+        'product-image' => FrontProductImageController::class,
+        'news' => FrontNewsController::class,
+        'references' => FrontReferencesController::class,
+        'brands' => FrontBrandController::class,
+        'courses'=>FrontCourseController::class,
+        'galleries' => FrontGalleryController::class,
 
 
     ]);
