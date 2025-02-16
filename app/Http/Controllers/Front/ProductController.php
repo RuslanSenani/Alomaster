@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 
-class FrontProductController
+class ProductController
 {
     /**
      * Display a listing of the resource.

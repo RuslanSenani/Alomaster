@@ -236,6 +236,17 @@
                             </a>
                         </li>
 
+
+                        <li class="nav-item">
+                            <a href="{{Route('galleries.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'galleries.') ? 'active' : '' }}">
+                                <i class="fas  fa-images"></i>
+                                <p>
+                                    Galleries
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
