@@ -16,7 +16,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{Route("product.update",$product->id)}}">
+                        <form method="POST" action="{{Route("galleries.update",$gallery->id)}}">
                             @csrf
                             @method('PUT')
                             <div class="card-body">
@@ -25,34 +25,13 @@
                                     <div class="col">
 
 
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <div class="form-group">
-                                                    <label for="url">Url:</label>
-                                                    <input type="text" value="{{$product->url}}"
-                                                           name="url"
-                                                           class="form-control" id="url"
-                                                           placeholder="Url">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <div class="form-group">
-                                                    <label for="title">Başlıq:</label>
-                                                    <input type="text" value="{{$product->title}}"
-                                                           name="title"
-                                                           class="form-control" id="title"
-                                                           placeholder="Başlıq">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
-                                                <label for="description">Açıqlama:</label>
-                                                <input type="text" value="{{$product->description}}" name="description"
-                                                       class="form-control" id="description"
-                                                       placeholder="Açıqlama">
+                                                <label for="title">Qalerya Adı:</label>
+                                                <input type="text" value="{{$gallery->title}}"
+                                                       name="title"
+                                                       class="form-control" id="title"
+                                                       placeholder="Qalerya Adı">
                                             </div>
                                         </div>
 
@@ -71,7 +50,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="{{Route("product.index")}}" type="submit"
+                                            <a href="{{Route("galleries.index")}}" type="submit"
                                                class="btn  btn-outline-danger btn-md"><i class="fa fa-window-close"
                                                                                          aria-hidden="true"></i>
 

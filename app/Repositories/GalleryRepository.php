@@ -36,10 +36,9 @@ class GalleryRepository implements IGalleryRepository
         return $this->model->create($attributes);
     }
 
-    public function update($id, array $attributes): bool
+    public function update(array $where, array $attributes): bool
     {
-        $gallery = $this->model->findOrFail($id);
-        return $gallery->update($attributes);
+        return $this->model->where($where)->update($attributes);
     }
 
     public function delete($id): bool

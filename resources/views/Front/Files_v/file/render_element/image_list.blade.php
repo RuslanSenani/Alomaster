@@ -4,45 +4,35 @@
     <tr>
         <th><i class="fa-solid fa-list-ol"></i></th>
         <th>#id</th>
-        <th>Şəkil</th>
-        <th>Şəkil Adı</th>
+        <th>Görüntü</th>
+        <th>Fayl Adı</th>
         <th>Status</th>
-        <th>Örtük</th>
         <th>Əməliyyatlar</th>
     </tr>
     </thead>
     <tbody class="sortable">
-    @foreach($productImage as $image)
-        <tr id="ord-{{$image->id}}" data-url="{{route('ajax-rankSetter-product-image')}}">
+    @foreach($files as $file)
+        <tr id="ord-{{$file->id}}" data-url="{{route('ajax.files-rankSetter-file')}}">
             <th><i class="fa-solid fa-list-ol"></i></th>
-            <th class="col-md-1">{{$image->id}}</th>
+            <th class="col-md-1">{{$file->id}}</th>
             <th class="col-md-1">
                 <img width="50"
-                     src="{{asset($image->img_url)}}"
+                     src="{{asset("assets/dist/img/folder.png")}}"
                      alt="" class="img-responsive">
             </th>
-            <th class="col-md-8">{{basename($image->img_url)}}</th>
+            <th class="col-md-8">{{basename($file->url)}}</th>
             <td class="col-md-1" style="text-align: center">
                 <label class="toggle">
                     <input type="checkbox" class="isActive"
-                           data-url="{{route('ajax.is-active-setter-product-image',$image->id)}}"
-                           name="isActive" {{ $image->isActive ? 'checked' : '' }}/>
-
-                    <span class="slider"></span>
-                </label>
-            </td>
-            <td class="col-md-1" style="text-align: center">
-                <label class="toggle">
-                    <input type="checkbox" class="isCover"
-                           data-url="{{route('isCoverSetter-product-image',[$image->id,$image->product_id])}}"
-                           name="isActive" {{ $image->isCover ? 'checked' : '' }}/>
+                           data-url="{{route('ajax.is-active-setter-files-file',$file->id)}}"
+                           name="isActive" {{ $file->isActive ? 'checked' : '' }}/>
 
                     <span class="slider"></span>
                 </label>
             </td>
             <td class="col-md-1" style="text-align: center">
                 <button type="submit" id="delete-button"
-                        data-url="{{route('product-image.destroy',$image->id)}}"
+                        data-url="{{route('files.destroy',$file->id)}}"
                         class="btn btn-outline-danger btn-md remove-btn">
                     <i class="fa fa-trash"></i>
                 </button>

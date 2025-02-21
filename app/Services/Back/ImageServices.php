@@ -10,21 +10,21 @@ use Illuminate\Support\Collection;
 class ImageServices
 {
 
-    private  IImageRepository $imageRepository;
+    private IImageRepository $imageRepository;
     private FileUploadService $uploadService;
     private IAlert $alert;
 
-    public function __construct(IImageRepository $imageRepository, FileUploadService  $uploadService, IAlert $alert){
+    public function __construct(IImageRepository $imageRepository, FileUploadService $uploadService, IAlert $alert)
+    {
         $this->imageRepository = $imageRepository;
         $this->uploadService = $uploadService;
         $this->alert = $alert;
     }
 
 
-
-    public function getAllData(): Collection
+    public function getAllData(array $where = [], array $order = ['rank','asc']): Collection
     {
-        return $this->imageRepository->all();
+        return $this->imageRepository->all($where, $order);
     }
 
     public function getDataById(int $id): Model

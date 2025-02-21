@@ -59,8 +59,14 @@
                                                 <label>Xəbər Növü:</label>
                                                 <select name="news_type"
                                                         class="form-control select2bs4 news_type_select">
-                                                    <option value="image" selected="selected">Şəkil</option>
-                                                    <option value="video">Video</option>
+                                                    <option value="image" {{old('news_type','image' ?? '')=='image' ? 'selected' :'' }}>
+                                                        Şəkil
+                                                    </option>
+
+                                                    <option value="video" {{old('news_type','video' ?? '')=='video' ? 'selected' :'' }}>
+                                                        Video
+                                                    </option>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -115,7 +121,7 @@
                                 <div class="row">
                                     <div class="col-md-1">
                                         <button type="submit" class="btn  btn-outline-primary btn-md"><i
-                                                class="fa fa-check" aria-hidden="true"></i>
+                                                    class="fa fa-check" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                     <div class="col-md-1">

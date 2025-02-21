@@ -21,9 +21,9 @@ class FileServices
     }
 
 
-    public function getAllData(): Collection
+    public function getAllData(array $where = [], array $order = ['rank','asc']): Collection
     {
-        return $this->fileRepository->all();
+        return $this->fileRepository->all($where, $order);
     }
 
     public function getDataById(int $id): Model

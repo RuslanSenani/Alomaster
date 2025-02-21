@@ -16,7 +16,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="POST" action="{{Route("product.store")}}">
+                        <form method="POST" action="{{Route("galleries.store")}}">
                             @csrf
                             <div class="card-body">
 
@@ -24,58 +24,58 @@
                                     <div class="col">
 
 
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <div class="form-group">
-                                                    <label for="url">Url:</label>
-                                                    <input type="text" value="{{old('url')}}"
-                                                           name="url"
-                                                           class="form-control" id="url"
-                                                           placeholder="Url">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-md-6">
-                                                <div class="form-group">
-                                                    <label for="title">Başlıq:</label>
-                                                    <input type="text" value="{{old('title')}}"
-                                                           name="title"
-                                                           class="form-control" id="title"
-                                                           placeholder="Başlıq">
-                                                </div>
+                                        <div class="form-group col-md-12">
+                                            <div class="form-group">
+                                                <label for="title">Qalerya Adı:</label>
+                                                <input type="text" value="{{old('title')}}"
+                                                       name="title"
+                                                       class="form-control" id="title"
+                                                       placeholder="Qalerya Adı">
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
-                                                <label for="description">Açıqlama:</label>
-                                                <input type="text" value="{{old('description')}}" name="description"
-                                                       class="form-control" id="description"
-                                                       placeholder="Açıqlama">
+                                                <label>Qalerya Növü:</label>
+                                                <select name="gallery_type"
+                                                        class="form-control select2bs4">
+                                                    <option
+                                                        value="image" {{ old('gallery_type', 'image') == 'image' ? 'selected' : '' }}>
+                                                        Şəkil
+                                                    </option>
+                                                    <option
+                                                        value="video" {{ old('gallery_type') == 'video' ? 'selected' : '' }}>
+                                                        Video
+                                                    </option>
+                                                    <option
+                                                        value="file" {{ old('gallery_type') == 'file'  ? 'selected' : '' }}>
+                                                        Fayl
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
 
 
                                     </div>
                                 </div>
+                            </div>
 
 
-                                <!-- /.card-body -->
+                            <!-- /.card-body -->
 
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            <button type="submit" class="btn  btn-outline-primary btn-md"><i
-                                                    class="fa fa-check" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <a href="{{Route("product.index")}}" type="submit"
-                                               class="btn  btn-outline-danger btn-md"><i class="fa fa-window-close"
-                                                                                         aria-hidden="true"></i>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn  btn-outline-primary btn-md"><i
+                                                class="fa fa-check" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a href="{{Route("galleries.index")}}" type="submit"
+                                           class="btn  btn-outline-danger btn-md"><i class="fa fa-window-close"
+                                                                                     aria-hidden="true"></i>
 
-                                            </a>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

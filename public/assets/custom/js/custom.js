@@ -342,7 +342,6 @@ $(document).ready(function () {
         let uploadSection = Dropzone.forElement("#fileUpload");
 
         uploadSection.on('complete', function (file) {
-            //console.log(file);
             let data_url = $('#fileUpload').data('url');
             $.post(data_url, {}, function (response) {
                 $(".image-list-container").html(response);

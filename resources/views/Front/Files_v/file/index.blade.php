@@ -21,7 +21,7 @@
 
     <!-- Content Wrapper. Contains edit content -->
 
-    @include("Front.Galleries_v.image.content")
+    @include("Front.Files_v.file.content")
     <!-- /.content-wrapper -->
 
 

@@ -28,16 +28,18 @@ use App\Http\Controllers\Back\{
     WarehouseController,
 };
 
-use App\Http\Controllers\Front\{
-    FrontBrandController,
+use App\Http\Controllers\Front\{FrontBrandController,
     FrontCourseController,
+    FrontFileController,
     FrontHomeController,
+    FrontImageController,
     FrontNewsController,
     FrontProductController,
     FrontProductImageController,
     FrontSettingController,
     FrontGalleryController,
-    FrontReferencesController};
+    FrontReferencesController
+};
 
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -103,7 +105,6 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/isActive/{id}/references', [FrontReferencesController::class, 'isActiveSetter'])->name('ajax.references-is-active-setter');
 
 
-
     Route::post('/ajax-brands-rankSetter', [FrontBrandController::class, 'rankSetter'])->name('ajax-brands-rankSetter');
 
     Route::post('/isActive/{id}/brands', [FrontBrandController::class, 'isActiveSetter'])->name('ajax.brands-is-active-setter');
@@ -112,7 +113,24 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/isActive/{id}/courses', [FrontCourseController::class, 'isActiveSetter'])->name('ajax.courses-is-active-setter');
 
+
+    Route::post('/ajax-gallery-rankSetter', [FrontGalleryController::class, 'rankSetter'])->name('ajax.gallery-rankSetter');
+
+    Route::post('/isActive/{id}/gallery', [FrontGalleryController::class, 'isActiveSetter'])->name('ajax.gallery-is-active-setter');
+
     Route::post('/isCoverSetter/{id}/{parent}/product-image', [FrontProductImageController::class, 'isCoverSetter'])->name('isCoverSetter-product-image');
+
+    Route::post('/isActive/{id}/images-image', [FrontImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-images-image');
+
+    Route::post('/ajax-rankSetter-images-image', [FrontImageController::class, 'rankSetter'])->name('ajax.images-rankSetter-image');
+
+    Route::post('/image-refresh/{id}/images', [FrontImageController::class, 'refresh_image'])->name('images.refresh-image-list');
+
+    Route::post('/isActive/{id}/files-file', [FrontFileController::class, 'isActiveSetter'])->name('ajax.is-active-setter-files-file');
+
+    Route::post('/ajax-rankSetter-files-file', [FrontFileController::class, 'rankSetter'])->name('ajax.files-rankSetter-file');
+
+    Route::post('/files-refresh/{id}/images', [FrontFileController::class, 'refresh_files'])->name('files.refresh-file-list');
 
 
     Route::resources([
@@ -134,8 +152,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'news' => FrontNewsController::class,
         'references' => FrontReferencesController::class,
         'brands' => FrontBrandController::class,
-        'courses'=>FrontCourseController::class,
+        'courses' => FrontCourseController::class,
         'galleries' => FrontGalleryController::class,
+        'images' => FrontImageController::class,
+        'files' => FrontFileController::class,
 
 
     ]);

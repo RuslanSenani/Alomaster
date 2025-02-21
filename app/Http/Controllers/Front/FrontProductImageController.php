@@ -16,6 +16,8 @@ class FrontProductImageController
      * Display a listing of the resource.
      */
 
+    private string $viewFolder;
+    private string $directoryPath;
     private ProductImageServices $productImageServices;
     private StatusServices $statusServices;
     private RankServices $rankServices;
@@ -24,6 +26,8 @@ class FrontProductImageController
 
     public function __construct(ProductImageServices $productImageServices, StatusServices $statusServices, RankServices $rankServices, CoverServices $coverServices, FileUploadService $fileUploadService)
     {
+        $this->viewFolder = 'Front/Product_v';
+        $this->directoryPath = "uploads/" . $this->viewFolder;
         $this->productImageServices = $productImageServices;
         $this->statusServices = $statusServices;
         $this->rankServices = $rankServices;
@@ -89,7 +93,7 @@ class FrontProductImageController
                 'redirect_url' => route('product.image-form', $product->product_id),
             ], 404);
         }
-        $this->fileUploadService->fileDelete($product->img_url);
+        $this->fileUploadService->fileDelete($this->directoryPath . "/" . $product->img_url);
         return response()->json([
             'redirect_url' => route('product.image-form', $product->product_id),
         ]);

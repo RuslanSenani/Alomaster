@@ -33,46 +33,69 @@
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <thead>
                         <tr>
-                            <th><i class="fa-solid fa-list-ol"></i></th>
-                            <th>#id</th>
-                            <th>Başlıq</th>
-                            <th>Url</th>
-                            <th>Açıqlama</th>
-                            <th>Status</th>
-                            <th>Əməliyyatlar</th>
+                            <th class="text-center"><i class="fa-solid fa-list-ol"></i></th>
+                            <th class="text-center">#id</th>
+                            <th class="text-center">Qalerya Adı</th>
+                            <th class="text-center">Qalerya Növü</th>
+                            <th class="text-center">Qovluq Adı</th>
+                            <th class="text-center">Url</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Əməliyyatlar</th>
                         </tr>
                         </thead>
                         <tbody class="sortable">
 
 
-                        @foreach($products as $product)
-                            <tr id="ord-{{$product->id}}" data-url="{{route('ajax-rankSetter')}}">
-                                <th><i class="fa-solid fa-list-ol"></i></th>
-                                <td class="col-md-1">#{{$product->id}}</td>
-                                <td class="col-md-2">{{$product->title}}</td>
-                                <td class="col-md-2">{{$product->url}}</td>
-                                <td class="col-md-3">{{$product->description}}</td>
-                                <td class="col-md-1">
+                        @foreach($galleries as $gallery)
+                            <tr id="ord-{{$gallery->id}}" data-url="{{route('ajax.gallery-rankSetter')}}">
+                                <th class="text-center"><i class="fa-solid fa-list-ol"></i></th>
+                                <td class="col-md-1 text-center">#{{$gallery->id}}</td>
+                                <td class="col-md-2 text-center">{{$gallery->title}}</td>
+                                <td class="col-md-1 text-center">{{$gallery->gallery_type}}</td>
+                                <td class="col-md-2 text-center">{{$gallery->folder_name}}</td>
+                                <td class="col-md-3 text-center">{{$gallery->url}}</td>
+                                <td class="col-md-1 text-center">
                                     <label class="toggle">
                                         <input type="checkbox" class="isActive"
-                                               data-url="{{route('ajax.is-active-setter',$product->id)}}"
-                                               name="isActive" {{ $product->isActive ? 'checked' : '' }} />
+                                               data-url="{{route('ajax.gallery-is-active-setter',$gallery->id)}}"
+                                               name="isActive" {{ $gallery->isActive ? 'checked' : '' }} />
                                         <span class="slider"></span>
                                     </label>
                                 </td>
-                                <td class="col-md-2">
+                                <td class="col-md-3 text-center">
 
                                     <div class="d-flex justify-content-between" role="group">
                                         <button type="submit" id="delete-button"
-                                                data-url="{{route('galleries.destroy',$product->id)}}"
+                                                data-url="{{route('galleries.destroy',$gallery->id)}}"
                                                 class="btn btn-outline-danger btn-md remove-btn"><i
                                                 class="fa fa-trash"></i>
                                         </button>
-                                        <a href="{{Route('galleries.edit',$product->id)}}"
-                                           class="btn btn-outline-primary btn-md"> <i class="fa fa-edit"></i> </a>
-                                        <a
-                                            href="{{Route('galleries.image-form',$product->id)}}"
-                                            class="btn btn-outline-dark btn-md"> <i class="fa fa-image"></i> </a>
+                                        @php
+                                            if($gallery->gallery_type=="image"){
+                                                $button_icon = "fa-image";
+                                                $button_url = "images.controller";
+                                            }
+                                            if($gallery->gallery_type=="video"){
+                                                $button_icon = "fa-play-circle";
+                                                $button_url = "videos.controller";
+                                            }
+                                            if($gallery->gallery_type=="file"){
+                                                $button_icon = "fa-folder";
+                                                $button_url = "file.controller";
+                                            }
+
+                                            echo  $gallery->button_icon
+                                        @endphp
+
+                                        <a href="{{Route('galleries.edit',$gallery->id)}}"
+                                           class="btn btn-outline-primary btn-md">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a href="{{route($gallery->route,$gallery->id)}}"
+                                           class="btn btn-outline-primary btn-md">
+                                            <i class="fa {{$gallery->icon}}"></i>
+                                        </a>
                                     </div>
 
 

@@ -15,7 +15,7 @@ interface IGalleryRepository
 
     public function create(array $attributes): Model;
 
-    public function update($id, array $attributes): bool;
+    public function update(array $where, array $attributes): bool;
 
     public function delete($id): bool;
 

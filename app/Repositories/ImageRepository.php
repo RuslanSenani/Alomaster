@@ -7,7 +7,7 @@ use App\Models\Front\Image;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class ImageRepository implements  IImageRepository
+class ImageRepository implements IImageRepository
 {
 
     private Image $model;
@@ -17,9 +17,9 @@ class ImageRepository implements  IImageRepository
         $this->model = $imageModel;
     }
 
-    public function all(): Collection
+    public function all(array $where, array $order): Collection
     {
-        return $this->model->orderBy('rank', 'asc')->get();
+        return $this->model->where($where)->orderBy($order[0], $order[1])->get();
     }
 
     public function find($id): ?Model
@@ -40,11 +40,12 @@ class ImageRepository implements  IImageRepository
     public function update($id, array $attributes): bool
     {
         $image = $this->model->findOrFail($id);
-        return $image->update($attributes);
+        return $this->model->where([['id', '=', $id]])->update($attributes);
     }
 
     public function delete($id): bool
     {
         return $this->model->destroy($id);
     }
+
 }

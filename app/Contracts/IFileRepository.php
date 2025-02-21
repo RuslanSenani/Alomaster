@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 interface IFileRepository
 {
-    public function all(): Collection;
+    public function all(array $where, array $order): Collection;
 
     public function find($id): ?Model;
 

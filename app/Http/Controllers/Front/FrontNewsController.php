@@ -93,7 +93,7 @@ class FrontNewsController
         } catch (\Exception $exception) {
 
             $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('news.index');
@@ -155,7 +155,7 @@ class FrontNewsController
             return redirect()->route('news.index');
         } catch (\Exception $exception) {
             $this->alertServices->error("Xəta ", $exception->getMessage());
-            return redirect()->route('news.index');
+            return redirect()->back()->withInput();
         }
     }
 

@@ -156,7 +156,7 @@ class FrontProductController
         }
 
         foreach ($product_images as $product_image) {
-            $this->fileUploadService->fileDelete($product_image->img_url);
+            $this->fileUploadService->fileDelete($this->directoryPath . "/" . $product_image->img_url);
         }
         return response()->json([
             'redirect_url' => route('product.index'),
@@ -174,6 +174,7 @@ class FrontProductController
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "image",
+            "directoryPath" => $this->directoryPath,
             "pageName" => "Şəkil Əlavə Et",
             "dropzoneMessage" => "Fayllarınızı bura sürükləyib buraxın və ya onları seçmək üçün klikləyin..",
             'product' => $product,
@@ -186,6 +187,8 @@ class FrontProductController
 
     public function product_image_upload(Request $request, string $id)
     {
+
+
         $validationData = $request->validate([
             'file.*' => 'required|file|mimes:jpeg,jpg,png|max:5120',
         ]);
@@ -215,9 +218,11 @@ class FrontProductController
     public function product_refresh_image(string $id)
     {
 
+
         $productImage = $this->productImageServices->getAllProducts(['product_id' => $id]);
         $viewData = [
             "viewFolder" => $this->viewFolder,
+            "directoryPath" => $this->directoryPath,
             "subViewFolder" => "image/render_element",
             'productImage' => $productImage,
         ];

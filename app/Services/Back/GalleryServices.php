@@ -42,9 +42,9 @@ class GalleryServices
         return $this->galleryRepository->create($data);
     }
 
-    public function updateData(int $id, array $data): bool
+    public function updateData(array $array, array $data): bool
     {
-        return $this->galleryRepository->update($id, $data);
+        return $this->galleryRepository->update($array, $data);
     }
 
     public function deleteData(int $id): bool
@@ -66,5 +66,27 @@ class GalleryServices
             return false;
         }
     }
+
+    public function addGalleryAttributes(Collection $galleries): Collection
+    {
+        return $galleries->map(function ($gallery) {
+            $gallery->icon = match ($gallery->gallery_type) {
+                'image' => 'fa-image',
+                'video' => 'fa-play-circle',
+                'file' => 'fa-folder',
+                default => 'fa-question',
+            };
+
+            $gallery->route = match ($gallery->gallery_type) {
+                'image' => 'images.show',
+//                'video' => 'videos.edit',
+                'file' => 'files.show',
+                default => 'galleries.index',
+            };
+
+            return $gallery;
+        });
+    }
+
 
 }

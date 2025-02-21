@@ -58,8 +58,7 @@
                                                 <label>Xəbər Növü:</label>
                                                 <select name="news_type"
                                                         class="form-control select2bs4 news_type_select">
-                                                    <option {{$news->news_type=="image"?'selected':''}} value="image"
-                                                            selected="selected">Şəkil
+                                                    <option {{$news->news_type=="image"?'selected':''}} value="image">Şəkil
                                                     </option>
                                                     <option {{$news->news_type=="video"?'selected':''}} value="video">
                                                         Video
