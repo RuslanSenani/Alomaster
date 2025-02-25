@@ -12,7 +12,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                       <textarea id="mission" name="mission">
-
+                            {{old('mission')}}
                       </textarea>
                     </div>
 

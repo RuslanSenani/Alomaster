@@ -13,7 +13,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                       <textarea id="address" name="address">
-
+                            {{$setting->address}}
                       </textarea>
                     </div>
 

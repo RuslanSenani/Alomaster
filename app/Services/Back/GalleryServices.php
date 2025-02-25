@@ -79,7 +79,7 @@ class GalleryServices
 
             $gallery->route = match ($gallery->gallery_type) {
                 'image' => 'images.show',
-//                'video' => 'videos.edit',
+                'video' => 'galleries.videos.index',
                 'file' => 'files.show',
                 default => 'galleries.index',
             };

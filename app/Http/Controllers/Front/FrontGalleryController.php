@@ -47,7 +47,7 @@ class FrontGalleryController
         $viewData = [
             "viewFolder" => $this->viewFolder,
             "subViewFolder" => "list",
-            "pageName" => "Brendlər",
+            "pageName" => "Qalerya",
             'galleries' => $galleries,
         ];
 

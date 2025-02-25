@@ -9,9 +9,11 @@
                         {{$pageName}}
                     </h3>
                 </div>
-                <form action="">
+                <form action="{{route('settings.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+
                             <li class="nav-item">
                                 <a class="nav-link active" id="custom-content-below-site-info-tab" data-toggle="pill"
                                    href="#custom-content-below-site-info" role="tab"
@@ -60,6 +62,7 @@
                                    aria-controls="custom-content-blow-logo"
                                    aria-selected="true"> Logo </a>
                             </li>
+
                         </ul>
                         <div class="tab-content" id="custom-content-below-tabContent">
 
@@ -79,12 +82,12 @@
 
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Yadda Saxla</button>
+                    </div>
                 </form>
 
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
                 <!-- /.card -->
             </div>
             <!-- /.card -->

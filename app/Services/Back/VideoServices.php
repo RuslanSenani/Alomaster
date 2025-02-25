@@ -21,10 +21,11 @@ class VideoServices
     }
 
 
-    public function getAllData(): Collection
+    public function getAllData(array $where = [], array $order = ['rank', 'asc']): Collection
     {
-        return $this->videoRepository->all();
+        return $this->videoRepository->all($where, $order);
     }
+
 
     public function getDataById(int $id): Model
     {

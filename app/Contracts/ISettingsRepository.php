@@ -5,7 +5,7 @@ namespace App\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-interface IVideoRepository
+interface ISettingsRepository
 {
     public function all(array $where, array $order): Collection;
 
@@ -18,4 +18,5 @@ interface IVideoRepository
     public function update($id, array $attributes): bool;
 
     public function delete($id): bool;
+
 }

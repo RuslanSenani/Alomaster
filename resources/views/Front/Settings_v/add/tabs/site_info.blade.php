@@ -15,9 +15,9 @@
                             <div class="row">
                                 <div class="form-group col-md-8">
                                     <div class="form-group">
-                                        <label for="companyName">Şirkət Adı:</label>
-                                        <input type="text" value="" name="companyName"
-                                               class="form-control" id="companyName"
+                                        <label for="company_name">Şirkət Adı:</label>
+                                        <input type="text" value="{{old('company_name')}}" name="company_name"
+                                               class="form-control" id="company_name"
                                                placeholder="Şirkət Adı">
                                     </div>
                                 </div>
@@ -30,17 +30,17 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="phone1">Telefon 1:</label>
-                                        <input type="text" value="" name="phone1"
-                                               class="form-control" id="phone1"
+                                        <label for="phone_1">Telefon 1:</label>
+                                        <input type="text" value="{{old('phone_1')}}" name="phone_1"
+                                               class="form-control" id="phone_1"
                                                placeholder="Telefon 1">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="phone2">Telefon 2:</label>
-                                        <input type="text" value="" name="phone2"
-                                               class="form-control" id="phone2"
+                                        <label for="phone_2">Telefon 2:</label>
+                                        <input type="text" value="{{old('phone_2')}}" name="phone_2"
+                                               class="form-control" id="phone_2"
                                                placeholder="Telefon 2">
                                     </div>
                                 </div>
@@ -52,17 +52,17 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="fax1">Fax 1:</label>
-                                        <input type="text" value="" name="fax1"
-                                               class="form-control" id="fax1"
+                                        <label for="fax_1">Fax 1:</label>
+                                        <input type="text" value="{{old('fax_1')}}" name="fax_1"
+                                               class="form-control" id="fax_1"
                                                placeholder="Fax 1">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="fax2">Fax 2:</label>
-                                        <input type="text" value="" name="fax2"
-                                               class="form-control" id="fax2"
+                                        <label for="fax_2">Fax 2:</label>
+                                        <input type="text" value="{{old('fax_2')}}" name="fax_2"
+                                               class="form-control" id="fax_2"
                                                placeholder="Fax 2">
                                     </div>
                                 </div>

@@ -16,7 +16,7 @@
                                 <div class="form-group col-md-8">
                                     <div class="form-group">
                                         <label for="email">E-Poçt:</label>
-                                        <input type="text" value="" name="email"
+                                        <input type="text" value="{{$setting->email}}" name="email"
                                                class="form-control" id="email"
                                                placeholder="E-Poçt">
                                     </div>
@@ -31,7 +31,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="instagram">İnstagram:</label>
-                                        <input type="text" value="" name="instagram"
+                                        <input type="text" value="{{$setting->instagram}}" name="instagram"
                                                class="form-control" id="instagram"
                                                placeholder="İnstagram">
                                     </div>
@@ -39,7 +39,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="tik_tok">Tik Tok:</label>
-                                        <input type="text" value="" name="tik_tok"
+                                        <input type="text" value="{{$setting->tik_tok}}" name="tik_tok"
                                                class="form-control" id="tik_tok"
                                                placeholder="Tik Tok">
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="youtube">Youtube:</label>
-                                        <input type="text" value="" name="youtube"
+                                        <input type="text" value="{{$setting->youtube}}" name="youtube"
                                                class="form-control" id="youtube"
                                                placeholder="Youtube">
                                     </div>
@@ -61,7 +61,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="facebook">Facebook:</label>
-                                        <input type="text" value="" name="facebook"
+                                        <input type="text" value="{{$setting->facebook}}" name="facebook"
                                                class="form-control" id="facebook"
                                                placeholder="Facebook">
                                     </div>

@@ -38,7 +38,8 @@ use App\Http\Controllers\Front\{FrontBrandController,
     FrontProductImageController,
     FrontSettingController,
     FrontGalleryController,
-    FrontReferencesController
+    FrontReferencesController,
+    FrontVideoController
 };
 
 
@@ -133,6 +134,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/files-refresh/{id}/images', [FrontFileController::class, 'refresh_files'])->name('files.refresh-file-list');
 
 
+    Route::post('/isActive/{id}/videos', [FrontVideoController::class, 'isActiveSetter'])->name('ajax.is-active-setter-videos');
+
+    Route::post('/ajax-rankSetter-videos', [FrontVideoController::class, 'rankSetter'])->name('ajax.rankSetter-videos');
+
+
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -156,6 +162,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'galleries' => FrontGalleryController::class,
         'images' => FrontImageController::class,
         'files' => FrontFileController::class,
+        'galleries.videos' => FrontVideoController::class,
 
 
     ]);

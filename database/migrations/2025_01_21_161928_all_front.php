@@ -351,12 +351,11 @@ return new class extends Migration {
             $table->string('phone_2')->nullable();
             $table->string('fax_1')->nullable();
             $table->string('fax_2')->nullable();
-            $table->string('facebook')->nullable();
+            $table->string('email')->nullable();
             $table->string('instagram')->nullable();
             $table->string('tik_tok')->nullable();
             $table->string('youtube')->nullable();
-            $table->string('x')->nullable();
-            $table->string('linkedin')->nullable();
+            $table->string('facebook')->nullable();
             $this->addCommonColumns($table);
 
         });

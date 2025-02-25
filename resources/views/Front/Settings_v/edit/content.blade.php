@@ -9,7 +9,9 @@
                         {{$pageName}}
                     </h3>
                 </div>
-                <form action="">
+                <form action="{{route("settings.update",$setting->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="card-body">
                         <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
                             <li class="nav-item">
@@ -78,6 +80,9 @@
                             @include('Front.Settings_v.edit.tabs.logo')
 
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Yenilə</button>
                     </div>
                 </form>
                 <!-- /.card -->

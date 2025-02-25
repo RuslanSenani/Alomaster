@@ -2,19 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Contracts\IVideoRepository;
-use App\Models\Front\Video;
+use App\Contracts\ISettingsRepository;
+use App\Models\Front\Setting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class VideoRepository implements IVideoRepository
+class SettingsRepository implements ISettingsRepository
 {
+    private Setting $model;
 
-    private Video $model;
-
-    public function __construct(Video $videoModel)
+    public function __construct(Setting $settingModel)
     {
-        $this->model = $videoModel;
+        $this->model = $settingModel;
     }
 
     public function all(array $where, array $order): Collection

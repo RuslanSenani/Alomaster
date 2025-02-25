@@ -46,49 +46,6 @@ class FileUploadService
     }
 
 
-//    public function multiUpload($request, $uploadPath, $width, $height): JsonResponse
-//    {
-//        try {
-//
-//
-//            if ($request->hasFile('file')) {
-//
-//                $uploadedFiles = [];
-//                $files = $request->file('file');
-//
-//                if (!is_array($files)) {
-//                    $files = [$files];
-//                }
-//
-//                foreach ($files as $image) {
-//
-//                    if (!in_array($image->getClientOriginalExtension(), ['jpeg', 'jpg', 'png', 'gif','pdf','xlsx','xls','doc','docx'])) {
-//                        return response()->json(['Error' => 'Format uygun değil'], 400);
-//                    }
-//
-//                    $targetPath = $uploadPath . "/" . $width . "x" . $height;
-//                    File::ensureDirectoryExists($targetPath);
-//                    $fileName = Str::slug(pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME)) . "." . $image->getClientOriginalExtension();
-//                    $fullPath = "$targetPath/$fileName";
-//
-//                    Image::read($image->getRealPath())
-//                        ->resize($width, $height)
-//                        ->save($fullPath, 80);
-//
-//                    $uploadedFiles[] = "$width" . "x" . "$height" . "/" . "$fileName";
-//
-//                }
-//
-//                return response()->json(['Success' => 'Dosyalar eklendi', 'filePaths' => $uploadedFiles], 200);
-//            }
-//
-//            return response()->json(['Error' => 'Geçerli bir resim bulunamadı'], 400);
-//        } catch (\Exception $exception) {
-//            return response()->json(['Error' => $exception->getMessage()], 400);
-//        }
-//    }
-
-
     public function multiUpload($request, $uploadPath, $width, $height): JsonResponse
     {
         try {

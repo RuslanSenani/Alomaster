@@ -22,7 +22,7 @@
 </head>
 <body>
 <h1>404 - Page Not Found</h1>
-<p>The page you are looking for could not be found.   {{var_dump(url()->previous())}}</p>
-<a href="#">Return to Home</a>
+<p>The page you are looking for could not be found.</p>
+<a href="{{url()->previous()}}">Return to Home</a>
 </body>
 </html>

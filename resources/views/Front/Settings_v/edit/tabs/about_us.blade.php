@@ -12,7 +12,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                       <textarea id="about_us" name="about_us">
-
+                                {{$setting->about_us}}
                       </textarea>
                     </div>
 
