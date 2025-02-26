@@ -39,7 +39,8 @@ use App\Http\Controllers\Front\{FrontBrandController,
     FrontSettingController,
     FrontGalleryController,
     FrontReferencesController,
-    FrontVideoController
+    FrontVideoController,
+    ServicesController
 };
 
 
@@ -139,6 +140,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/ajax-rankSetter-videos', [FrontVideoController::class, 'rankSetter'])->name('ajax.rankSetter-videos');
 
 
+    Route::post('/isActive/{id}/services', [ServicesController::class, 'isActiveSetter'])->name('ajax.is-active-setter-services');
+
+    Route::post('/ajax-rankSetter-services', [ServicesController::class, 'rankSetter'])->name('ajax.files-rankSetter-services');
+
+
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -163,6 +169,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'images' => FrontImageController::class,
         'files' => FrontFileController::class,
         'galleries.videos' => FrontVideoController::class,
+        'services' => ServicesController::class,
 
 
     ]);

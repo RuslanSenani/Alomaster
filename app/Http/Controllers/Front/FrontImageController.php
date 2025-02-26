@@ -150,7 +150,7 @@ class FrontImageController
     }
 
 
-    public function refresh_image(string $id)
+    public function refresh_image(string $id): void
     {
         $gallery = $this->galleryServices->getDataById($id);
         $images = $this->imageServices->getAllData(
@@ -172,12 +172,12 @@ class FrontImageController
 
     }
 
-    public function rankSetter(Request $request)
+    public function rankSetter(Request $request): void
     {
         $this->rankServices->setRankStatus($request, $this->imageServices->getModelInstance());
     }
 
-    public function isActiveSetter(Request $request, string $id)
+    public function isActiveSetter(Request $request, string $id): void
     {
         $images = $this->imageServices->getDataById($id);
         $this->statusServices->setStatus($request, $images, $id);

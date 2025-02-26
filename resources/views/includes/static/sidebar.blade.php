@@ -1,9 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{Route("home")}}" class="brand-link">
-        <img src="{{asset("assets")}}/dist/img/alomasterLogo.svg" alt="Alo Master Logo"
+        <img src="{{asset("assets")}}/dist/img/alomasterLogo.svg"
+             alt="{{cache('settings')['company_name']??"Alo Master"}}"
              class="brand-image img-circle elevation-4">
-        <span class="brand-text font-weight-light">Alo Master</span>
+        <span class="brand-text font-weight-light">{{cache('settings')['company_name']??"Alo Master"}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -243,6 +244,16 @@
                                 <i class="fas  fa-images"></i>
                                 <p>
                                     Galleries
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{Route('services.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'services.') ? 'active' : '' }}">
+                                <i class="fas fa-solid fa-utensils"></i>
+                                <p>
+                                    Xidmətlər
                                 </p>
                             </a>
                         </li>

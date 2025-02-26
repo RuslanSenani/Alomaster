@@ -11,6 +11,8 @@ use App\Services\Back\RankServices;
 use App\Services\Back\StatusServices;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
+use PHPUnit\TextUI\Application;
 
 
 class FrontProductController

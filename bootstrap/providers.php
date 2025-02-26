@@ -10,6 +10,7 @@ return [
     App\Providers\GalleryProviders::class,
     App\Providers\ImagesProviders::class,
     App\Providers\ReferencesProviders::class,
+    App\Providers\ServicesProviders::class,
     App\Providers\SettingsProviders::class,
     App\Providers\VideoProviders::class,
 ];
