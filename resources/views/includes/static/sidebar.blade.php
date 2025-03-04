@@ -258,6 +258,39 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+
+                            <a class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Portfel əməliyyatları
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{Route('portfoliosCategories.index')}}"
+                                       class="nav-link {{ Str::startsWith(Route::currentRouteName(),'portfoliosCategories.') ? 'active' : '' }}">
+
+                                        <p>
+                                            Portfel Kateqoriaları
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{Route('portfolios.index')}}"
+                                       class="nav-link {{ Str::startsWith(Route::currentRouteName(),'portfolios.') ? 'active' : '' }}">
+
+                                        <p>
+                                            Portfellər
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+
                     </ul>
                 </li>
 

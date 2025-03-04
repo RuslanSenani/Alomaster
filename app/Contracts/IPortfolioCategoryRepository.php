@@ -5,7 +5,7 @@ namespace App\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-interface IProductImageRepository
+interface IPortfolioCategoryRepository
 {
     public function all(array $where, array $order): Collection;
 
@@ -18,5 +18,4 @@ interface IProductImageRepository
     public function update($id, array $attributes): bool;
 
     public function delete($id): bool;
-
 }

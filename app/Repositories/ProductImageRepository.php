@@ -18,7 +18,7 @@ class ProductImageRepository implements IProductImageRepository
         $this->productImage = $productImage;
     }
 
-    public function all(): Collection
+    public function all(array $where, array $order): Collection
     {
 
         return $this->productImage->orderBy('rank', 'asc')->get();

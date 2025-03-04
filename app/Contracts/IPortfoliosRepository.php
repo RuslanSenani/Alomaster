@@ -5,7 +5,7 @@ namespace App\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-interface IProductImageRepository
+interface IPortfoliosRepository
 {
     public function all(array $where, array $order): Collection;
 

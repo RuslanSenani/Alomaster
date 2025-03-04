@@ -60,7 +60,7 @@ return new class extends Migration {
     public function down(): void
     {
 
-        $tables = ['brands', 'courses', 'files', 'images', 'videos', 'galleries', 'members', 'news', 'popups', 'portfolios', 'portfolio_categories', 'portfolio_images', 'product_images', 'f_products', 'references', 'services', 'settings', 'slides', 'testimonials',];
+        $tables = ['brands', 'courses', 'files', 'images', 'videos', 'galleries', 'members', 'news', 'popups', 'portfolio_images', 'portfolios', 'portfolio_categories', 'product_images', 'f_products', 'references', 'services', 'settings', 'slides', 'testimonials',];
 
         foreach ($tables as $table) {
             Schema::dropIfExists($table);
@@ -100,6 +100,7 @@ return new class extends Migration {
             $this->addCommonColumns($table);
         });
     }
+
     /**
      * @return void
      */
@@ -224,7 +225,7 @@ return new class extends Migration {
             $table->string('portfolio_url');
             $table->string('title');
             $table->text('description');
-            $table->integer('client');
+            $table->string('client');
             $table->string('place');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);
@@ -253,7 +254,7 @@ return new class extends Migration {
     {
         Schema::create('portfolio_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('portfolio_id');
+            $table->foreignId('portfolio_id')->constrained('portfolios')->onDelete('cascade');
             $table->string('img_url');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);

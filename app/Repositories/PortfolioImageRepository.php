@@ -2,19 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Contracts\IImageRepository;
-use App\Models\Front\Image;
+use App\Contracts\IPortfolioImageRepository;
+use App\Models\Front\PortfolioImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class ImageRepository implements IImageRepository
+class PortfolioImageRepository implements IPortfolioImageRepository
 {
+    private PortfolioImage $model;
 
-    private Image $model;
-
-    public function __construct(Image $imageModel)
+    public function __construct(PortfolioImage $portfolioModel)
     {
-        $this->model = $imageModel;
+        $this->model = $portfolioModel;
     }
 
     public function all(array $where, array $order): Collection
@@ -46,5 +45,4 @@ class ImageRepository implements IImageRepository
     {
         return $this->model->destroy($id);
     }
-
 }

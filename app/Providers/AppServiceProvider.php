@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(ICoverRepository::class, CoverRepository::class);
 
+
     }
 
     /**

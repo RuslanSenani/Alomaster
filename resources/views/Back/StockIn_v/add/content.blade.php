@@ -127,11 +127,13 @@
                                             <div class="form-group">
                                                 <label for="enterCount">Tədarükçü:</label>
                                                 <select name="supplier" class="form-control select2bs4">
-                                                    <option value="" selected="selected"> --Tədarükçü Seç--
+                                                    <option value="" selected> --Tədarükçü Seç--
                                                     </option>
                                                     @foreach($supplierList as $supplier)
-                                                        <option
-                                                            value="{{$supplier->id}}" {{ old('supplier', $stockList->supplier_id ?? '') == $supplier->id ? 'selected' : '' }}>{{$supplier->name}}</option>
+                                                        <option value="{{ $supplier->id }}"
+                                                            {{ (old('supplier', $stockList->supplier_id ?? '') == $supplier->id) ? 'selected' : '' }}>
+                                                            {{ $supplier->name }}
+                                                        </option>
                                                     @endforeach
 
                                                 </select>

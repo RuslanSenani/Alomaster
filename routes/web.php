@@ -40,6 +40,9 @@ use App\Http\Controllers\Front\{FrontBrandController,
     FrontGalleryController,
     FrontReferencesController,
     FrontVideoController,
+    PortfolioCategoryController,
+    PortfolioImageController,
+    PortfoliosController,
     ServicesController
 };
 
@@ -144,7 +147,23 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/ajax-rankSetter-services', [ServicesController::class, 'rankSetter'])->name('ajax.files-rankSetter-services');
 
+    Route::post('/isActive/{id}/portfoliosCategories', [PortfolioCategoryController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfoliosCategories');
 
+
+    Route::post('/isActive/{id}/portfolios', [PortfoliosController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolios');
+
+    Route::post('/ajax-rankSetter-portfolios', [PortfoliosController::class, 'rankSetter'])->name('ajax.files-rankSetter-portfolios');
+
+    Route::get('/image-form/{id}/portfolios', [PortfoliosController::class, 'portfolios_image'])->name('portfolios.image-form');
+
+    Route::post('/ajax-rankSetter-portfolio-image', [PortfolioImageController::class, 'rankSetter'])->name('ajax-rankSetter-portfolio-image');
+
+    Route::post('/isActive/{id}/portfolio-image', [PortfolioImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolio-image');
+
+    Route::post('/image-refresh/{id}/portfolio', [PortfoliosController::class, 'portfolio_refresh_image'])->name('portfolio.refresh-image-list');
+
+
+    Route::post('/image-upload/{id}/portfolio', [PortfoliosController::class, 'portfolio_image_upload'])->name('portfolio.image-upload');
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -170,6 +189,9 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'files' => FrontFileController::class,
         'galleries.videos' => FrontVideoController::class,
         'services' => ServicesController::class,
+        'portfoliosCategories' => PortfolioCategoryController::class,
+        'portfolios' => PortfoliosController::class,
+        'portfolioImages' => PortfolioImageController::class,
 
 
     ]);

@@ -2,24 +2,24 @@
 
 namespace App\Repositories;
 
-use App\Contracts\IImageRepository;
-use App\Models\Front\Image;
+use App\Contracts\IPortfoliosRepository;
+use App\Models\Front\Portfolio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class ImageRepository implements IImageRepository
+class PortfoliosRepository implements IPortfoliosRepository
 {
 
-    private Image $model;
+    private Portfolio $model;
 
-    public function __construct(Image $imageModel)
+    public function __construct(Portfolio $portfolioModel)
     {
-        $this->model = $imageModel;
+        $this->model = $portfolioModel;
     }
 
     public function all(array $where, array $order): Collection
     {
-        return $this->model->where($where)->orderBy($order[0], $order[1])->get();
+        return $this->model->with(['category','portfolioImage'])->where($where)->orderBy($order[0], $order[1])->get();
     }
 
     public function find($id): ?Model
@@ -46,5 +46,4 @@ class ImageRepository implements IImageRepository
     {
         return $this->model->destroy($id);
     }
-
 }
