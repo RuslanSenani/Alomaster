@@ -54,6 +54,7 @@
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{asset("assets")}}/vendor/bs-stepper/css/bs-stepper.min.css">
     <link rel="stylesheet" href="{{asset("assets")}}/custom/css/toggle.css">
+    <link rel="stylesheet" href="{{asset("assets")}}/custom/css/news.css">
 
 </head>
 

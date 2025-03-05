@@ -20,9 +20,9 @@ class ProductImageServices
     }
 
 
-    public function getAllProducts(array $where): Collection
+    public function getAllProducts(array $where = [], array $order = ['rank', 'asc']): Collection
     {
-        return $this->productImageRepository->all($where);
+        return $this->productImageRepository->all($where, $order);
 
     }
 

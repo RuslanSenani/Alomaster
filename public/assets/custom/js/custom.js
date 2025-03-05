@@ -352,6 +352,14 @@ $(document).ready(function () {
     })
 
 
+
+
+    $(".button_usage_btn").change(function(){
+
+        $(".button-information-container").slideToggle();
+
+    })
+
 })
 
 

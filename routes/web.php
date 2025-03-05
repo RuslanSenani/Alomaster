@@ -1,19 +1,30 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-
-use App\Http\Controllers\Auth\{
-    ForgotPasswordController,
+use App\Http\Controllers\Auth\{ForgotPasswordController,
     LoginController,
     RegisterController,
     ResetPasswordController,
     VerificationController,
 };
-
 use App\Http\Controllers\Back\{
     CategoryController,
     CustomerController,
+    FrontBrandController,
+    FrontCourseController,
+    FrontFileController,
+    FrontGalleryController,
+    FrontImageController,
+    FrontNewsController,
+    FrontPortfolioCategoryController,
+    FrontPortfolioImageController,
+    FrontPortfoliosController,
+    FrontProductController,
+    FrontProductImageController,
+    FrontReferencesController,
+    FrontServicesController,
+    FrontSettingController,
+    FrontSlidersController,
+    FrontVideoController,
     HelperController,
     HomeController,
     ModelController,
@@ -25,26 +36,13 @@ use App\Http\Controllers\Back\{
     SupplierController,
     UnitController,
     UserController,
-    WarehouseController,
+    WarehouseController
 };
 
-use App\Http\Controllers\Front\{FrontBrandController,
-    FrontCourseController,
-    FrontFileController,
-    FrontHomeController,
-    FrontImageController,
-    FrontNewsController,
-    FrontProductController,
-    FrontProductImageController,
-    FrontSettingController,
-    FrontGalleryController,
-    FrontReferencesController,
-    FrontVideoController,
-    PortfolioCategoryController,
-    PortfolioImageController,
-    PortfoliosController,
-    ServicesController
+use App\Http\Controllers\Front\{
+    FrontHomeController
 };
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -143,27 +141,33 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::post('/ajax-rankSetter-videos', [FrontVideoController::class, 'rankSetter'])->name('ajax.rankSetter-videos');
 
 
-    Route::post('/isActive/{id}/services', [ServicesController::class, 'isActiveSetter'])->name('ajax.is-active-setter-services');
+    Route::post('/isActive/{id}/services', [FrontServicesController::class, 'isActiveSetter'])->name('ajax.is-active-setter-services');
 
-    Route::post('/ajax-rankSetter-services', [ServicesController::class, 'rankSetter'])->name('ajax.files-rankSetter-services');
+    Route::post('/ajax-rankSetter-services', [FrontServicesController::class, 'rankSetter'])->name('ajax.files-rankSetter-services');
 
-    Route::post('/isActive/{id}/portfoliosCategories', [PortfolioCategoryController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfoliosCategories');
-
-
-    Route::post('/isActive/{id}/portfolios', [PortfoliosController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolios');
-
-    Route::post('/ajax-rankSetter-portfolios', [PortfoliosController::class, 'rankSetter'])->name('ajax.files-rankSetter-portfolios');
-
-    Route::get('/image-form/{id}/portfolios', [PortfoliosController::class, 'portfolios_image'])->name('portfolios.image-form');
-
-    Route::post('/ajax-rankSetter-portfolio-image', [PortfolioImageController::class, 'rankSetter'])->name('ajax-rankSetter-portfolio-image');
-
-    Route::post('/isActive/{id}/portfolio-image', [PortfolioImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolio-image');
-
-    Route::post('/image-refresh/{id}/portfolio', [PortfoliosController::class, 'portfolio_refresh_image'])->name('portfolio.refresh-image-list');
+    Route::post('/isActive/{id}/portfoliosCategories', [FrontPortfolioCategoryController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfoliosCategories');
 
 
-    Route::post('/image-upload/{id}/portfolio', [PortfoliosController::class, 'portfolio_image_upload'])->name('portfolio.image-upload');
+    Route::post('/isActive/{id}/portfolios', [FrontPortfoliosController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolios');
+
+    Route::post('/ajax-rankSetter-portfolios', [FrontPortfoliosController::class, 'rankSetter'])->name('ajax.files-rankSetter-portfolios');
+
+    Route::get('/image-form/{id}/portfolios', [FrontPortfoliosController::class, 'portfolios_image'])->name('portfolios.image-form');
+
+    Route::post('/ajax-rankSetter-portfolio-image', [FrontPortfolioImageController::class, 'rankSetter'])->name('ajax-rankSetter-portfolio-image');
+
+    Route::post('/isActive/{id}/portfolio-image', [FrontPortfolioImageController::class, 'isActiveSetter'])->name('ajax.is-active-setter-portfolio-image');
+
+    Route::post('/image-refresh/{id}/portfolio', [FrontPortfoliosController::class, 'portfolio_refresh_image'])->name('portfolio.refresh-image-list');
+
+    Route::post('/image-upload/{id}/portfolio', [FrontPortfoliosController::class, 'portfolio_image_upload'])->name('portfolio.image-upload');
+
+
+    Route::post('/isActive/{id}/sliders', [FrontSlidersController::class, 'isActiveSetter'])->name('ajax.is-active-setter-sliders');
+
+    Route::post('/ajax-rankSetter-sliders', [FrontSlidersController::class, 'rankSetter'])->name('ajax.rankSetter-sliders');
+
+
     Route::resources([
         'stock-in' => StockInController::class,
         'stock-out' => StockOutController::class,
@@ -188,10 +192,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'images' => FrontImageController::class,
         'files' => FrontFileController::class,
         'galleries.videos' => FrontVideoController::class,
-        'services' => ServicesController::class,
-        'portfoliosCategories' => PortfolioCategoryController::class,
-        'portfolios' => PortfoliosController::class,
-        'portfolioImages' => PortfolioImageController::class,
+        'services' => FrontServicesController::class,
+        'portfoliosCategories' => FrontPortfolioCategoryController::class,
+        'portfolios' => FrontPortfoliosController::class,
+        'portfolioImages' => FrontPortfolioImageController::class,
+        'sliders' => FrontSlidersController::class
 
 
     ]);

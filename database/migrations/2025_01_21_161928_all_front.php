@@ -376,6 +376,7 @@ return new class extends Migration {
             $table->string('button_caption')->nullable();
             $table->string('animation_type')->nullable();
             $table->string('animation_time')->nullable();
+            $table->string('img_url')->nullable();
             $table->integer('rank')->nullable();
             $table->boolean('isActive')->default(false);
             $this->addCommonColumns($table);
@@ -400,6 +401,5 @@ return new class extends Migration {
             $this->addCommonColumns($table);
         });
     }
-
 
 };

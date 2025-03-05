@@ -2,3 +2,11 @@
     display: none;
 }
 
+.button-information-container{
+    display: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+

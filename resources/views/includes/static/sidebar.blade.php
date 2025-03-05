@@ -290,6 +290,15 @@
                             </ul>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{Route('sliders.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'sliders.') ? 'active' : '' }}">
+                                <i class="fas fa fa-solid fa-sliders"></i>
+                                <p>
+                                    Slaydlar
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

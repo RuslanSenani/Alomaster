@@ -16,5 +16,6 @@ return [
     App\Providers\ReferencesProviders::class,
     App\Providers\ServicesProviders::class,
     App\Providers\SettingsProviders::class,
+    App\Providers\SlidersProviders::class,
     App\Providers\VideoProviders::class,
 ];
