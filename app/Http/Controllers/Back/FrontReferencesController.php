@@ -75,7 +75,7 @@ class FrontReferencesController
             ]);
 
 
-            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
+            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 400, 150);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;
             }
@@ -84,7 +84,7 @@ class FrontReferencesController
         } catch (\Exception $exception) {
 
             $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('references.index');
@@ -128,7 +128,7 @@ class FrontReferencesController
             ]);
 
             $references = $this->referencesServices->getDataById($id);
-            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
+            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 400, 150);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
                 $this->fileUploadService->fileDelete($references->img_url);
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;

@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 interface IReferencesRepository
 {
 
-    public function all(): Collection;
+    public function all(array $where, array $order): Collection;
 
     public function find($id): ?Model;
 

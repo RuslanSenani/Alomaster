@@ -17,9 +17,9 @@ class ReferencesRepository implements IReferencesRepository
         $this->reference = $reference;
     }
 
-    public function all(): Collection
+    public function all(array $where, array $order): Collection
     {
-        return $this->reference->orderBy('rank', 'asc')->get();
+        return $this->reference->where($where)->orderBy($order[0], $order[1])->get();
     }
 
     public function find($id): ?Model

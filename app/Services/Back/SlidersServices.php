@@ -22,7 +22,7 @@ class SlidersServices
     }
 
 
-    public function getAllData(array $where = [], array $order = ['rank','asc']): Collection
+    public function getAllData(array $where = [], array $order = ['rank', 'asc']): Collection
     {
         return $this->slidersRepository->all($where, $order);
     }
@@ -45,7 +45,14 @@ class SlidersServices
 
     public function updateData(int $id, array $data): bool
     {
-        return $this->slidersRepository->update($id, $data);
+        try {
+
+            return $this->slidersRepository->update($id, $data);
+
+        } catch (\Exception $e) {
+            $this->alert->error("Xeta", $e->getMessage());
+            return false;
+        }
     }
 
     public function deleteData(int $id): bool

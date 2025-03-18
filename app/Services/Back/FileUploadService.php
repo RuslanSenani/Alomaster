@@ -12,31 +12,32 @@ use Throwable;
 
 class FileUploadService
 {
+
     public function uploadPicture($request, $uploadPath, $width, $height): JsonResponse
     {
         try {
-
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-
-
-                $targetPath = $uploadPath . "/" . $width . "x" . $height;
-                File::ensureDirectoryExists($targetPath);
                 $image = $request->file('image');
+                $extension = strtolower($image->getClientOriginalExtension());
 
-
-                if (!in_array($image->getClientOriginalExtension(), ['jpeg', 'jpg', 'png', 'gif'])) {
+                if (!in_array($extension, ['jpeg', 'jpg', 'png', 'gif', 'svg'])) {
                     return response()->json(['Error' => 'Şəkil Formatı Uyğun Deyil'], 400);
                 }
 
-
-                $fileName = md5($image->getClientOriginalName()) . '.' . $image->getClientOriginalExtension();
+                $targetPath = $uploadPath . "/" . $width . "x" . $height;
+                File::ensureDirectoryExists($targetPath);
+                $fileName = md5($image->getClientOriginalName()) . '.' . $extension;
                 $fullPath = "$targetPath/$fileName";
 
-                Image::read($image->getRealPath())
-                    ->resize($width, $height)
-                    ->save($fullPath, 75);
+                if ($extension === 'svg') {
+                    $image->move($targetPath, $fileName);
+                } else {
+                    Image::read($image->getRealPath())
+                        ->resize($width, $height)
+                        ->save($fullPath, 100);
+                }
 
-                return response()->json(['Success' => 'Fayl Yükləndi', 'fileName' => $fullPath], 200);
+                return response()->json(['Success' => 'Fayl Yükləndi', 'fileName' => $fullPath]);
             }
 
             return response()->json(['Error' => 'Uyğu bir şəkil tapılmadı'], 400);
@@ -44,6 +45,7 @@ class FileUploadService
             return response()->json(['Error' => $exception->getMessage()], 400);
         }
     }
+
 
 
     public function multiUpload($request, $uploadPath, $width, $height): JsonResponse

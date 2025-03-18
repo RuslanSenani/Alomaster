@@ -12,4 +12,8 @@ class StatusRepository  implements  IStatusRepository
     {
         $model->where('id', $id)->update(['isActive' => $isActive]);
     }
+    public function isReadable(int $isReadable, int $id, Model $model): void
+    {
+        $model->where('id', $id)->update(['isReadable' => $isReadable]);
+    }
 }

@@ -37,16 +37,6 @@
 
                                         <div class="form-group col-md-12">
                                             <div class="form-group">
-                                                <label for="url">Url:</label>
-                                                <input type="text" value="{{old('url')}}"
-                                                       name="url"
-                                                       class="form-control" id="url"
-                                                       placeholder="Url">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-md-12">
-                                            <div class="form-group">
                                                 <label for="description">Açıqlama:</label>
                                                 <textarea id="description" name="description" placeholder="Açıqlama">               {{old('description')}}
                                                 </textarea>

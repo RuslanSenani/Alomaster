@@ -66,7 +66,7 @@ class FrontSettingController
             ]);
 
             $others = $request->only([
-                'phone_2', 'fax_1', 'fax_2', 'address', 'about_us', 'mission', 'vision', 'instagram', 'tik_tok', 'youtube', 'facebook'
+                'phone_2', 'fax_1', 'fax_2', 'address', 'about_us', 'mission', 'vision', 'instagram', 'tik_tok', 'youtube', 'facebook', 'price', 'quality', 'warranty'
             ]);
 
 
@@ -135,7 +135,7 @@ class FrontSettingController
             ]);
 
             $others = $request->only([
-                'phone_2', 'fax_1', 'fax_2', 'address', 'about_us', 'mission', 'vision', 'instagram', 'tik_tok', 'youtube', 'facebook','logo'=>'/dist/img/alomasterLogo.svg'
+                'phone_2', 'fax_1', 'fax_2', 'address', 'about_us', 'mission', 'vision', 'instagram', 'tik_tok', 'youtube', 'facebook', 'price', 'quality', 'warranty', 'logo' => '/dist/img/alomasterLogo.svg'
             ]);
 
 

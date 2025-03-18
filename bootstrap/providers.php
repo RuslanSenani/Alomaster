@@ -3,6 +3,7 @@
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\BrandsProviders::class,
+    App\Providers\ContactProvider::class,
     App\Providers\CoursesProviders::class,
     App\Providers\FProductServiceProvider::class,
     App\Providers\FileProviders::class,

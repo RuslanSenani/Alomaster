@@ -141,11 +141,15 @@ class FrontSlidersController
                 ]);
             }
 
-            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
+            $slide = $this->slidersServices->getDataById($id);
+
+            $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 1920, 1088);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
+                $this->fileUploadService->fileDelete($slide->img_url);
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;
                 unset($validatedData['image']);
             }
+
             $this->slidersServices->updateData($id, $validatedData);
         } catch (\Exception $exception) {
 

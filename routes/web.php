@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\{ForgotPasswordController,
     ResetPasswordController,
     VerificationController,
 };
-use App\Http\Controllers\Back\{
+use App\Http\Controllers\Back\{BackContactController,
     CategoryController,
     CustomerController,
     FrontBrandController,
@@ -39,8 +39,11 @@ use App\Http\Controllers\Back\{
     WarehouseController
 };
 
-use App\Http\Controllers\Front\{
-    FrontHomeController
+use App\Http\Controllers\Front\{AdvantageController,
+    FrontContactController,
+    FrontAboutController,
+    FrontHomeController,
+    ServicesController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +70,15 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 
 Route::prefix('/')->group(function () {
     Route::get('/', [FrontHomeController::class, 'index'])->name('homepage');
+    Route::get('/work-area', [FrontHomeController::class, 'work_area'])->name('work-area');
+
+    Route::resources([
+        'about-us' => FrontAboutController::class,
+        'service' => ServicesController::class,
+        'advantage' => AdvantageController::class,
+        'contact' => FrontContactController::class,
+    ]);
+
 });
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
@@ -167,6 +179,10 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/ajax-rankSetter-sliders', [FrontSlidersController::class, 'rankSetter'])->name('ajax.rankSetter-sliders');
 
+    Route::post('/isReadable/{id}/contacts', [BackContactController::class, 'isReadable'])->name('ajax.is-readable-setter-contacts');
+
+
+
 
     Route::resources([
         'stock-in' => StockInController::class,
@@ -196,7 +212,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         'portfoliosCategories' => FrontPortfolioCategoryController::class,
         'portfolios' => FrontPortfoliosController::class,
         'portfolioImages' => FrontPortfolioImageController::class,
-        'sliders' => FrontSlidersController::class
+        'sliders' => FrontSlidersController::class,
+        'contacts' => BackContactController::class,
 
 
     ]);

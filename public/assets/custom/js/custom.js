@@ -252,11 +252,10 @@ $(document).ready(function () {
     });
 
 
-
     $(function () {
-        const fields = ['#about_us', '#address', '#mission', '#vision', '#description'];
+        const fields = ['#about_us', '#address', '#mission', '#vision', '#description', '#price', '#warranty', '#quality'];
         fields.forEach(function (selector) {
-            $('textarea'+selector).summernote({
+            $('textarea' + selector).summernote({
                 height: '300px', width: '100%',
             });
         });
@@ -271,6 +270,25 @@ $(document).ready(function () {
         if (typeof data !== 'undefined' && typeof data_url !== 'undefined') {
 
             $.post(data_url, {data: data}, function (response) {
+            })
+        }
+    });
+
+    $(document).on("click", "#isReadable", function () {
+
+        let isReadable = $(this);
+        let data_url = isReadable.data('url');
+        if (typeof data_url !== 'undefined') {
+
+            $.post(data_url, {}, function (response) {
+                if (response.success) {
+
+                    isReadable.removeClass('btn-danger').addClass('btn-success');
+
+                    isReadable.html('<i class="fas fa-check"></i> Oxundu');
+                    isReadable.find('i').removeClass('fa-times-circle').addClass('fa-check-circle');
+                    isReadable.prop('disabled', true);
+                }
             })
         }
     });
@@ -352,9 +370,7 @@ $(document).ready(function () {
     })
 
 
-
-
-    $(".button_usage_btn").change(function(){
+    $(".button_usage_btn").change(function () {
 
         $(".button-information-container").slideToggle();
 

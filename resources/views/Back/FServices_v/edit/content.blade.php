@@ -35,15 +35,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-md-12">
-                                            <div class="form-group">
-                                                <label for="url">Url:</label>
-                                                <input type="text" value="{{$service->url}}"
-                                                       name="url"
-                                                       class="form-control" id="url"
-                                                       placeholder="Url">
-                                            </div>
-                                        </div>
 
                                         <div class="form-group col-md-12">
                                             <div class="form-group">

@@ -22,9 +22,9 @@ class ReferencesServices
     }
 
 
-    public function getAllData(): Collection
+    public function getAllData(array $where = [], array $order = ['rank', 'asc']): Collection
     {
-        return $this->referencesRepository->all();
+        return $this->referencesRepository->all($where, $order);
     }
 
     public function getDataById(int $id): Model

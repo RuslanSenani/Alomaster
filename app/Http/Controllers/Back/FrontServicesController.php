@@ -70,13 +70,11 @@ class FrontServicesController
     {
         try {
             $validatedData = $request->validate([
-                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
                 'description' => 'required|string',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $validatedData['url'] = Str::slug($validatedData['url']);
+            $validatedData['url'] = Str::slug($validatedData['title']);
             $uploadFile = $this->fileUploadService->uploadPicture($request, $this->directoryPath, 150, 150);
             if ($uploadFile->getStatusCode() === 200 && isset($uploadFile->getData()->fileName)) {
                 $validatedData['img_url'] = $uploadFile->getData()->fileName;
@@ -86,7 +84,7 @@ class FrontServicesController
         } catch (\Exception $exception) {
 
             $this->alertServices->error("Xəta", $exception->getMessage(), 30000);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         return redirect()->route('services.index');
@@ -125,7 +123,6 @@ class FrontServicesController
 
 
             $validatedData = $request->validate([
-                'url' => 'required|string|max:100',
                 'title' => 'required|string|max:100',
                 'description' => 'required|string',
                 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',

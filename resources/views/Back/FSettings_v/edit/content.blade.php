@@ -49,6 +49,28 @@
                                    aria-selected="true"> Vizyonumuz </a>
                             </li>
 
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-content-below-price-tab" data-toggle="pill"
+                                   href="#custom-content-below-price" role="tab"
+                                   aria-controls="custom-content-blow-price"
+                                   aria-selected="true"> Qiymet Melumati </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-content-below-quality-tab" data-toggle="pill"
+                                   href="#custom-content-below-quality" role="tab"
+                                   aria-controls="custom-content-blow-quality"
+                                   aria-selected="true"> Keyfiyyət Məlumatı </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-content-below-warranty-tab" data-toggle="pill"
+                                   href="#custom-content-below-warranty" role="tab"
+                                   aria-controls="custom-content-blow-warranty"
+                                   aria-selected="true"> Zəmanət Məlumatı </a>
+                            </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-content-below-social-tab" data-toggle="pill"
                                    href="#custom-content-below-social" role="tab"
@@ -75,9 +97,16 @@
 
                             @include('Back.FSettings_v.edit.tabs.vision')
 
+                            @include('Back.FSettings_v.edit.tabs.price')
+
+                            @include('Back.FSettings_v.edit.tabs.quality')
+
+                            @include('Back.FSettings_v.edit.tabs.warranty')
+
                             @include('Back.FSettings_v.edit.tabs.social')
 
                             @include('Back.FSettings_v.edit.tabs.logo')
+
 
                         </div>
                     </div>

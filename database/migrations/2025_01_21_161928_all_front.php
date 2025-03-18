@@ -51,6 +51,8 @@ return new class extends Migration {
 
         $this->createTestimonialsTable();
 
+        $this->createContactsTable();
+
 
     }
 
@@ -60,7 +62,7 @@ return new class extends Migration {
     public function down(): void
     {
 
-        $tables = ['brands', 'courses', 'files', 'images', 'videos', 'galleries', 'members', 'news', 'popups', 'portfolio_images', 'portfolios', 'portfolio_categories', 'product_images', 'f_products', 'references', 'services', 'settings', 'slides', 'testimonials',];
+        $tables = ['brands', 'courses', 'files', 'images', 'videos', 'galleries', 'members', 'news', 'popups', 'portfolio_images', 'portfolios', 'portfolio_categories', 'product_images', 'f_products', 'references', 'services', 'settings', 'slides', 'testimonials', 'contacts'];
 
         foreach ($tables as $table) {
             Schema::dropIfExists($table);
@@ -325,7 +327,7 @@ return new class extends Migration {
             $table->id();
             $table->string('url');
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('img_url');
             $table->integer('rank');
             $table->boolean('isActive')->default(false);
@@ -335,6 +337,7 @@ return new class extends Migration {
         });
     }
 
+
     /**
      * @return void
      */
@@ -343,10 +346,13 @@ return new class extends Migration {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('company_name')->nullable();
-            $table->string('about_us')->nullable();
-            $table->string('address')->nullable();
-            $table->string('mission')->nullable();
-            $table->string('vision')->nullable();
+            $table->longText('about_us')->nullable();
+            $table->longText('address')->nullable();
+            $table->longText('mission')->nullable();
+            $table->longText('vision')->nullable();
+            $table->longText('quality')->nullable();
+            $table->longText('warranty')->nullable();
+            $table->longText('price')->nullable();
             $table->string('logo')->nullable();
             $table->string('phone_1')->nullable();
             $table->string('phone_2')->nullable();
@@ -402,4 +408,21 @@ return new class extends Migration {
         });
     }
 
+
+    public function createContactsTable(): void
+    {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->string('ip', 16);
+            $table->string('name', 50);
+            $table->string('phone', 15);
+            $table->string('email', 60);
+            $table->string('subject', 50);
+            $table->longText('message');
+            $table->boolean('isReadable')->default(false);
+            $this->addCommonColumns($table);
+
+        });
+
+    }
 };

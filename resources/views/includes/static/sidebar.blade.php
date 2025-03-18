@@ -299,6 +299,15 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{Route('contacts.index')}}"
+                               class="nav-link {{ Str::startsWith(Route::currentRouteName(),'contacts.') ? 'active' : '' }}">
+                                <i class="fas fa fa-solid fa-phone"></i>
+                                <p>
+                                    Əlaqə
+                                </p>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>
