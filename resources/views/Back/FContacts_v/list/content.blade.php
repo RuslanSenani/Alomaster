@@ -40,7 +40,6 @@
                             <th>Mail</th>
                             <th>Başlıq</th>
                             <th>Mesaj</th>
-                            <th>Status</th>
                             <th>Oxundu</th>
                             <th>Əməliyyatlar</th>
                         </tr>
@@ -67,13 +66,7 @@
                                 <td class="col-md-4">{{ \Illuminate\Support\Str::limit($contact->message,30,'....')}}</td>
 
 
-                                <td class="col-md-1">
-                                    <label class="toggle">
-                                        <input  disabled type="checkbox" class="isActive"
-                                               name="isActive" {{ $contact->isActive ? 'checked' : '' }} />
-                                        <span class="slider"></span>
-                                    </label>
-                                </td>
+
 
                                 <td class="col-md-1">
                                     <label class="toggle">
